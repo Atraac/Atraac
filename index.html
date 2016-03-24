@@ -3,11 +3,223 @@
     <meta charset="UTF-8">
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./app.js"></script>
-    <title>Title</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./content/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/color-styles.css">
+    <script src="./content/semantic.min.js"></script>
+    <script src="./scripts/raiting-script.js"></script>
+    <title>DeliverIT</title>
 </head>
 <body>
-    {{1+1}}
-    {{2+5}}
-    {{10-4}}
+<div style="margin-bottom: 30px" class="ui primary-dark-color stackable inverted pointing labeled icon menu">
+    <div class="ui container">
+        <a class="item active">
+            <i class="home icon"></i> Strona główna
+        </a>
+        <a class="item ">
+            <i class="search icon "></i> Wyszukaj przejazdy
+        </a>
+        <a class="item">
+            <i class="car icon"></i> Dodaj przejazd
+        </a>
+        <a class="item">
+            <i class="Dropbox icon"></i> Twoje przesyłki
+        </a>
+        <a class="item">
+            <i class="List icon"></i> Twoje przejazdy
+        </a>
+        <a class="item">
+            <i class="Mail icon"></i> Wiadomości
+        </a>
+        <div class="right menu">
+            <a class="item">
+                <i class="user icon "></i> Twój profil
+            </a>
+            <a class="item">
+                <i class="Sign out icon"></i>Wyloguj
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="container ui">
+
+    <h2 class="center aligned ui icon huge header">
+        <i class="car icon primary-color"></i>
+        <div class="content">
+            DeliverIT
+            <div class="sub header">Fusce posuere porta sapien non tincidunt.</div>
+        </div>
+    </h2>
+    <h4 class="ui horizontal divider header">
+        <i class="secondary-dark-color Star icon"></i>
+    </h4>
+
+    <div class="ui grid">
+        <div class="row ui">
+            <h2>Proponowane przejazdy</h2>
+        </div>
+        <div class="row ui">
+            <div class="ui cards">
+                <div class="card">
+                    <div class="content">
+                        <img class="right floated tiny ui image" src="./content/pictures/lolek.jpg">
+                        <div class="header">
+                            <p style="margin-top: 15px">Karol Niziałek</p>
+                            <div style="margin-bottom:10px" class="ui star rating" data-rating="1" data-max-rating="5"></div>
+                            <h4 class="ui horizontal divider ">
+                                PODRÓŻ
+                            </h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Z: Wrocław</h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Do: Warszawa</h4>
+                                <h4 class="ui horizontal divider ">
+                                    TERMIN
+                                </h4>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Data: 12.04.2016r</h5>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Godzina: 15:30</h5>
+                        </div>
+                        <div class="meta">
+                        </div>
+                        <h4 class="ui horizontal divider ">
+                            Opis
+                        </h4>
+                        <div class="description">
+                            <p>Aliquam euismod malesuada tortor sit amet molestie. Nunc ullamcorper eget sem at pharetra. Ut eleifend, justo nec maximus scelerisque, dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien. Fusce a diam a nisl efficitur euismod...</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui two buttons">
+                            <div class="ui secondary-dark-color button">Zobacz</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <img class="right floated tiny ui image" src="./content/pictures/maciek.jpg">
+                        <div class="header">
+                            <p style="margin-top: 15px">Maciej Lewiński</p>
+                            <div style="margin-bottom:10px" class="ui star rating" data-rating="3" data-max-rating="5"></div>
+                            <h4 class="ui horizontal divider ">
+                                PODRÓŻ
+                            </h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Z: Wrocław</h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Do: Warszawa</h4>
+                                <h4 class="ui horizontal divider ">
+                                    TERMIN
+                                </h4>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Data: 14.04.2016r</h5>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Godzina: 11:15</h5>
+                        </div>
+                        <div class="meta">
+                        </div>
+                        <h4 class="ui horizontal divider ">
+                            Opis
+                        </h4>
+                        <div class="description">
+                            <p>Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien.</p>
+                            <p>Eget pretium turpis lacinia...</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui two buttons">
+                            <div class="ui secondary-dark-color button">Zobacz</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <img class="right floated tiny ui image" src="./content/pictures/daniel.jpg">
+                        <div class="header">
+                            <p style="margin-top: 15px">Daniel Skupień</p>
+                            <div style="margin-bottom:10px" class="ui star rating" data-rating="4" data-max-rating="5"></div>
+                            <h4 class="ui horizontal divider ">
+                                PODRÓŻ
+                            </h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Z: Wrocław</h4>
+                            <h4 style="margin-bottom: 2px; margin-top: 2px;">Do: Warszawa</h4>
+                                <h4 class="ui horizontal divider ">
+                                    TERMIN
+                                </h4>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Data: 05.04.2016r</h5>
+                                <h5 style="margin-bottom: 2px; margin-top: 2px;">Godzina: 6:35</h5>
+                        </div>
+                        <div class="meta">
+                        </div>
+                        <h4 class="ui horizontal divider ">
+                            Opis
+                        </h4>
+                        <div class="description">
+                            <p>Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien.</p>
+                            <p>Eget pretium turpis lacinia.</p>
+                            <p>Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien...</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui two buttons">
+                            <div class="ui secondary-dark-color button">Zobacz</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="ui horizontal divider header">
+        <i class="secondary-dark-color Star icon"></i>
+    </h4>
+    <div class="ui steps">
+        <div class="active step">
+            <i class="primary-color search icon"></i>
+            <div class="content">
+                <div class="title">Wyszukaj przejazd</div>
+                <div class="description">Fusce posuere non tincidunt.</div>
+            </div>
+        </div>
+        <div class="step">
+            <i class="primary-color Write icon"></i>
+            <div class="content">
+                <div class="title">Zarezerwuj miejsce</div>
+                <div class="description">Fusce posuere non tincidunt.</div>
+            </div>
+        </div>
+        <div class="step">
+            <i class="primary-color Send Outline icon"></i>
+            <div class="content">
+                <div class="title">Wyślij przesyłkę</div>
+                <div class="description">Fusce posuere non tincidunt.</div>
+            </div>
+        </div>
+        <div class="step">
+            <i class="primary-color Child icon"></i>
+            <div class="content">
+                <div class="title">Bądź usatysfakcjonowany</div>
+                <div class="description">Fusce posuere non tincidunt.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer style="margin-top: 30px" class="ui primary-dark-color inverted vertical footer segment form-page">
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="center aligned six wide column">
+                <h3>Kontakt</h3>
+                <p>Telefon: 123 123 123
+                <p>Email: aaa@aaa.pl
+            </div>
+            <div class="center aligned four wide column">
+                <h3>DeliverIT</h3>
+                <p>DeliverIT Team 2016</p>
+                <p>All Rights Reserved</p>
+            </div>
+            <div class="center aligned six wide column ">
+                <h3>Adress</h3>
+                <p>Pszczyna Dolna 23/3
+                <p>93-234 Pszczyna Górna
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
