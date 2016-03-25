@@ -27,3 +27,7 @@ div.card div.content div.header h5.date-time{
 div.card div.content div.header div.star.rating{
     margin-bottom:10px;
 }
+
+.ui.comments .comment .avatar img{
+    height: auto;
+}
