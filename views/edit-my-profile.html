@@ -1,0 +1,51 @@
+<div class="ui container" ng-controller="MyProfileController">
+    <div class="ui grid stackable">
+        <div class="eight wide column ">
+            <h4 class="ui horizontal divider header">
+                <i class="user icon"></i>
+                Dane użytkownika
+            </h4>
+            <form class="ui form">
+                <div class="field">
+                    <label>Imię</label>
+                    <input ng-model="User.name" type="text" name="first-name" value="{{User.name}}" placeholder="Imię">
+                </div>
+                <div class="field">
+                    <label>Nazwisko</label>
+                    <input ng-model="User.surname" type="text" name="last-name" value="{{User.surname}}" placeholder="Nazwisko">
+                </div>
+                <div class="field">
+                    <label>Telefon</label>
+                    <input ng-model="User.phoneNumber" type="text" name="last-name" value="{{User.phoneNumber}}" placeholder="Telefon">
+                </div>
+                <div class="field">
+                    <label>Data urodzenia</label>
+                    <input ng-model="User.birthdate" type="date" name="last-name" value="{{User.birthdate}}">
+                </div>
+                <div class="field">
+                    <label>Auto</label>
+                    <input ng-model="User.car" type="text" name="last-name" value="{{User.car}}" placeholder="Auto">
+                </div>
+                <div class="field">
+                    <label>Płeć</label>
+                    <select ng-model="User.sex" class="ui dropdown">
+                        <option value=""></option>
+                        <option value="Mężczyzna">Mężczyzna</option>
+                        <option value="Kobieta">Kobieta</option>
+                    </select>
+                </div>
+                <div class="ui right floated large accent-color button" ng-click="onEdit()" type="submit">Zapisz</div>
+            </form>
+        </div>
+        <div class="eight wide column center aligned">
+            <h4 class="ui horizontal divider header">
+                <i class="Photo icon"></i>
+                Zdjęcie
+            </h4>
+            <div class="chosed-photo" ng-if="User.photo != ''" class="image center aligned">
+                <img class="ui small " src="{{User.photo}}">
+            </div>
+            <div class="ui large accent-color button">Wybierz</div>
+        </div>
+    </div>
+</div>

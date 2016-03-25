@@ -31,6 +31,10 @@ deliverIT.config(['$routeProvider', function ($routeProvider) {
         templateUrl: './views/my-messages.html',
         controller: 'MyMessagesController'
     }).
+    when('/edit-my-profile', {
+        templateUrl: './views/edit-my-profile.html',
+        controller: 'MyProfileController'
+    }).
     otherwise({
         redirectTo: '/'
     });

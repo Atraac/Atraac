@@ -31,3 +31,7 @@ div.card div.content div.header div.star.rating{
 .ui.comments .comment .avatar img{
     height: auto;
 }
+
+.chosed-photo{
+    margin-bottom: 20px;
+}

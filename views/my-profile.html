@@ -1,14 +1,14 @@
 <div class="ui container" ng-controller="MyProfileController">
 
-    <div class="ui two column very relaxed grid">
-        <div class="column">
+    <div class="ui grid stackable">
+        <div class="eight wide column">
             <h4 class="ui horizontal divider header">
                 <i class="user icon"></i>
                 Dane użytkownika
             </h4>
-            <div class="ui two column grid">
-                <div class="column">
-                    <div class="ui piled segment right floated">
+            <div class="ui two column grid stackable">
+                <div class="column center aligned">
+                    <div class="ui center aligned">
                         <div class="ui header">
                             <div class="ui star rating" data-rating="4" data-max-rating="5"></div>
                             <span>{{User.rating}}</span>
@@ -18,21 +18,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="ui left floated">
+                <div class="column center aligned">
+                    <div class="ui  center aligned">
 
-                        <p>Imię: {{User.name}}</p>
-                        <p>Nazwisko: {{User.surname}}</p>
-                        <p>Data urodzenia: {{User.birthdate}}</p>
-                        <p>Płeć: {{User.sex}}</p>
-                        <p>Telefon: {{User.phoneNumber}}</p>
-                        <p>Auto: {{User.car}}</p>
-                        <p>Ocena: {{User.rating}}</p>
+                        <p>Imię: <strong>{{User.name}}</strong></p>
+                        <p>Nazwisko: <strong>{{User.surname}}</strong></p>
+                        <p>Data urodzenia: <strong>{{User.birthdate | date:'dd-MM-yyyy'}}</strong></p>
+                        <p>Płeć: <strong>{{User.sex}}</strong></p>
+                        <p>Telefon: <strong>{{User.phoneNumber}}</strong></p>
+                        <p>Auto: <strong>{{User.car}}</strong></p>
+                        <p>Ocena: <strong>{{User.rating}}</strong></p>
+                        <a type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="column">
+        <div class="eight wide column">
             <h4 class="ui horizontal divider header">
                 <i class="Write icon"></i>
                 Komentarze
