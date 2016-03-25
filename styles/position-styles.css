@@ -1,0 +1,29 @@
+footer{
+    margin-top: 30px !important;
+}
+
+div.menu.inverted{
+    margin-bottom: 30px;
+}
+
+h4.ui.horizontal.divider.header{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.card div.content div.header p.header-name{
+    margin-top: 15px;
+}
+
+div.card div.content div.header h4.from-where{
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+div.card div.content div.header h5.date-time{
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+div.card div.content div.header div.star.rating{
+    margin-bottom:10px;
+}
