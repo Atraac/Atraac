@@ -1,6 +1,8 @@
 <div ng-controller="GreetingController">
-    <a class="ui accent-color button" href="#login">Zaloguj</a>
-    <a class="ui accent-color button" href="#register">Zarejestruj</a>
+    <div class="loggedin">
+        <a class="ui accent-color button" id="notLoggedLoginButton" href="#login">Zaloguj</a>
+        <a class="ui accent-color button" id="notLoggedRegisterButton" href="#register">Zarejestruj</a>
+    </div>
     <div class="container ui">
         <h2 class="center aligned ui icon huge header">
             <i class="car icon primary-color"></i>
@@ -14,7 +16,7 @@
             <i class="accent-color Star icon"></i>
         </h4>
 
-        <div class="ui grid">
+        <div class="ui grid"  id="recommendations">
             <div class="row ui">
                 <h2>Proponowane przejazdy</h2>
             </div>
