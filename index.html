@@ -21,7 +21,7 @@
     <script src="./controllers/myTransportsController.js"></script>
     <script src="./controllers/loginController.js"></script>
     <script src="./controllers/registerController.js"></script>
-
+    <script src="./controllers/menuController.js"></script>
     <script src="./app.js"></script>
 
     <link rel="stylesheet" type="text/css" href="styles/color-styles.css">
@@ -31,29 +31,29 @@
     <title>DeliverIT</title>
 </head>
 <body>
-<div class="ui primary-dark-color stackable inverted pointing labeled icon menu">
+<div ng-controller="MenuController" class="ui primary-dark-color stackable inverted pointing labeled icon menu">
     <div class="ui container">
-        <a href="#/" class="item active">
+        <a ng-class="{ active: isActive('/') }" href="#/" class="item">
             <i class="home icon"></i> Strona główna
         </a>
-        <a href="#search-transport" class="item ">
+        <a ng-class="{ active: isActive('/search-transport') }" href="#search-transport" class="item ">
             <i class="search icon "></i> Wyszukaj przejazdy
         </a>
-        <a href="#add-transport" class="item">
+        <a ng-class="{ active: isActive('/add-transport') }" href="#add-transport" class="item">
             <i class="car icon"></i> Dodaj przejazd
         </a>
-        <a href="#my-packages" class="item">
+        <a ng-class="{ active: isActive('/my-packages') }" href="#my-packages" class="item">
             <i class="Dropbox icon"></i> Twoje przesyłki
         </a>
-        <a href="#my-transports" class="item">
+        <a ng-class="{ active: isActive('/my-transports') }" href="#my-transports" class="item">
             <i class="List icon"></i> Twoje przejazdy
         </a>
-        <a href="#my-messages" class="item">
+        <a ng-class="{ active: isActive('/my-messages') }" href="#my-messages" class="item">
             <i class="Mail icon"></i> Wiadomości
         </a>
 
         <div class="right menu">
-            <a href="#my-profile" class="item">
+            <a ng-class="{ active: isActive('/my-profile') }" href="#my-profile" class="item">
                 <i class="user icon "></i> Twój profil
             </a>
             <a class="item">

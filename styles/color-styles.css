@@ -16,3 +16,7 @@
 .accent-color.button:hover{
     box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:#FFFFFF;
 }
+
+.ui.inverted.pointing.menu .active.item:after, .ui.inverted.pointing.menu .active.item:hover:after{
+    background: #FF6F00 !important;
+}
