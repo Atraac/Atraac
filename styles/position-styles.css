@@ -28,7 +28,7 @@ div.card div.content div.header div.star.rating{
     margin-bottom:10px;
 }
 
-.ui.comments .comment .avatar img{
+.ui.comments.comment.avatar img{
     height: auto;
 }
 
@@ -39,4 +39,9 @@ div.card div.content div.header div.star.rating{
 #recommendations{
     display: table;
     margin: 0 auto;
+}
+
+h4.ui.horizontal.divider.from-where{
+    margin-top: 50px !important;
+    margin-bottom: 1rem !important;
 }
