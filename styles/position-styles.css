@@ -35,3 +35,8 @@ div.card div.content div.header div.star.rating{
 .chosed-photo{
     margin-bottom: 20px;
 }
+
+#recommendations{
+    display: table;
+    margin: 0 auto;
+}
