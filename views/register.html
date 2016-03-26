@@ -1,3 +1,74 @@
-<div ng-controller="RegisterController">
-    {{something}}
+<div class="ui container"  ng-controller="RegisterController">
+    <form class="ui form">
+        <div class="ui grid stackable">
+            <div class="eight wide column ">
+                <h4 class="ui horizontal divider header">
+                    <i class="sign in icon"></i>
+                    Dane konta
+                </h4>
+                <div class="field">
+                    <label>Email</label>
+                    <input ng-model="user.email" type="text" name="login" placeholder="Email">
+                </div>
+                <div class="field">
+                    <label></i>Hasło</label>
+                    <input ng-model="user.password" type="password" name="password" placeholder="Hasło">
+                </div>
+                <div class="field">
+                    <label>Potwierdź hasło</label>
+                    <input ng-model="user.passwordAgain" type="password" name="password" placeholder="Potwierdź hasło">
+                </div>
+            </div>
+            <div class="eight wide column center aligned">
+
+            </div>
+        </div>
+        <div class="ui grid stackable">
+            <div class="eight wide column ">
+                <h4 class="ui horizontal divider header">
+                    <i class="user icon"></i>
+                    Dane użytkownika
+                </h4>
+                 <div class="field">
+                     <label>Imię</label>
+                     <input ng-model="user.name" type="text" name="first-name" placeholder="Imię">
+                 </div>
+                 <div class="field">
+                     <label>Nazwisko</label>
+                     <input ng-model="user.surname" type="text" name="last-name" placeholder="Nazwisko">
+                 </div>
+                 <div class="field">
+                     <label>Telefon</label>
+                     <input ng-model="user.phoneNumber" type="text" name="last-name" placeholder="Telefon">
+                 </div>
+                 <div class="field">
+                     <label>Data urodzenia</label>
+                     <input ng-model="user.birthdate" type="date" name="last-name" >
+                 </div>
+                 <div class="field">
+                     <label>Auto</label>
+                     <input ng-model="user.car" type="text" name="last-name" placeholder="Auto">
+                 </div>
+                 <div class="field">
+                     <label>Płeć</label>
+                     <select ng-model="user.sex" class="ui dropdown">
+                         <option value="">-</option>
+                         <option value="Mężczyzna">Mężczyzna</option>
+                         <option value="Kobieta">Kobieta</option>
+                     </select>
+                 </div>
+                 <a href="#/" class="ui right floated large accent-color button" ng-click="onRegister()" type="submit">Zarejestruj</a>
+            </div>
+            <div class="eight wide column center aligned">
+                <h4 class="ui horizontal divider header">
+                    <i class="Photo icon"></i>
+                    Zdjęcie
+                </h4>
+                <div class="chosed-photo" ng-if="user.photo != ''" class="image center aligned">
+                    <img class="ui small " src="{{user.photo}}">
+                </div>
+                <div class="ui large accent-color button">Wybierz</div>
+            </div>
+        </div>
+    </form>
 </div>

@@ -1,4 +1,4 @@
-var myProfileController = angular.module('myProfileController', ['ngResource']);
+var myProfileController = angular.module('myProfileController', ['ngResource', 'userFactory']);
 myProfileController.controller('MyProfileController', ['$scope', 'User',
     function ($scope, User) {
         $scope.something = 'MyProfileController';
@@ -10,12 +10,3 @@ myProfileController.controller('MyProfileController', ['$scope', 'User',
             console.log($scope.User);
         }
     }]);
-
-myProfileController.factory('User', ['$resource','$http', function ($resource, $http){
-    //var data = $resource('./fixedObject/user-profile.json', {});
-    //return data;
-    return{
-        getUser: function() {
-            return $http.get('./fixedObject/user-profile.json');
-    }
-}}]);
