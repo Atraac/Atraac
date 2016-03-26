@@ -18,6 +18,8 @@
     <script src="./controllers/myMessagesController.js"></script>
     <script src="./controllers/myPackagesController.js"></script>
     <script src="./controllers/myTransportsController.js"></script>
+    <script src="./controllers/loginController.js"></script>
+    <script src="./controllers/registerController.js"></script>
 
     <script src="./app.js"></script>
 
@@ -48,7 +50,7 @@
         <a href="#my-messages" class="item">
             <i class="Mail icon"></i> Wiadomości
         </a>
-        <a class="item">Status: {{5-2-3}}</a>
+
         <div class="right menu">
             <a href="#my-profile" class="item">
                 <i class="user icon "></i> Twój profil
@@ -56,15 +58,11 @@
             <a class="item">
                 <i class="Sign out icon"></i>Wyloguj
             </a>
-
         </div>
     </div>
 </div>
 
-
 <div ng-view></div>
-
-
 
 <footer class="ui primary-dark-color inverted vertical footer segment form-page">
     <div class="ui container">

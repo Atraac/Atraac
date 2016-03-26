@@ -1,0 +1,28 @@
+<div ng-controller="LoginController">
+    <div class="ui container">
+        <div class="ui card centered">
+            <div class="content">
+                <div class="header">
+                    Zaloguj się
+                </div>
+                <div class="meta">
+                    Podaj twój email oraz hasło
+                </div>
+                <div class="description">
+                    <form class="ui form">
+                        <div class="field">
+                            <label><i class="At icon"></i>Email</label>
+                            <input ng-model="user.login" type="text" name="login" placeholder="Email">
+                        </div>
+                        <div class="field">
+                            <label><i class="Protect icon"></i>Hasło</label>
+                            <input ng-model="user.password" type="password" name="password" placeholder="Hasło">
+                        </div>
+
+                        <a href="#/" class="ui right floated large accent-color button" ng-click="onLogin()" type="submit">Zaloguj</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

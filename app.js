@@ -1,7 +1,7 @@
 var deliverIT = angular.module('deliverIT',
         ['ngRoute',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
-        'myPackagesController', 'myTransportsController']);
+        'myPackagesController', 'myTransportsController', 'loginController', 'registerController']);
 deliverIT.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
@@ -34,6 +34,14 @@ deliverIT.config(['$routeProvider', function ($routeProvider) {
     when('/edit-my-profile', {
         templateUrl: './views/edit-my-profile.html',
         controller: 'MyProfileController'
+    }).
+    when('/login', {
+        templateUrl: './views/login.html',
+        controller: 'LoginController'
+    }).
+    when('/register', {
+        templateUrl: './views/register.html',
+        controller: 'RegisterController'
     }).
     otherwise({
         redirectTo: '/'
