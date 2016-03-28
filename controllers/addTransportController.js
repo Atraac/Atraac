@@ -11,7 +11,7 @@ addTransportController.controller('AddTransportController', ['$scope',
         $('#transport-pack-types').dropdown({
             fields: { name: "type", value: "id" },
             apiSettings: {
-                url: './fixedObject/pack-types.json/'
+                url: './fixedObject/pack-types.json/{query}'
             }
         });
         $scope.onSubmit = function ()   {
