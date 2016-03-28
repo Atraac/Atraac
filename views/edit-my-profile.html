@@ -29,7 +29,6 @@
                 <div class="field">
                     <label>Płeć</label>
                     <select ng-model="User.sex" class="ui dropdown">
-                        <option value=""></option>
                         <option value="Mężczyzna">Mężczyzna</option>
                         <option value="Kobieta">Kobieta</option>
                     </select>
@@ -49,3 +48,8 @@
         </div>
     </div>
 </div>
+<script>
+    $('select.dropdown')
+            .dropdown()
+    ;
+</script>
