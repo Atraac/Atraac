@@ -1,21 +1,11 @@
 var searchTransportController = angular.module('searchTransportController', []);
 
-searchTransportController.controller('SearchTransportController', ['$scope', 'Transport',
-    function ($scope, transport) {
+searchTransportController.controller('SearchTransportController', ['$scope',
+    function ($scope) {
         $('.ui.dropdown').dropdown({
-            fields: { name: "description"},
+            fields: { name: "name", value: "id" },
             apiSettings: {
-                mockResponse: {
-                    success: true,
-                    results: [
-                        {"description":"Opole"},
-                        {"description":"Wrocław"},
-                        {"description":"Warszawa"},
-                        {"description":"Budapest"},
-                        {"description":"Köln"}
-                    ]
-                }
+                url: './fixedObject/cities.json/{query}'
             }
         });
-        $scope.transport.date = new Date();
     }]);

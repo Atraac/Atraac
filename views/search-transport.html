@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="searchTransportController">
+<div class="ui container" ng-controller="SearchTransportController">
     <div class="ui grid stackable">
         <div class="column">
             <h4 class="ui horizontal divider header">
@@ -8,19 +8,19 @@
             <form class="ui form">
                 <div class="inline field">
                     <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
-                    <div class="ui selection dropdown" ng-model="transport-start">
+                    <div class="ui search selection dropdown">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto początkowe</div>
                     </div>
                     <label><i class="Flag icon"></i>Miasto docelowe</label>
-                    <div class="ui search selection dropdown" ng-model="transport-end">
+                    <div class="ui search selection dropdown">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto docelowe</div>
                     </div>
                     <label><i class="Calendar icon"></i>Data nadania paczki</label>
-                        <input ng-model="transport.date" type="date" name="transport-date" >
+                    <input ng-model="transport.date" type="date" name="transport-date" id="transport-date">
+                    <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onSubmit()" type="submit">Utwórz</a>
                 </div>
-                <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onSubmit()" type="submit">Utwórz</a>
             </form>
         </div>
 

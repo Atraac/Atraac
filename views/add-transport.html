@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="addTransportController">
+<div class="ui container" ng-controller="AddTransportController">
     <div class="ui grid stackable">
         <div class="eight wide column centered">
             <h4 class="ui horizontal divider header">
@@ -7,44 +7,43 @@
             </h4>
             <form class="ui form">
                 <div class="field">
-                    <label>Nazwa ogłoszenia</label>
+                    <label><i class="Comment Outline icon"></i>Nazwa ogłoszenia</label>
                     <textarea rows="1" maxlength="100"></textarea>
                 </div>
                 <div class="field">
                     <label><i class="Flag Outline icon"></i>Początek trasy</label>
-                    <div class="ui search selection dropdown" id="transport-start" ng-model="transport.start">
-                        <input type="hidden">
+                    <div class="ui search selection dropdown" id="transport-start">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto początkowe</div>
                     </div>
                 </div>
                 <div class="field">
-                    <label><i class="Flag Outline icon"></i>Przejazd przez</label>
-                    <div class="ui search multiple selection dropdown" ng-model="transport-through">
+                    <label><i class="Resize Horizontal icon"></i>Przejazd przez</label>
+                    <div class="ui search multiple selection dropdown" id="transport-through">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto pośrednie</div>
                     </div>
                 </div>
                 <div class="field">
                     <label><i class="Flag icon"></i>Koniec trasy</label>
-                    <div class="ui search selection dropdown" id="transport-end" ng-model="transport.end">
+                    <div class="ui search selection dropdown" id="transport-end">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto końcowe</div>
                     </div>
                 </div>
                 <div class="field">
-                    <label><i class="Flag Outline icon"></i>Rodzaje akceptowanych paczek</label>
-                    <div class="ui search multiple selection dropdown" id="pack-types-dropdown" ng-model="transport-pack-type">
+                    <label><i class="Suitcase icon"></i>Rodzaje akceptowanych paczek</label>
+                    <div class="ui search multiple selection dropdown" id="transport-pack-types">
                         <i class="dropdown icon"></i>
                         <div class="default text">Małe, średnie...</div>
                     </div>
                 </div>
                 <div class="field">
-                    <label>Opis ogłoszenia</label>
+                    <label><i class="Browser icon"></i>Opis ogłoszenia</label>
                     <textarea rows="4" maxlength="500"></textarea>
                 </div>
 
-                <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onSubmit()" type="submit">Utwórz</a>
+                <a href="" class="ui right floated large accent-color button" ng-click="onSubmit()" type="submit">Utwórz</a>
             </form>
         </div>
 
