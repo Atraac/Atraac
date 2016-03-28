@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "results": [
+    {
+      "city"  : "Wrocław",
+      "id"  : 1
+    },
+    {
+      "city"  : "Warszawa",
+      "id"  : 2
+    },
+    {
+      "city"  : "Poznań",
+      "id"  : 3
+    },
+    {
+      "city"  : "Gdańsk",
+      "id"  : 4
+    },
+    {
+      "city"  : "Gdynia",
+      "id"  : 5
+    },
+    {
+      "city"  : "Lublin",
+      "id"  : 6
+    },
+    {
+      "city"  : "Nowa Sól",
+      "id"  : 7
+    },
+    {
+      "city"  : "Białystok",
+      "id"  : 8
+    },
+    {
+      "city"  : "Szczecin",
+      "id"  : 9
+    },
+    {
+      "city"  : "Czółenka Małe",
+      "id"  : 10
+    },
+    {
+      "city"  : "GG EZ",
+      "id"  : 11
+    }
+  ]
+}

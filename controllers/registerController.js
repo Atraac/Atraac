@@ -1,3 +1,4 @@
+
 var registerController = angular.module('registerController', ['userFactory']);
 
 registerController.controller('RegisterController', ['$scope', 'User',
