@@ -1,6 +1,6 @@
 <div ng-controller="LoginController">
     <div class="ui container">
-        <div class="ui card centered">
+        <div ng-hide="logged" class="ui card centered">
             <div class="content">
                 <div class="header">
                     Zaloguj się
@@ -9,16 +9,20 @@
                     Podaj twój email oraz hasło
                 </div>
                 <div class="description">
-                    <form class="ui form">
-                        <div class="field">
-                            <label><i class="At icon"></i>Email</label>
-                            <input ng-model="user.email" type="text" name="login" placeholder="Email">
+                    <form class="ui form" name="loginForm" ng-submit="submitLogin()" novalidate>
+                        <div class="field" ng-class="{'error' : loginForm.email.$invalid && loginForm.email.$touched }">
+                            <label ><i class="At icon"></i>Email</label>
+                            <input ng-model="user.email" type="email" name="email" placeholder="Email" required>
+
                         </div>
-                        <div class="field">
+                        <div class="field" ng-class="{'error' : loginForm.password.$invalid && loginForm.password.$touched }">
                             <label><i class="Protect icon"></i>Hasło</label>
-                            <input ng-model="user.password" type="password" name="password" placeholder="Hasło">
+                            <input ng-model="user.password" type="password" name="password" placeholder="Hasło" required>
                         </div>
-                        <a href="#/" class="ui right floated large accent-color button" ng-click="onLogin()" type="submit">Zaloguj</a>
+                        <p class="has-error" ng-show="wrongUser" class="help-block">Zły email lub hasło</p>
+                        <p class="has-error" ng-show="loginForm.email.$invalid && loginForm.email.$touched" class="help-block">Email jest wymagany</p>
+                        <p class="has-error" ng-show="loginForm.password.$invalid && loginForm.password.$touched" class="help-block">Hasło jest wymagane</p>
+                        <button ng-disabled="loginForm.$invalid" href="#/" class="ui right floated large accent-color button" type="submit">Zaloguj</button>
                     </form>
                 </div>
             </div>
