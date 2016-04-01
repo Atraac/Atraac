@@ -23,7 +23,48 @@
                 </div>
             </form>
         </div>
-
-
     </div>
+
+    <h4 class="ui horizontal divider header">
+        <i class="Shipping icon"></i>Wyszukane przejazdy
+    </h4>
+    <table class="ui very basic collapsing celled table">
+        <thead>
+            <tr>
+                <th>Kierowca</th>
+                <th>Trasa</th>
+                <th>Godzina wyjazdu</th>
+                <th>Rodzaje paczek</th>
+                <th>Krótki opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="transport in transports">
+                <td>
+                    <h4 class="ui image header">
+                        <i class="user icon"></i>
+                        <div class="content">
+                            {{transport.name}} {{transport.surname}}
+                            <div class="sub header">Ocena: {{transport.rating}}
+                            </div>
+                        </div>
+                    </h4></td>
+                <td>
+                    Z:<br/> {{transport.sourceCity}} <br/>
+                    Do: {{transport.destinationCity}}
+                </td>
+                <td>
+                    {{transport.departureDate | date: 'short'}}
+                </td>
+                <td>
+                    <span ng-repeat="type in transport.packTypes">
+                        {{type}}
+                    </span>
+                </td>
+                <td>
+                    {{transport.description}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

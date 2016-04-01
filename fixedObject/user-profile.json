@@ -3,9 +3,9 @@
   "name": "Michał",
   "surname": "Zawadzki",
   "sex": "M",
-  "birthDate": "1993-07-12",
+  "birthdate": "1993-07-12",
   "car": "Toyota Corolla",
   "phoneNumber": 432432432,
   "photo": "./content/pictures/michal.jpg",
-  "rating": 1.8
+  "rating": 3.7
 }

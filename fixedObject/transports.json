@@ -1,0 +1,50 @@
+[
+  {
+    "idTransport": 1,
+    "idUser": 1,
+    "name": "Michał",
+    "surname": "Zawadzki",
+    "rating": 3.8,
+    "departureDate": "2013-10-21T18:28:06.419Z",
+    "sourceCity": "Wrocław",
+    "destinationCity": "Warszawa",
+    "description": "Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien.\nEget pretium turpis lacinia...",
+    "packTypes": [
+      "Małe",
+      "Srednie",
+      "Duże"
+    ]
+  },
+  {
+    "idTransport": 2,
+    "idUser": 2,
+    "name": "Maciej",
+    "surname": "Lewiński",
+    "rating": 1.6,
+    "departureDate": "2013-10-21T13:28:06.419Z",
+    "sourceCity": "Wrocław",
+    "destinationCity": "Warszawa",
+    "description": "Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien.\nEget pretium turpis lacinia...",
+    "packTypes": [
+      "Małe",
+      "Niewymiarowe",
+      "Zwierzeta"
+    ]
+  },
+  {
+    "idTransport": 3,
+    "idUser": 3,
+    "name": "Daniel",
+    "surname": "Skupień",
+    "rating": 4.3,
+    "departureDate": "2013-10-21T10:28:06.419Z",
+    "sourceCity": "Wrocław",
+    "destinationCity": "Warszawa",
+    "description": "Dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien.\nEget pretium turpis lacinia...",
+    "packTypes": [
+      "Małe",
+      "Srednie",
+      "Zwierzeta"
+    ]
+  }
+]
