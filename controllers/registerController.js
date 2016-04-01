@@ -10,11 +10,6 @@ registerController.controller('RegisterController', ['$scope', 'User',
         $scope.onRegister = function () {
             console.log($scope.user);
             $scope.correctRegister = true;
-            
         }
     }
 ]);
-
-$('.small.modal')
-    .modal('show')
-;

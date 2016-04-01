@@ -10,7 +10,7 @@
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
-                            <div class="ui star rating" data-rating="4" data-max-rating="5"></div>
+                            <rating id="my-rating" size="large" type="star" ng-model="rating"></rating>
                             <span>{{user.rating}}</span>
                         </div>
                         <div class="image right">
@@ -102,19 +102,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 </div>
-
-
-<!-- Nie wiem czemu ale tylko w tej formie gwiazdki dzialaja tak jak trzeba-->
-<script>
-    $(document).ready(function(){
-        $('.ui.rating')
-                .rating();
-    });
-</script>

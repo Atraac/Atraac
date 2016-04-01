@@ -5,8 +5,11 @@ myProfileController.controller('MyProfileController', ['$scope', 'User',
         User.getUser().then(function (response) {
             $scope.user = response.data;
             $scope.user.birthdate = new Date(response.data.birthdate);
+            $scope.rating = Math.round($scope.user.rating);
         })
         $scope.onSubmitUpdate = function(){
             console.log($scope.User);
         }
+
+
     }]);

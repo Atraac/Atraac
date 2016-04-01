@@ -1,7 +1,8 @@
 var deliverIT = angular.module('deliverIT',
         ['ngRoute',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
-        'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController']);
+        'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController',
+        'rating']);
 deliverIT.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
