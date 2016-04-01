@@ -3,10 +3,10 @@ myProfileController.controller('MyProfileController', ['$scope', 'User',
     function ($scope, User) {
         $scope.something = 'MyProfileController';
         User.getUser().then(function (response) {
-            $scope.User = response.data;
-            $scope.User.birthdate = new Date(response.data.birthdate);
+            $scope.user = response.data;
+            $scope.user.birthdate = new Date(response.data.birthdate);
         })
-        $scope.onEdit = function(){
+        $scope.onSubmitUpdate = function(){
             console.log($scope.User);
         }
     }]);

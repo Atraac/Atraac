@@ -49,14 +49,21 @@
                      <label>Auto</label>
                      <input ng-model="user.car" type="text" name="last-name" placeholder="Auto">
                  </div>
-                 <div class="field">
-                     <label>Płeć</label>
-                     <select ng-model="user.sex" class="ui dropdown">
-                         <option value="">-</option>
-                         <option value="Mężczyzna">Mężczyzna</option>
-                         <option value="Kobieta">Kobieta</option>
-                     </select>
-                 </div>
+                <div class="inline fields">
+                    <label>Płeć</label>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" ng-model="user.sex" value="M" name="sex" checked="" tabindex="0" class="hidden">
+                            <label>Mężczyzna</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" ng-model="user.sex" value="K" name="sex" tabindex="0" class="hidden">
+                            <label>Kobieta</label>
+                        </div>
+                    </div>
+                </div>
                  <a href="#/" class="ui right floated large accent-color button" ng-click="onRegister()" type="submit">Zarejestruj</a>
             </div>
             <div class="eight wide column center aligned">

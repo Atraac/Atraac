@@ -8,32 +8,40 @@
             <form class="ui form">
                 <div class="field">
                     <label>Imię</label>
-                    <input ng-model="User.name" type="text" name="first-name" value="{{User.name}}" placeholder="Imię">
+                    <input ng-model="user.name" type="text" name="first-name" value="{{User.name}}" placeholder="Imię">
                 </div>
                 <div class="field">
                     <label>Nazwisko</label>
-                    <input ng-model="User.surname" type="text" name="last-name" value="{{User.surname}}" placeholder="Nazwisko">
+                    <input ng-model="user.surname" type="text" name="last-name" value="{{User.surname}}" placeholder="Nazwisko">
                 </div>
                 <div class="field">
                     <label>Telefon</label>
-                    <input ng-model="User.phoneNumber" type="text" name="last-name" value="{{User.phoneNumber}}" placeholder="Telefon">
+                    <input ng-model="user.phoneNumber" type="text" name="last-name" value="{{User.phoneNumber}}" placeholder="Telefon">
                 </div>
                 <div class="field">
                     <label>Data urodzenia</label>
-                    <input ng-model="User.birthdate" type="date" name="last-name" value="{{User.birthdate}}">
+                    <input ng-model="user.birthdate" type="date" name="last-name" value="{{User.birthdate}}">
                 </div>
                 <div class="field">
                     <label>Auto</label>
-                    <input ng-model="User.car" type="text" name="last-name" value="{{User.car}}" placeholder="Auto">
+                    <input ng-model="user.car" type="text" name="last-name" value="{{User.car}}" placeholder="Auto">
                 </div>
-                <div class="field">
+                <div class="inline fields">
                     <label>Płeć</label>
-                    <select ng-model="User.sex" class="ui dropdown">
-                        <option value="Mężczyzna">Mężczyzna</option>
-                        <option value="Kobieta">Kobieta</option>
-                    </select>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" ng-model="user.sex" value="M" name="sex" checked="" tabindex="0" class="hidden">
+                            <label>Mężczyzna</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" ng-model="user.sex" value="K" name="sex" tabindex="0" class="hidden">
+                            <label>Kobieta</label>
+                        </div>
+                    </div>
                 </div>
-                <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onEdit()" type="submit">Zapisz</a>
+                <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onSubmitUpdate()" type="submit">Zapisz</a>
             </form>
         </div>
         <div class="eight wide column center aligned">
@@ -49,7 +57,7 @@
     </div>
 </div>
 <script>
-    $('select.dropdown')
-            .dropdown()
+    $('.ui.radio.checkbox')
+            .checkbox()
     ;
 </script>
