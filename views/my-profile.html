@@ -11,23 +11,23 @@
                     <div class="ui center aligned">
                         <div class="ui header">
                             <div class="ui star rating" data-rating="4" data-max-rating="5"></div>
-                            <span>{{User.rating}}</span>
+                            <span>{{user.rating}}</span>
                         </div>
                         <div class="image right">
-                            <img src="{{User.photo}}">
+                            <img src="{{user.photo}}">
                         </div>
                     </div>
                 </div>
                 <div class="column center aligned">
                     <div class="ui  center aligned">
 
-                        <p>Imię: <strong>{{User.name}}</strong></p>
-                        <p>Nazwisko: <strong>{{User.surname}}</strong></p>
-                        <p>Data urodzenia: <strong>{{User.birthdate | date:'dd-MM-yyyy'}}</strong></p>
-                        <p>Płeć: <strong>{{User.sex}}</strong></p>
-                        <p>Telefon: <strong>{{User.phoneNumber}}</strong></p>
-                        <p>Auto: <strong>{{User.car}}</strong></p>
-                        <p>Ocena: <strong>{{User.rating}}</strong></p>
+                        <p>Imię: <strong>{{user.name}}</strong></p>
+                        <p>Nazwisko: <strong>{{user.surname}}</strong></p>
+                        <p>Data urodzenia: <strong>{{user.birthdate | date:'dd-MM-yyyy'}}</strong></p>
+                        <p>Płeć: <strong>{{user.sex}}</strong></p>
+                        <p>Telefon: <strong>{{user.phoneNumber}}</strong></p>
+                        <p>Auto: <strong>{{user.car}}</strong></p>
+                        <p>Ocena: <strong>{{user.rating}}</strong></p>
                         <a type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
                     </div>
                 </div>

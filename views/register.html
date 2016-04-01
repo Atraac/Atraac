@@ -1,22 +1,28 @@
 <div class="ui container"  ng-controller="RegisterController">
-    <form class="ui form">
+    <form ng-show="!correctRegister" class="ui form" name="registerForm" ng-submit="onRegister()" novalidate>
         <div class="ui grid stackable">
             <div class="eight wide column ">
                 <h4 class="ui horizontal divider header">
                     <i class="sign in icon"></i>
                     Dane konta
                 </h4>
-                <div class="field">
+                <ul>
+                    <li class="has-error" ng-show="duplicateEmail" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
+                    <li class="has-error" ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
+                    <li class="has-error" ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
+                    <li class="has-error" ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
+                </ul>
+                <div class="field" ng-class="{'error' : registerForm.email.$invalid && registerForm.email.$touched }">
                     <label>Email</label>
-                    <input ng-model="user.email" type="text" name="login" placeholder="Email">
+                    <input ng-model="user.email" type="email" name="email" placeholder="Email" required>
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : registerForm.password.$invalid && registerForm.password.$touched }">
                     <label></i>Hasło</label>
-                    <input ng-model="user.password" type="password" name="password" placeholder="Hasło">
+                    <input ng-model="user.password" type="password" name="password" placeholder="Hasło" required>
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched }">
                     <label>Potwierdź hasło</label>
-                    <input ng-model="user.passwordAgain" type="password" name="password" placeholder="Potwierdź hasło">
+                    <input ng-model="passwordAgain" type="password" name="passwordAgain" placeholder="Potwierdź hasło" required>
                 </div>
             </div>
             <div class="eight wide column center aligned">
@@ -29,42 +35,48 @@
                     <i class="user icon"></i>
                     Dane użytkownika
                 </h4>
-                 <div class="field">
+                <ul>
+                    <li class="has-error" ng-show="registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched" class="help-block">Potwierdzenie hasła jest wymagane</li>
+                    <li class="has-error" ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
+                    <li class="has-error" ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
+                    <li class="has-error" ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
+                </ul>
+                 <div class="field" ng-class="{'error' : registerForm.name.$invalid && registerForm.name.$touched }">
                      <label>Imię</label>
-                     <input ng-model="user.name" type="text" name="first-name" placeholder="Imię">
+                     <input ng-model="user.name" type="text" name="name" placeholder="Imię" required>
                  </div>
-                 <div class="field">
+                 <div class="field" ng-class="{'error' : registerForm.surname.$invalid && registerForm.surname.$touched }">
                      <label>Nazwisko</label>
-                     <input ng-model="user.surname" type="text" name="last-name" placeholder="Nazwisko">
+                     <input ng-model="user.surname" type="text" name="surname" placeholder="Nazwisko" required>
                  </div>
-                 <div class="field">
+                 <div class="field" ng-class="{'error' : registerForm.phoneNumber.$invalid && registerForm.phoneNumber.$touched }">
                      <label>Telefon</label>
-                     <input ng-model="user.phoneNumber" type="text" name="last-name" placeholder="Telefon">
+                     <input ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                  </div>
-                 <div class="field">
+                 <div class="field" ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }">
                      <label>Data urodzenia</label>
-                     <input ng-model="user.birthdate" type="date" name="last-name" >
+                     <input ng-model="user.birthDate" type="date" name="birthDate" required>
                  </div>
-                 <div class="field">
+                 <div class="field" ng-class="{'error' : registerForm.car.$invalid && registerForm.car.$touched }">
                      <label>Auto</label>
-                     <input ng-model="user.car" type="text" name="last-name" placeholder="Auto">
+                     <input ng-model="user.car" type="text" name="car" placeholder="Auto">
                  </div>
                 <div class="inline fields">
                     <label>Płeć</label>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="M" name="sex" checked="" tabindex="0" class="hidden">
+                            <input type="radio" ng-model="user.sex" value="M" name="sex" ng-checked="true">
                             <label>Mężczyzna</label>
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="K" name="sex" tabindex="0" class="hidden">
+                            <input type="radio" ng-model="user.sex" value="K" name="sex" >
                             <label>Kobieta</label>
                         </div>
                     </div>
                 </div>
-                 <a href="#/" class="ui right floated large accent-color button" ng-click="onRegister()" type="submit">Zarejestruj</a>
+                <button ng-disabled="registerForm.$invalid" href="#/" class="ui right floated large accent-color button" type="submit">Zarejestruj</button>
             </div>
             <div class="eight wide column center aligned">
                 <h4 class="ui horizontal divider header">
@@ -78,4 +90,27 @@
             </div>
         </div>
     </form>
+    <div ng-show="correctRegister" class="ui centered card">
+        <div class="content">
+            <div class="header">
+                Gratulacje! :)
+            </div>
+            <div class="meta">
+                {{user.name}} {{user.surname}}
+            </div>
+            <div class="description">
+                Udało Ci się zarejestrować poprawnie! Zaloguj się do systemu przy pomocy danych podanych przy rejestracji.
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="ui two buttons">
+                <div class="ui right floated large accent-color button">Przejdź do logowania</div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $('.ui.radio.checkbox')
+            .checkbox()
+    ;
+    </script>
 </div>

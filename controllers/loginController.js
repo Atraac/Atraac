@@ -15,8 +15,7 @@ loginController.controller('LoginController', ['$scope', '$location',
                     $scope.user = {};
                 }
                 else {
-                    $scope.wrongUser = false;
-                    
+                    $scope.wrongUser = false;                    
                     $location.path("#/");
                 }
             }

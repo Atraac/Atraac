@@ -8,23 +8,23 @@
             <form class="ui form">
                 <div class="field">
                     <label>Imię</label>
-                    <input ng-model="user.name" type="text" name="first-name" value="{{User.name}}" placeholder="Imię">
+                    <input ng-model="user.name" type="text" name="first-name" value="{{user.name}}" placeholder="Imię">
                 </div>
                 <div class="field">
                     <label>Nazwisko</label>
-                    <input ng-model="user.surname" type="text" name="last-name" value="{{User.surname}}" placeholder="Nazwisko">
+                    <input ng-model="user.surname" type="text" name="last-name" value="{{user.surname}}" placeholder="Nazwisko">
                 </div>
                 <div class="field">
                     <label>Telefon</label>
-                    <input ng-model="user.phoneNumber" type="text" name="last-name" value="{{User.phoneNumber}}" placeholder="Telefon">
+                    <input ng-model="user.phoneNumber" type="text" name="last-name" value="{{user.phoneNumber}}" placeholder="Telefon">
                 </div>
                 <div class="field">
                     <label>Data urodzenia</label>
-                    <input ng-model="user.birthdate" type="date" name="last-name" value="{{User.birthdate}}">
+                    <input ng-model="user.birthdate" type="date" name="last-name" value="{{user.birthdate}}">
                 </div>
                 <div class="field">
                     <label>Auto</label>
-                    <input ng-model="user.car" type="text" name="last-name" value="{{User.car}}" placeholder="Auto">
+                    <input ng-model="user.car" type="text" name="last-name" value="{{user.car}}" placeholder="Auto">
                 </div>
                 <div class="inline fields">
                     <label>Płeć</label>
@@ -49,8 +49,8 @@
                 <i class="Photo icon"></i>
                 Zdjęcie
             </h4>
-            <div class="chosed-photo" ng-if="User.photo != ''" class="image center aligned">
-                <img class="ui small " src="{{User.photo}}">
+            <div class="chosed-photo" ng-if="user.photo != ''" class="image center aligned">
+                <img class="ui small " src="{{user.photo}}">
             </div>
             <div class="ui large accent-color button">Wybierz</div>
         </div>
