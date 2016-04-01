@@ -36,7 +36,6 @@
                     Dane użytkownika
                 </h4>
                 <ul>
-                    <li class="has-error" ng-show="registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched" class="help-block">Potwierdzenie hasła jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
@@ -55,7 +54,7 @@
                  </div>
                  <div class="field" ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }">
                      <label>Data urodzenia</label>
-                     <input ng-model="user.birthDate" type="date" name="birthDate" required>
+                     <input ng-model="user.birthDate" type="date" name="birthDate" value="{{user.birthDate}} required>
                  </div>
                  <div class="field" ng-class="{'error' : registerForm.car.$invalid && registerForm.car.$touched }">
                      <label>Auto</label>

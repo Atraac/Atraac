@@ -5,43 +5,48 @@
                 <i class="user icon"></i>
                 Dane użytkownika
             </h4>
-            <form class="ui form">
-                <div class="field">
+            <form class="ui form" name="updateProfileForm" ng-submit="onUpdateProfile()" novalidate>
+                <ul>
+                    <li class="has-error" ng-show="updateProfileForm.name.$invalid && updateProfileForm.name.$touched" class="help-block">Imię jest wymagane</li>
+                    <li class="has-error" ng-show="updateProfileForm.surname.$invalid && updateProfileForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
+                    <li class="has-error" ng-show="updateProfileForm.birthDate.$invalid && updateProfileForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
+                </ul>
+                <div class="field" ng-class="{'error' : updateProfileForm.name.$invalid && updateProfileForm.name.$touched }">
                     <label>Imię</label>
-                    <input ng-model="user.name" type="text" name="first-name" value="{{user.name}}" placeholder="Imię">
+                    <input ng-model="user.name" type="text" name="name" placeholder="Imię" required>
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : updateProfileForm.surname.$invalid && updateProfileForm.surname.$touched }">
                     <label>Nazwisko</label>
-                    <input ng-model="user.surname" type="text" name="last-name" value="{{user.surname}}" placeholder="Nazwisko">
+                    <input ng-model="user.surname" type="text" name="surname" placeholder="Nazwisko" required>
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : updateProfileForm.phoneNumber.$invalid && updateProfileForm.phoneNumber.$touched }">
                     <label>Telefon</label>
-                    <input ng-model="user.phoneNumber" type="text" name="last-name" value="{{user.phoneNumber}}" placeholder="Telefon">
+                    <input ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : updateProfileForm.birthDate.$invalid && updateProfileForm.birthDate.$touched }">
                     <label>Data urodzenia</label>
-                    <input ng-model="user.birthdate" type="date" name="last-name" value="{{user.birthdate}}">
+                    <input ng-model="user.birthDate" type="date" name="birthDate" required>
                 </div>
-                <div class="field">
+                <div class="field" ng-class="{'error' : updateProfileForm.car.$invalid && updateProfileForm.car.$touched }">
                     <label>Auto</label>
-                    <input ng-model="user.car" type="text" name="last-name" value="{{user.car}}" placeholder="Auto">
+                    <input ng-model="user.car" type="text" name="car" placeholder="Auto">
                 </div>
                 <div class="inline fields">
                     <label>Płeć</label>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="M" name="sex" checked="" tabindex="0" class="hidden">
+                            <input type="radio" ng-model="user.sex" value="M" name="sex" ng-checked="true">
                             <label>Mężczyzna</label>
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="K" name="sex" tabindex="0" class="hidden">
+                            <input type="radio" ng-model="user.sex" value="K" name="sex" >
                             <label>Kobieta</label>
                         </div>
                     </div>
                 </div>
-                <a href="#my-profile" class="ui right floated large accent-color button" ng-click="onSubmitUpdate()" type="submit">Zapisz</a>
+                <button ng-disabled="updateProfileForm.$invalid" class="ui right floated large accent-color button" type="submit">Zapisz</button>
             </form>
         </div>
         <div class="eight wide column center aligned">
@@ -58,6 +63,5 @@
 </div>
 <script>
     $('.ui.radio.checkbox')
-            .checkbox()
-    ;
+            .checkbox()    ;
 </script>
