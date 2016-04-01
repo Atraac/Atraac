@@ -33,61 +33,72 @@
     <title>DeliverIT</title>
 </head>
 <body>
-<div ng-controller="MenuController" class="ui primary-dark-color stackable inverted pointing labeled icon menu">
-    <div class="ui container">
-        <a ng-class="{ active: isActive('/') }" href="#/" class="item">
-            <i class="home icon"></i> Strona główna
-        </a>
-        <a ng-class="{ active: isActive('/search-transport') }" href="#search-transport" class="item ">
-            <i class="search icon "></i> Wyszukaj przejazdy
-        </a>
-        <a ng-class="{ active: isActive('/add-transport') }" href="#add-transport" class="item">
-            <i class="car icon"></i> Dodaj przejazd
-        </a>
-        <a ng-class="{ active: isActive('/my-packages') }" href="#my-packages" class="item">
-            <i class="Dropbox icon"></i> Twoje przesyłki
-        </a>
-        <a ng-class="{ active: isActive('/my-transports') }" href="#my-transports" class="item">
-            <i class="List icon"></i> Twoje przejazdy
-        </a>
-        <a ng-class="{ active: isActive('/my-messages') }" href="#my-messages" class="item">
-            <i class="Mail icon"></i> Wiadomości
-        </a>
+<div id="container">
+    <div id="header">
+        <div ng-controller="MenuController" class="ui primary-dark-color stackable inverted pointing labeled icon menu">
+            <div class="ui container">
+                <a ng-class="{ active: isActive('/') }" href="#/" class="item">
+                    <i class="home icon"></i> Strona główna
+                </a>
+                <a ng-class="{ active: isActive('/search-transport') }" href="#search-transport" class="item ">
+                    <i class="search icon "></i> Wyszukaj przejazdy
+                </a>
+                <a ng-class="{ active: isActive('/add-transport') }" href="#add-transport" class="item">
+                    <i class="car icon"></i> Dodaj przejazd
+                </a>
+                <a ng-class="{ active: isActive('/my-packages') }" href="#my-packages" class="item">
+                    <i class="Dropbox icon"></i> Twoje przesyłki
+                </a>
+                <a ng-class="{ active: isActive('/my-transports') }" href="#my-transports" class="item">
+                    <i class="List icon"></i> Twoje przejazdy
+                </a>
+                <a ng-class="{ active: isActive('/my-messages') }" href="#my-messages" class="item">
+                    <i class="Mail icon"></i> Wiadomości
+                </a>
 
-        <div class="right menu">
-            <a ng-class="{ active: isActive('/my-profile') }" href="#my-profile" class="item">
-                <i class="user icon "></i> Twój profil
-            </a>
-            <a class="item">
-                <i class="Sign out icon"></i>Wyloguj
-            </a>
+                <div class="right menu">
+                    <a ng-class="{ active: isActive('/my-profile') }" href="#my-profile" class="item">
+                        <i class="user icon "></i> Twój profil
+                    </a>
+                    <a class="item">
+                        <i class="Sign out icon"></i>Wyloguj
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
+    <div id="content">
+        <div ng-view></div>
+    </div>
+    <div id="footer">
+        <footer class="ui primary-dark-color inverted vertical footer segment form-page">
+            <div class="ui container">
+                <div class="ui grid">
+                    <div class="center aligned four wide column">
+                        <i class="primary-light-color car huge icon"></i>
+                        <h3>DeliverIT</h3>
+                        <p>DeliverIT Team 2016<i class="Copyright small icon"></i></p>
+                        <p>All Rights Reserved</p>
+                    </div>
+                    <div class="ui vertical divider"><i class="primary-light-color Star icon"></i></div>
+                    <div class="center aligned six wide column">
+                        <i class="primary-light-color Mail big icon"></i>
+                        <h3>Kontakt</h3>
+                        <p>Telefon: 123 123 123
+                        <p>Telefon stac: (22) 321 321 321
+                        <p>Email: deliverit.team@gmail.com
+                    </div>
+                    <div class="center aligned six wide column ">
+                        <i class="primary-light-color Home big icon"></i>
+                        <h3>Adres</h3>
+                        <p>ul. Zaporoska 27/18</p>
+                        <p>53-519 Wrocław</p>
+                        <p>Polska</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>
-
-<div ng-view></div>
-
-<footer class="ui primary-dark-color inverted vertical footer segment form-page">
-    <div class="ui container">
-        <div class="ui grid">
-            <div class="center aligned six wide column">
-                <h3>Kontakt</h3>
-                <p>Telefon: 123 123 123
-                <p>Email: aaa@aaa.pl
-            </div>
-            <div class="center aligned four wide column">
-                <h3>DeliverIT</h3>
-                <p>DeliverIT Team 2016</p>
-                <p>All Rights Reserved</p>
-            </div>
-            <div class="center aligned six wide column ">
-                <h3>Adress</h3>
-                <p>Pszczyna Dolna 23/3
-                <p>93-234 Pszczyna Górna
-            </div>
-        </div>
-    </div>
-</footer>
-
 </body>
 </html>

@@ -1,9 +1,27 @@
-footer{
-    margin-top: 30px !important;
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
 }
-
-div.menu.inverted{
-    margin-bottom: 30px;
+#container {
+    min-height:100%;
+    position:relative;
+}
+#header {
+    background:#ff0;
+}
+#content {
+    padding:10px;
+    padding-bottom: 110px;
+    margin-top: 30px;
+}
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height: 60px;
+    background:#6cf;
 }
 
 h4.ui.horizontal.divider.header{

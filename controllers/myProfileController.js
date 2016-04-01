@@ -10,6 +10,4 @@ myProfileController.controller('MyProfileController', ['$scope', 'User',
         $scope.onSubmitUpdate = function(){
             console.log($scope.User);
         }
-
-
     }]);
