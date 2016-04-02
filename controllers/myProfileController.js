@@ -6,7 +6,6 @@ myProfileController.controller('MyProfileController', ['$scope', 'User', '$locat
         User.getUser().then(function (response) {
             $scope.user = response.data;
             $scope.user.birthDate = new Date(response.data.birthDate);
-            $scope.rating = Math.round($scope.user.rating);
             console.log($scope.user);
         });
         $scope.onUpdateProfile = function(){

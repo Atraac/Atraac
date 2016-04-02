@@ -1,8 +1,8 @@
 var deliverIT = angular.module('deliverIT',
         ['ngRoute',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
-        'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController',
-        'rating']);
+        'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
+        'rating', 'roundFilter']);
 deliverIT.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
@@ -27,6 +27,10 @@ deliverIT.config(['$routeProvider', function ($routeProvider) {
     when('/my-transports', {
         templateUrl: './views/my-transports.html',
         controller: 'MyTransportsController'
+    }).
+    when('/transport/:transportId', {
+        templateUrl: './views/show-transport.html',
+        controller: 'ShowTransportController'
     }).
     when('/my-messages', {
         templateUrl: './views/my-messages.html',

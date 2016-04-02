@@ -2,6 +2,12 @@ var searchTransportController = angular.module('searchTransportController', ['tr
 
 searchTransportController.controller('SearchTransportController', ['$scope', 'Transport',
     function ($scope, Transport) {
+        $scope.order = 'departureDate';
+        $scope.reverse = false;
+        $scope.changeOrder = function(order){
+            $scope.reverse = ($scope.order === order) ? !$scope.reverse : false;
+            $scope.order = order;
+        };
         $scope.transports = {};
         Transport.getTransports().then(function(response){
             $scope.transports = response.data;

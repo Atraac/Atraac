@@ -24,31 +24,43 @@
             </form>
         </div>
     </div>
-
     <h4 class="ui horizontal divider header">
         <i class="Shipping icon"></i>Wyszukane przejazdy
     </h4>
     <table class="ui very basic collapsing celled table">
         <thead>
             <tr>
-                <th>Kierowca</th>
+                <th>
+                    <span class="orderBy" ng-click="changeOrder('rating')">
+                        Kierowca
+                    </span>
+         span class="sortorder" ng-show="order === 'rating'" ng-class="{reverse:reverse}"></span>
+                </th>
                 <th>Trasa</th>
-                <th>Godzina wyjazdu</th>
+                <th>
+                    <span class="orderBy" ng-click="changeOrder('departureDate')">
+                        Czas wyjazdu
+                    </span>
+                    <span class="sortorder" ng-show="order === 'departureDate'" ng-class="{reverse:reverse}"></span>
+                </th>
                 <th>Rodzaje paczek</th>
                 <th>Krótki opis</th>
+                <th>Szczegóły</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="transport in transports">
+            <tr ng-repeat="transport in transports | orderBy:order:reverse">
                 <td>
                     <h4 class="ui image header">
                         <i class="user icon"></i>
                         <div class="content">
-                            {{transport.name}} {{transport.surname}}
-                            <div class="sub header">Ocena: {{transport.rating}}
-                            </div>
+                            <p>{{transport.name}} {{transport.surname}}</p>
+                            <p></p><rating id="my-rating{{transport.idUser}}" size="small" type="star" ng-model="transport.rating | round"></rating></p>
+                            <p><div class="sub header">Ocena: {{transport.rating}}</div></p>
                         </div>
-                    </h4></td>
+
+                    </h4>
+                </td>
                 <td>
                     Z:<br/> {{transport.sourceCity}} <br/>
                     Do: {{transport.destinationCity}}
@@ -63,6 +75,9 @@
                 </td>
                 <td>
                     {{transport.description}}
+                </td>
+                <td>
+                    <a href="#/transport/{{transport.idTransport}}" class="ui right floated large accent-color button" type="button">Szczegóły</a>
                 </td>
             </tr>
         </tbody>

@@ -10,7 +10,7 @@
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
-                            <rating id="my-rating" size="large" type="star" ng-model="rating"></rating>
+                            <rating id="my-rating" size="large" type="star" ng-model="user.rating | round"></rating>
                             <span>{{user.rating}}</span>
                         </div>
                         <div class="image right">
