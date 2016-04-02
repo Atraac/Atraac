@@ -56,6 +56,7 @@
                     <label>Treść ogłoszenia</label>
                     <textarea ng-model="transport.description" type="description" name="description" placeholder="Treść ogłoszenia" maxlength="500" required></textarea>
                 </div>
+<<<<<<< HEAD
                 <div class="grouped fields">
                     <div class="field">
                         <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="packtype in packtypes">
@@ -69,6 +70,21 @@
                             <label>{{packtype.name}}</label>
                         </div>
                     </div>
+=======
+                <div class="field">
+                    <div class="field">
+                        <label>Paczki jakie mogę zabrać</label>
+                    </div>
+                    <label ng-repeat="packtype in packtypes">
+                        <input
+                                type="checkbox"
+                                name="selectedPacktypes[]"
+                                value="{{packtype}}"
+                                ng-checked="selection.indexOf(packtype) > -1"
+                                ng-click="toggleSelection(packtype)"
+                        > {{packtype.name}}
+                    </label>
+>>>>>>> d4b6aa7403d75a387e9db322d211b7cf4f53d64c
                 </div>
                 <button ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</button>
             </form>
