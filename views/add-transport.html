@@ -5,78 +5,70 @@
                 <i class="Shipping icon"></i>
                 Dodaj nowy przejazd
             </h4>
-            <form class="ui form">
-                <div class="field">
-                    <label><i class="Comment Outline icon"></i>Nazwa ogłoszenia</label>
-                    <textarea rows="1" maxlength="100" id="title" name="title"></textarea>
+            <form class="ui form" name="addTransportForm" ng-submit="addTransport()" novalidate>
+                <div class="field" ng-class="{'error' : addTransportForm.title.$invalid && addTransportForm.title.$touched }">
+                    <label>Tytuł ogłoszenia</label>
+                    <input ng-model="transport.title" type="text" name="title" placeholder="Tytuł ogłoszenia" maxlength="100" required>
+                </div>
+                <div class="field" ng-class="{'error' : addTransportForm.date.$invalid && addTransportForm.date.$touched }">
+                    <label>Data wyjazdu</label>
+                    <input ng-model="transport.date" type="date" name="date" required>
+                </div>
+                <div class="field" ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
+                    <label>Wyruszam z</label>
+                    <select id="point0Dropdown" name="point0" ng-model="transport.point0" ng-options="point0City.name for point0City in cities" required>
+                    </select>
                 </div>
                 <div class="field">
-                    <label><i class="Calendar icon"></i>Data wyjazdu</label>
-                    <input type="date" name="date" id="date">
+                    <label>Jadę przez</label>
+                    <select id="point1Dropdown" ng-model="transport.point1" ng-options="point1City.name for point1City in cities" ng-change="addPoint(2)">
+                        <option value=""></option>
+                    </select>
+                    <select id="point2Dropdown" ng-model="transport.point2" ng-options="point2City.name for point2City in cities" ng-change="addPoint(3)" ng-show=" points >= 2">
+                        <option value=""></option>
+                    </select>
+                    <select id="point3Dropdown" ng-model="transport.point3" ng-options="point3City.name for point3City in cities" ng-change="addPoint(4)" ng-show=" points >= 3">
+                        <option value=""></option>
+                    </select>
+                    <select id="point4Dropdown" ng-model="transport.point4" ng-options="point4City.name for point4City in cities" ng-change="addPoint(5)" ng-show=" points >= 4">
+                        <option value=""></option>
+                    </select>
+                    <select id="point5Dropdown" ng-model="transport.point5" ng-options="point5City.name for point5City in cities" ng-change="addPoint(6)" ng-show=" points >= 5">
+                        <option value=""></option>
+                    </select>
+                    <select id="point6Dropdown" ng-model="transport.point6" ng-options="point6City.name for point6City in cities" ng-show=" points >= 6">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="field" ng-class="{'error' : addTransportForm.point7.$invalid && addTransportForm.point7.$touched }">
+                    <label>Wyruszam do</label>
+                    <select id="point7Dropdown" name="point7" ng-model="transport.point7" ng-options="point7City.name for point7City in cities" required>
+                    </select>
+                </div>
+                <div class="field" ng-class="{'error' : addTransportForm.description.$invalid && addTransportForm.description.$touched }">
+                    <label>Treść ogłoszenia</label>
+                    <textarea ng-model="transport.description" type="description" name="description" placeholder="Treść ogłoszenia" maxlength="500" required></textarea>
                 </div>
                 <div class="field">
-                    <label><i class="Flag Outline icon"></i>Początek trasy</label>
-                    <div class="ui search selection dropdown" id="point0">
-                        <input type="hidden" name="point0">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto początkowe</div>
-                    </div>
+                    <label ng-repeat="packtype in packtypes">
+                        <input
+                                type="checkbox"
+                                name="selectedPacktypes[]"
+                                value="{{packtype}}"
+                                ng-checked="selection.indexOf(packtype) > -1"
+                                ng-click="toggleSelection(packtype)"
+                        > {{packtype.name}}
+                    </label>
                 </div>
-                <div class="field">
-                    <label><i class="Resize Horizontal icon"></i>Przejazd przez</label>
-                    <div class="ui search selection dropdown" id="point1"  onchange="addPoint(2)">
-                        <input type="hidden" name="point1">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                    <div class="ui search selection dropdown" id="point2" onchange="addPoint(3)" ng-show="points > 1">
-                        <input type="hidden" name="point2">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                    <div class="ui search selection dropdown" id="point3" onchange="addPoint(4)" ng-show="points > 2">
-                        <input type="hidden" name="point3">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                    <div class="ui search selection dropdown" id="point4" onchange="addPoint(5)" ng-show="points > 3">
-                        <input type="hidden" name="point4">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                    <div class="ui search selection dropdown" id="point5" onchange="addPoint(6)" ng-show="points > 4">
-                        <input type="hidden" name="point5">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                    <div class="ui search selection dropdown" id="point6"  ng-show="points > 5">
-                        <input type="hidden" name="point6">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto pośrednie</div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label><i class="Flag icon"></i>Koniec trasy</label>
-                    <div class="ui search selection dropdown" id="point7">
-                        <input type="hidden" name="point7">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Miasto końcowe</div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label><i class="Suitcase icon"></i>Rodzaje akceptowanych paczek</label>
-                    <div class="ui search multiple selection dropdown" id="packtypes">
-                        <input type="hidden" name="packtypes">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Małe, średnie...</div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label><i class="Browser icon"></i>Opis ogłoszenia</label>
-                    <textarea rows="4" maxlength="500" id="description" name="description"></textarea>
-                </div>
-                <div class="ui error message"></div>
-                <button type="submit" class="ui blue submit button">Potwierdź</button>
+                <ul>
+                    <li class="has-error" ng-show="addTransportForm.title.$invalid && addTransportForm.title.$touched" class="help-block">Tytuł jest wymagany</li>
+                    <li class="has-error" ng-show="addTransportForm.date.$invalid && addTransportForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
+                    <li class="has-error" ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
+                    <li class="has-error" ng-show="addTransportForm.point7.$invalid && addTransportForm.point7.$touched" class="help-block">Koniec trasy jest wymagany</li>
+
+                    <li class="has-error" ng-show="addTransportForm.description.$invalid && addTransportForm.description.$touched" class="help-block">Opis jest wymagany</li>
+                </ul>
+                <button ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</button>
             </form>
         </div>
 

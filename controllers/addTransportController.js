@@ -1,123 +1,55 @@
 var addTransportController = angular.module('addTransportController', []);
-addTransportController.controller('AddTransportController', ['$scope',
-    function ($scope) {
-        $('.ui.dropdown').dropdown({
-            fields: { name: "name", value: "id" },
-            apiSettings: {
-                url: './fixedObject/cities.json/{query}'
-            }
-        });
+addTransportController.controller('AddTransportController', [ '$scope', '$http', '$filter',
+    function ($scope, $http, $filter) {
 
-        $('#packtypes').dropdown({
-            fields: { name: "type", value: "id" },
-            apiSettings: {
-                url: './fixedObject/pack-types.json/{query}'
-            }
-        });
-
-        $('.ui.form')
-            .form({
-                fields: {
-                    title: {
-                        identifier: 'title',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'Wymagany jest tytuł ogłoszenia'
-                            }
-                        ]
-                    },
-                    date: {
-                        identifier: 'date',
-                        rules: [
-                            {
-                                type : 'empty',
-                                prompt : 'Wymagana jest data wyjazdu'
-                            }
-                        ]
-
-                    },
-                    point0: {
-                        identifier: 'point0',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'Wymagana jest lokacja początkowa'
-                            }
-                        ]
-                    },
-                    point1: {
-                        identifier: 'point1'
-                    },
-                    point2: {
-                        identifier: 'point2'
-                    },
-                    point3: {
-                        identifier: 'point3'
-                    },
-                    point4: {
-                        identifier: 'point4'
-                    },
-                    point5: {
-                        identifier: 'point5'
-                    },
-                    point6: {
-                        identifier: 'point6'
-                    },
-                    point7: {
-                        identifier: 'point7',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'Wymagana jest lokacja docelowa'
-                            }
-                        ]
-                    },
-                    packtypes: {
-                        identifier: 'packtypes',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'Wymagany jest co najmniej jeden rodzaj transportowanych paczek'
-                            }
-                        ]
-                    },
-                    description: {
-                        identifier: 'description',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'Wymagany jest opis ogłoszenia'
-                            }
-                        ]
-                    }
-                }
+        $http.get('./fixedObject/cities.json')
+            .then(function (response)
+            {
+                $scope.cities = response.data;
+            }, function (error) {
+                $scope.error1 = JSON.stringify(error);
+            });
+        $http.get('./fixedObject/packtypes.json')
+            .then(function (response)
+            {
+                $scope.packtypes = response.data;
+            }, function (error) {
+                $scope.error1 = JSON.stringify(error);
             });
 
-        $('form').api({
-            url: './fixedObject/transports.json',
-            action: 'addtransport',
-            method: 'post',
-            serializeForm: true,
-            dataType: 'text',
-            beforeSend: function(settings) {
-                // static user id = 1
-                settings.data.idUser = 1;
-            },
-            onSuccess: function() {
-            },
-            onError: function() {
-                alert('Wystąpił błąd połączenia z serwerem');
+        // syf do obslugi checkboxow
+
+        // selected packtypes
+        $scope.selection = [];
+
+        // toggle selection for a given packtype by name
+        $scope.toggleSelection = function toggleSelection(packtype) {
+            var idx = $scope.selection.indexOf(packtype.name);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.selection.splice(idx, 1);
             }
-        });
+            // is newly selected
+            else {
+                $scope.selection.push(packtype.name);
+            }
+        };
 
-        $scope.points = 1;
-
-        addPoint = function(num) {
-            if (num > $scope.points) {
+        $scope.points=1;
+        $scope.addPoint = function(num) {
+            if ($scope.points < num) {
                 $scope.points = num;
-                $scope.$apply();
             }
+        };
+        $scope.transport = {
+            idUser : '1',
+            packtypes : $scope.selection
+        };
+
+        $scope.addTransport = function() {
+            //po tym skroceniu daty, angular jeczy, ze spodziewa sie typowej daty w JSONie, a dostaje (chyba) string
+            //$scope.transport.date=$filter('date')($scope.transport.date, 'mediumDate');
+            console.log($scope.transport);
         }
-    }
-]);
+    }]);

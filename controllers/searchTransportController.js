@@ -19,5 +19,10 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Tr
                 url: './fixedObject/cities.json/{query}'
             }
         });
+        $scope.found=false;
+        $scope.onSearch = function() {
+            // show results table after search
+            $scope.found=true;
+        }
     }]);
 
