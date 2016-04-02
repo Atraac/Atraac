@@ -1,6 +1,6 @@
 var addTransportController = angular.module('addTransportController', []);
-addTransportController.controller('AddTransportController', ['$scope', '$location',
-    function ($scope, $location) {
+addTransportController.controller('AddTransportController', ['$scope',
+    function ($scope) {
         $('.ui.dropdown').dropdown({
             fields: { name: "name", value: "id" },
             apiSettings: {
@@ -8,7 +8,7 @@ addTransportController.controller('AddTransportController', ['$scope', '$locatio
             }
         });
 
-        $('#transport-packtypes').dropdown({
+        $('#packtypes').dropdown({
             fields: { name: "type", value: "id" },
             apiSettings: {
                 url: './fixedObject/pack-types.json/{query}'
@@ -19,66 +19,105 @@ addTransportController.controller('AddTransportController', ['$scope', '$locatio
             .form({
                 fields: {
                     title: {
-                        identifier: 'transport-title',
+                        identifier: 'title',
                         rules: [
                             {
                                 type   : 'empty',
-                                prompt : 'Proszę wprowadzić tytuł ogłoszenia'
+                                prompt : 'Wymagany jest tytuł ogłoszenia'
                             }
                         ]
                     },
-                    start: {
-                        identifier: 'transport-start',
+                    date: {
+                        identifier: 'date',
+                        rules: [
+                            {
+                                type : 'empty',
+                                prompt : 'Wymagana jest data wyjazdu'
+                            }
+                        ]
+
+                    },
+                    point0: {
+                        identifier: 'point0',
                         rules: [
                             {
                                 type   : 'empty',
-                                prompt : 'Proszę wybrać lokację początkową'
+                                prompt : 'Wymagana jest lokacja początkowa'
                             }
                         ]
                     },
-                    end: {
-                        identifier: 'transport-end',
+                    point1: {
+                        identifier: 'point1'
+                    },
+                    point2: {
+                        identifier: 'point2'
+                    },
+                    point3: {
+                        identifier: 'point3'
+                    },
+                    point4: {
+                        identifier: 'point4'
+                    },
+                    point5: {
+                        identifier: 'point5'
+                    },
+                    point6: {
+                        identifier: 'point6'
+                    },
+                    point7: {
+                        identifier: 'point7',
                         rules: [
                             {
                                 type   : 'empty',
-                                prompt : 'Proszę wybrać lokację końcową'
+                                prompt : 'Wymagana jest lokacja docelowa'
                             }
                         ]
-                    },
-                    through: {
-                        identifier: 'transport-through'
                     },
                     packtypes: {
-                        identifier: 'transport-packtypes',
+                        identifier: 'packtypes',
                         rules: [
                             {
                                 type   : 'empty',
-                                prompt : 'Proszę wybrać rodzaje transportowanych paczek'
+                                prompt : 'Wymagany jest co najmniej jeden rodzaj transportowanych paczek'
                             }
                         ]
                     },
                     description: {
-                        identifier: 'transport-description',
+                        identifier: 'description',
                         rules: [
                             {
                                 type   : 'empty',
-                                prompt : 'Proszę wprowadzić opis ogłoszenia'
+                                prompt : 'Wymagany jest opis ogłoszenia'
                             }
                         ]
                     }
                 }
             });
+
         $('form').api({
-            url: './fixedObject/addedTransports.json',
+            url: './fixedObject/transports.json',
             action: 'addtransport',
             method: 'post',
             serializeForm: true,
             dataType: 'text',
+            beforeSend: function(settings) {
+                // static user id = 1
+                settings.data.idUser = 1;
+            },
             onSuccess: function() {
-                // to do - switch view to transportid
             },
             onError: function() {
                 alert('Wystąpił błąd połączenia z serwerem');
             }
         });
-    }]);
+
+        $scope.points = 1;
+
+        addPoint = function(num) {
+            if (num > $scope.points) {
+                $scope.points = num;
+                $scope.$apply();
+            }
+        }
+    }
+]);

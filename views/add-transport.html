@@ -8,43 +8,72 @@
             <form class="ui form">
                 <div class="field">
                     <label><i class="Comment Outline icon"></i>Nazwa ogłoszenia</label>
-                    <textarea rows="1" maxlength="100" id="transport-title" name="transport-title"></textarea>
+                    <textarea rows="1" maxlength="100" id="title" name="title"></textarea>
+                </div>
+                <div class="field">
+                    <label><i class="Calendar icon"></i>Data wyjazdu</label>
+                    <input type="date" name="date" id="date">
                 </div>
                 <div class="field">
                     <label><i class="Flag Outline icon"></i>Początek trasy</label>
-                    <div class="ui search selection dropdown" id="transport-start">
-                        <input type="hidden" name="transport-start">
+                    <div class="ui search selection dropdown" id="point0">
+                        <input type="hidden" name="point0">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto początkowe</div>
                     </div>
                 </div>
                 <div class="field">
                     <label><i class="Resize Horizontal icon"></i>Przejazd przez</label>
-                    <div class="ui search multiple selection dropdown" id="transport-through">
-                        <input type="hidden" name="transport-through">
+                    <div class="ui search selection dropdown" id="point1"  onchange="addPoint(2)">
+                        <input type="hidden" name="point1">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Miasto pośrednie</div>
+                    </div>
+                    <div class="ui search selection dropdown" id="point2" onchange="addPoint(3)" ng-show="points > 1">
+                        <input type="hidden" name="point2">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Miasto pośrednie</div>
+                    </div>
+                    <div class="ui search selection dropdown" id="point3" onchange="addPoint(4)" ng-show="points > 2">
+                        <input type="hidden" name="point3">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Miasto pośrednie</div>
+                    </div>
+                    <div class="ui search selection dropdown" id="point4" onchange="addPoint(5)" ng-show="points > 3">
+                        <input type="hidden" name="point4">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Miasto pośrednie</div>
+                    </div>
+                    <div class="ui search selection dropdown" id="point5" onchange="addPoint(6)" ng-show="points > 4">
+                        <input type="hidden" name="point5">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Miasto pośrednie</div>
+                    </div>
+                    <div class="ui search selection dropdown" id="point6"  ng-show="points > 5">
+                        <input type="hidden" name="point6">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto pośrednie</div>
                     </div>
                 </div>
                 <div class="field">
                     <label><i class="Flag icon"></i>Koniec trasy</label>
-                    <div class="ui search selection dropdown" id="transport-end">
-                        <input type="hidden" name="transport-end">
+                    <div class="ui search selection dropdown" id="point7">
+                        <input type="hidden" name="point7">
                         <i class="dropdown icon"></i>
                         <div class="default text">Miasto końcowe</div>
                     </div>
                 </div>
                 <div class="field">
                     <label><i class="Suitcase icon"></i>Rodzaje akceptowanych paczek</label>
-                    <div class="ui search multiple selection dropdown" id="transport-packtypes">
-                        <input type="hidden" name="transport-packtypes">
+                    <div class="ui search multiple selection dropdown" id="packtypes">
+                        <input type="hidden" name="packtypes">
                         <i class="dropdown icon"></i>
                         <div class="default text">Małe, średnie...</div>
                     </div>
                 </div>
                 <div class="field">
                     <label><i class="Browser icon"></i>Opis ogłoszenia</label>
-                    <textarea rows="4" maxlength="500" id="transport-description" name="transport-description"></textarea>
+                    <textarea rows="4" maxlength="500" id="description" name="description"></textarea>
                 </div>
                 <div class="ui error message"></div>
                 <button type="submit" class="ui blue submit button">Potwierdź</button>
