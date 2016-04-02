@@ -36,6 +36,9 @@
                     </span>
                     <span class="sortorder" ng-show="order === 'rating'" ng-class="{reverse:reverse}"></span>
                 </th>
+                <th>
+                    Tytuł
+                </th>
                 <th>Trasa</th>
                 <th>
                     <span class="orderBy" ng-click="changeOrder('departureDate')">
@@ -44,8 +47,6 @@
                     <span class="sortorder" ng-show="order === 'departureDate'" ng-class="{reverse:reverse}"></span>
                 </th>
                 <th>Rodzaje paczek</th>
-                <th>Krótki opis</th>
-                <th>Szczegóły</th>
             </tr>
         </thead>
         <tbody>
@@ -62,8 +63,10 @@
                     </h4>
                 </td>
                 <td>
-                    Z:<br/> {{transport.sourceCity}} <br/>
-                    Do: {{transport.destinationCity}}
+                    <a class="transport-title" href="#/transport/{{transport.idTransport}}" type="button">{{transport.title}}</a>
+                </td>
+                <td>
+                    Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
                 </td>
                 <td>
                     {{transport.departureDate | date: 'short'}}
@@ -72,12 +75,6 @@
                     <span ng-repeat="type in transport.packTypes">
                         {{type}}
                     </span>
-                </td>
-                <td>
-                    {{transport.description}}
-                </td>
-                <td>
-                    <a href="#/transport/{{transport.idTransport}}" class="ui right floated large accent-color button" type="button">Szczegóły</a>
                 </td>
             </tr>
         </tbody>
