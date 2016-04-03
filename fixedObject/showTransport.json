@@ -1,0 +1,19 @@
+{
+  "idDriver": 1,
+  "idTransport": 1,
+  "name": "Michał",
+  "surname": "Zawadzki",
+  "car": "Toyota Corolla",
+  "rating": 3.7,
+  "phoneNumber": 432432432,
+  "photo": "./content/pictures/brak.jpg",
+  "cities": [
+    "Wrocław", "Wieluń", "Bełchatów", "Piotrków Trybunalski", "Warszawa", "Białystok"
+  ],
+  "packTypes": [
+    "Małe", "Duże", "Zwierzęta", "Żywność"
+  ],
+  "description": "Aliquam euismod malesuada tortor sit amet molestie. Nunc ullamcorper eget sem at pharetra. \n Aliquam euismod malesuada tortor sit amet molestie. Nunc ullamcorper eget sem at pharetra. Ut eleifend, justo nec maximus scelerisque, dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien. Fusce a diam a nisl efficitur euismod \n Ut eleifend, justo nec maximus scelerisque, dolor ex dignissim dui, nec sollicitudin sem ligula eu sapien. Fusce a diam a nisl efficitur euismod",
+  "departureDate": "2013-10-21T08:28:06.419Z",
+  "state": "active"
+}

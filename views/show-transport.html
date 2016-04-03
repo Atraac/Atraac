@@ -1,3 +1,82 @@
-<div ng-controller="ShowTransportController">
-    {{something}}
+<div class="ui container" ng-controller="ShowTransportController">
+    <div class="ui grid stackable">
+        <div class="four wide column">
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="user icon"></i>
+                    Kierowca
+                </h4>
+                <div class="ui header">
+                    <rating id="my-rating" size="large" type="star" ng-model="transport.rating | round"></rating>
+                    <span>{{transport.rating}}</span>
+                </div>
+                <img class="image ui tiny right" src="{{transport.photo}}">
+                <div class="description">
+                    <p>Imię: <strong>{{transport.name}}</strong></p>
+                    <p>Nazwisko: <strong>{{transport.surname}}</strong></p>
+                    <p>Auto: <strong>{{transport.car}}</strong></p>
+                    <p>Telefon: <strong>{{transport.phoneNumber}}</strong></p>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="Calendar icon"></i>
+                    Termin wyjazdu
+                </h4>
+                <h4>
+                    {{transport.departureDate | date:'short'}}
+                </h4>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="Road icon"></i>
+                    Trasa
+                </h4>
+                <div class="ui list">
+                    <div class="item" ng-repeat="city in transport.cities">
+                        <p ng-show="$first" ><i class="Flag Outline icon"></i><strong>{{city}}</strong></p>
+                        <p ng-show="$middle" ><i class="Arrow Down icon"></i>{{city}}</p>
+                        <p ng-show="$last" ><i class="Flag icon"></i><strong>{{city}}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four wide column">
+                    <h4 class="ui horizontal divider header">
+                        <i class="Dropbox icon"></i>
+                        Typ paczek
+                    </h4>
+                    <div class="ui list">
+                        <div class="item" ng-repeat="type in transport.packTypes">
+                            <p><i class="Cube icon"></i>{{type}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="eight wide column">
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="Write icon"></i>
+                    Opis
+                </h4>
+                <div class="ui piled segment">
+                    {{transport.description}}
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="Heartbeat icon"></i>
+                    Akcje/Stan
+                </h4>
+                <div class="ui piled segment">
+                    <p ng-show="transport.state === 'active'">Można zarejestrować paczkę</p>
+                </div>
+                <button class="ui right floated large accent-color button" type="button">Zarezerwuj</button>
+            </div>
+        </div>
+    </div>
 </div>
