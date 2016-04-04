@@ -6,8 +6,10 @@ var deliverIT = angular.module('deliverIT',
 deliverIT.run(function ($rootScope) {
     $rootScope.user = {};
     $rootScope.logged = false;
+
 });
-deliverIT.config(['$routeProvider', function ($routeProvider) {
+deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
         controller: 'GreetingController'
