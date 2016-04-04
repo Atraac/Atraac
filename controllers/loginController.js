@@ -13,7 +13,8 @@ loginController.controller('LoginController', ['$scope', '$location', '$http',
                     method: 'POST',
                     url: 'http://192.168.0.101:8080/login',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Access-Control-Allow-Origin': '*'
                     },
                     data: "username="+$scope.user.email+"&"+"password="+$scope.user.password
                 };
