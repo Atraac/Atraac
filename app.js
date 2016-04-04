@@ -4,8 +4,8 @@ var deliverIT = angular.module('deliverIT',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter']);
 deliverIT.run(function ($rootScope) {
-    $rootScope.userId = 0;
-    $rootScope.login = false;
+    $rootScope.user = {};
+    $rootScope.logged = false;
 });
 deliverIT.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
