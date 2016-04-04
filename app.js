@@ -3,6 +3,10 @@ var deliverIT = angular.module('deliverIT',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter']);
+deliverIT.run(function ($rootScope) {
+    $rootScope.userId = 0;
+    $rootScope.login = false;
+});
 deliverIT.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
