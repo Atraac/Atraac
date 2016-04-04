@@ -82,14 +82,11 @@
                     <i class="Photo icon"></i>
                     Zdjęcie
                 </h4>
-                <div class="chosed-photo" ng-if="user.photo != ''" class="image center aligned">
-                    <img class="ui small " src="{{user.photo}}">
-                </div>
                 <div class="ui large accent-color button">Wybierz</div>
             </div>
         </div>
     </form>
-    <div ng-show="correctRegister" class="ui centered card">
+    <div ng-show="!correctRegister" class="ui centered card">
         <div class="content">
             <div class="header">
                 Gratulacje! :)
@@ -103,7 +100,7 @@
         </div>
         <div class="extra content">
             <div class="ui two buttons">
-                <div class="ui right floated large accent-color button">Przejdź do logowania</div>
+                <a href="#/login" class="ui right floated large accent-color button">Przejdź do logowania</a>
             </div>
         </div>
     </div>
