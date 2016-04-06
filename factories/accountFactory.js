@@ -1,10 +1,11 @@
 var accountFactory = angular.module('accountFactory', []);
-accountFactory.factory('Account', ['$http', 'Urls', '$localStorage',
-    function ($http, Urls, $localStorage){
+accountFactory.factory('Account', ['$http', 'Urls', '$localStorage', '$window',
+    function ($http, Urls, $localStorage, $window){
         var Account = {};
         var url = 'http://192.168.0.101:8080/';
 
         Account.logIn = function (email, password) {
+            $window.localStorage.clear();
             var req = {
                 method: 'POST',
                 url: Urls.Base+'login',
@@ -14,15 +15,14 @@ accountFactory.factory('Account', ['$http', 'Urls', '$localStorage',
             return $http(req);
         };
         Account.logOut = function(){
-            return $http.get(Urls.Base+'logout');
-            delete $localStorage.token;
-        }
+            $window.localStorage.clear();
+        };
         Account.register = function (user) {
             return $http.post(Urls.Base+'users', user);
-        }
+        };
         Account.getCurrentUser = function () {
             return $http.get(Urls.Base+'users');
-        }
+        };
 
         return Account;
     }]);
