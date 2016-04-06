@@ -1,5 +1,5 @@
 var deliverIT = angular.module('deliverIT',
-        ['ngRoute',
+        ['ngRoute', 'ngStorage',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter']);
@@ -8,8 +8,30 @@ deliverIT.run(function ($rootScope) {
     $rootScope.logged = false;
 
 });
+deliverIT.constant('Urls', {
+    Base: 'http://192.168.0.101:8080/'
+});
 deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
+    
+
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+        return {
+            'request': function (config) {
+                config.headers = config.headers || {};
+                if ($localStorage.token) {
+                    config.headers.Authorization = 'X-CustomToken ' + $localStorage.token;
+                }
+                return config;
+            },
+            'responseError': function (response) {
+                if (response.status === 401 || response.status === 403) {
+                    $location.path('/login');
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+
     $routeProvider.when('/', {
         templateUrl: './views/greeting.html',
         controller: 'GreetingController'
