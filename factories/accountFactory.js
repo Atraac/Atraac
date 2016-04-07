@@ -5,7 +5,7 @@ accountFactory.factory('Account', ['$http', 'Urls', '$localStorage', '$window',
         var url = 'http://192.168.0.101:8080/';
 
         Account.logIn = function (email, password) {
-            $window.localStorage.clear();
+            $window.localStorage.removeItem('X-CustomToken');
             var req = {
                 method: 'POST',
                 url: Urls.Base+'login',
@@ -15,7 +15,7 @@ accountFactory.factory('Account', ['$http', 'Urls', '$localStorage', '$window',
             return $http(req);
         };
         Account.logOut = function(){
-            $window.localStorage.clear();
+            $window.localStorage.removeItem('X-CustomToken');
         };
         Account.register = function (user) {
             return $http.post(Urls.Base+'users', user);

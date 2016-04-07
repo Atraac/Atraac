@@ -6,14 +6,14 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
         $scope.user = {};
 
         $scope.submitLogin = function () {
-            if ($scope.loginForm.$valid) {
-                $window.localStorage.clear();
+            if ($scope.loginForm.$valid) {                
+                $window.localStorage.removeItem('X-CustomToken');
                 $scope.wrongUser = false;
                 
                 Account.logIn($scope.user.email, $scope.user.password).then(function (response) {
                     if(response.status == 200) {
                         var token = response.headers('X-CustomToken');
-                        $window.localStorage.setItem('token', token);
+                        $window.localStorage.setItem('X-CustomToken', token);
 
                         $rootScope.logged = true;
                         Account.getCurrentUser().then(function (response) {

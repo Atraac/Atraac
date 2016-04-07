@@ -3,23 +3,21 @@ var deliverIT = angular.module('deliverIT',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter']);
-deliverIT.run(function ($rootScope) {
+deliverIT.run(function ($rootScope, $http) {
     $rootScope.user = {};
     $rootScope.logged = false;
-
 });
 deliverIT.constant('Urls', {
-    Base: 'http://192.168.0.101:8080/'
+    Base: 'http://serverapi-deliverit.rhcloud.com/DeliverITServer/'
 });
 deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-    
-
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', '$window', function ($q, $location, $localStorage, $window) {
         return {
             'request': function (config) {
                 config.headers = config.headers || {};
-                if ($localStorage.token) {
-                    config.headers.Authorization = 'X-CustomToken ' + $localStorage.token;
+                if ($window.localStorage.getItem('X-CustomToken')) {
+                    config.headers['X-CustomToken'] = $window.localStorage.getItem('X-CustomToken');
+                    //config.headers.Authorization = 'X-CustomToken ' + $window.localStorage.getItem('X-CustomToken');
                 }
                 return config;
             },
