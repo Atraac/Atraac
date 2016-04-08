@@ -3,6 +3,8 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
     function ($scope, User, $location, $rootScope, $routeParams) {
         $scope.something = 'ProfileController';
         $scope.user = {};
+        $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
+
         User.getUser($routeParams.userId).then(function (response) {
             if(response.status == 200) {
                 $scope.user = response.data;
