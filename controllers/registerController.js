@@ -10,7 +10,7 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
             console.log('User:'+$scope.user);
             $scope.correctRegister = false;
 
-            Account.register(user).then(function (response) {
+            Account.register($scope.user).then(function (response) {
                 $scope.correctRegister = response.data.correct;
                 $scope.duplicateEmail = response.data.duplicate;
             }, function (error) {

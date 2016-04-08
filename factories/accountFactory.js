@@ -2,7 +2,6 @@ var accountFactory = angular.module('accountFactory', []);
 accountFactory.factory('Account', ['$http', 'Urls', '$localStorage', '$window',
     function ($http, Urls, $localStorage, $window){
         var Account = {};
-        var url = 'http://192.168.0.101:8080/';
 
         Account.logIn = function (email, password) {
             $window.localStorage.removeItem('X-CustomToken');
