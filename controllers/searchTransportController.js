@@ -18,10 +18,9 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Tr
             $scope.order = order;
         };
 
-        $scope.transports = {};
         $scope.searchTransport = {
-            idUser : $rootScope.user.id,
-            packtypes : $scope.selection
+            idUser : $rootScope.loggedUser.id,
+            preferences : $scope.selection
         };
 
         $scope.searchResults=false;
@@ -29,10 +28,12 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Tr
         $scope.onSearch = function() {
             // show results table after search
             Transport.getTransports($scope.searchTransport).then(function(response){
-                $scope.transports = response.data;
-                console.log($scope.transports);
+                if (response.status == 200) {
+                    $scope.transports = response.data;
+                    console.log($scope.transports);
+                    $scope.searchResults = true;
+                }
             });
-            $scope.searchResults=true;
         };
 
         // syf do obslugi checkboxow
@@ -68,4 +69,3 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Tr
             }
         };
     }]);
-
