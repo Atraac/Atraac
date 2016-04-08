@@ -30,6 +30,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
         };
 
+        // drive-through dropdowns control
         $scope.points=1;
         $scope.addPoint = function(num) {
             if ($scope.points < num) {
