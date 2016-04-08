@@ -5,7 +5,7 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
         $scope.correctRegister = false;
         $scope.duplicateEmail = '';
         $scope.passwordAgain = '';
-
+        $scope.sexes = [ {"M": "Mężczyzna"}, { "K": "Kobieta"}];
         $scope.onRegister = function () {
             console.log('User:'+$scope.user);
             $scope.correctRegister = false;
@@ -22,11 +22,11 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
             });
             
             if(!$scope.correctRegister) {
-                $scope.registerForm.email.$touched = false;
-                $scope.registerForm.password.$touched = false;
+                $scope.registerForm._email.$touched = false;
+                $scope.registerForm._password.$touched = false;
                 $scope.registerForm.passwordAgain.$touched = false;
-                $scope.user.email = '';
-                $scope.user.password = '';
+                //$scope.user._email = '';
+                //$scope.user._password = '';
                 $scope.passwordAgain = '';
             }
         }

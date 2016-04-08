@@ -4,11 +4,11 @@ var deliverIT = angular.module('deliverIT',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter']);
 deliverIT.run(function ($rootScope, $http) {
-    $rootScope.user = {};
+    $rootScope.loggedUser = {};
     $rootScope.logged = false;
 });
 deliverIT.constant('Urls', {
-    Base: 'http://serverapi-deliverit.rhcloud.com/DeliverITServer/'
+    Base: 'http://192.168.0.101:8080/'
 });
 deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', '$window', function ($q, $location, $localStorage, $window) {

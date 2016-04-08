@@ -11,7 +11,7 @@ menuController.controller('MenuController', ['Account', '$scope', '$location', '
             $rootScope.user = {};
             $rootScope.logged = false;
             $location.path("#/");
-            console.log($rootScope.user)
+            console.log($rootScope.loggedUser)
             console.log($rootScope.logged)
         };
     }]);

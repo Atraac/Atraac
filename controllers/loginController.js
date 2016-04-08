@@ -17,7 +17,7 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
                         $location.path("#/");
                         $rootScope.logged = true;
                         Account.getCurrentUser().then(function (response) {
-                            $rootScope.user = response.data;
+                            $rootScope.loggedUser = response.data;
                         }, function(error){
                             console.log("currentUserError: " + error);
                         });
