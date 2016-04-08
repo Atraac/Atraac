@@ -11,7 +11,6 @@
                 <li class="has-error" ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
                 <li class="has-error" ng-show="addTransportForm.point7.$invalid && addTransportForm.point7.$touched" class="help-block">Koniec trasy jest wymagany</li>
                 <li class="has-error" ng-show="addTransportForm.description.$invalid && addTransportForm.description.$touched" class="help-block">Opis jest wymagany</li>
-                <li class="has-error" ng-show="packtypesError" class="help-block">Wymagany jest co najmniej jeden rodzaj transportowanych paczek</li>
             </ul>
             <form class="ui form" name="addTransportForm" ng-submit="addTransport()" novalidate>
                 <div class="field" ng-class="{'error' : addTransportForm.title.$invalid && addTransportForm.title.$touched }">
@@ -60,15 +59,15 @@
                 <div class="grouped fields">
                     <label>Paczki jakie mogę zabrać</label>
                     <div class="field">
-                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="packtype in packtypes">
+                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="pref in preferences">
                             <input
                                     type="checkbox"
-                                    name="selectedPacktypes[]"
-                                    value="{{packtype.id}}"
-                                    ng-checked="selection.indexOf(packtype) > -1"
-                                    ng-click="toggleSelection(packtype)"
+                                    name="selectedPreferences[]"
+                                    value="{{pref.id}}"
+                                    ng-checked="selection.indexOf(preference) > -1"
+                                    ng-click="toggleSelection(preference)"
                             >
-                            <label>{{packtype.name}}</label>
+                            <label>{{preferenc\.name}}</label>
                         </div>
                     </div>
                 </div>

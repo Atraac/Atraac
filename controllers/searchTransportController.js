@@ -40,12 +40,12 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
         $http.get(Urls.Base+'preferences')
             .then(function (response)
             {
-                $scope.packtypes = response.data.preferenceList;
+                $scope.preferences = response.data.preferences;
             }, function (error) {
                 $scope.error1 = JSON.stringify(error);
             });
 
-        // selected packtypes
+        // selected preferences
         $scope.selection = [];
 
         // toggle selection for a given packtype by name

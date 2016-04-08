@@ -1,32 +1,24 @@
-var addTransportController = angular.module('addTransportController', ['transportFactory']);
-addTransportController.controller('AddTransportController', [ '$scope', 'Urls', '$http', 'Transport', '$rootScope',
-    function ($scope, Urls, $http, Transport, $rootScope) {
+var addTransportController = angular.module('addTransportController', ['citiesFactory', 'preferencesFactory', 'transportFactory']);
+addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 'Cities', 'Preferences', '$http', 'Transport', '$rootScope',
+    function ($scope, Urls, Cities, Preferences, $http, Transport, $rootScope) {
 
-        $http.get(Urls.Base+'cities')
-            .then(function (response)
-            {
-                $scope.cities = response.data.cities;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
-
+        // fill dropdowns with cities
+        Cities.getCities().then(function (response) {
+            $scope.cities = response.data.cities;
+        });
 
         // checkbox control
+        // fill checkboxes with preferences
+        Preferences.getPreferences().then(function (response) {
+            $scope.preferences = response.data.preferences;
+        });
 
-        $http.get(Urls.Base+'preferences')
-            .then(function (response)
-            {
-                $scope.packtypes = response.data.preferenceList;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
-
-        // selected packtypes
+        // selected preferences
         $scope.selection = [];
 
         // toggle selection for a given packtype by name
-        $scope.toggleSelection = function toggleSelection(packtype) {
-            var idx = $scope.selection.indexOf(packtype.name);
+        $scope.toggleSelection = function toggleSelection(preference) {
+            var idx = $scope.selection.indexOf(preference.name);
 
             // is currently selected
             if (idx > -1) {
@@ -34,7 +26,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
             // is newly selected
             else {
-                $scope.selection.push(packtype);
+                $scope.selection.push(preference);
             }
         };
 
@@ -45,6 +37,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
         };
 
+        // setting up ng-models
         $scope.transport = { };
         $scope.routes = {
             point0 : null,
@@ -57,11 +50,12 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             point7 : null
         };
 
+        // parsing to array for API
         $scope.parseRoutes = function(){
             return $scope.parsedRoutes = [$scope.routes.point0, $scope.routes.point1, $scope.routes.point2, $scope.routes.point3, $scope.routes.point4, $scope.routes.point5, $scope.routes.point6, $scope.routes.point7];
         };
+        
 
-        $scope.packtypesError = false;
         $scope.addTransport = function() {
             $scope.transport.userId = $rootScope.loggedUser.id;
             $scope.transport.preferences = $scope.selection;
