@@ -1,6 +1,6 @@
-var addTransportController = angular.module('addTransportController', []);
-addTransportController.controller('AddTransportController', [ '$scope', '$http',
-    function ($scope, $http, $rootScope) {
+var addTransportController = angular.module('addTransportController', ['transportFactory']);
+addTransportController.controller('AddTransportController', [ '$scope', '$http', 'Transport', '$rootScope',
+    function ($scope, $http, Transport, $rootScope) {
 
         $http.get('./fixedObject/cities.json')
             .then(function (response)
@@ -9,6 +9,8 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
             }, function (error) {
                 $scope.error1 = JSON.stringify(error);
             });
+        // syf do obslugi checkboxow
+
         $http.get('./fixedObject/packtypes.json')
             .then(function (response)
             {
@@ -17,8 +19,7 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
                 $scope.error1 = JSON.stringify(error);
             });
 
-        // syf do obslugi checkboxow
-
+        
         // selected packtypes
         $scope.selection = [];
 
@@ -44,11 +45,14 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
         };
 
         $scope.transport = {
-            idUser : '1',
+            idUser : $rootScope.user.id,
             packtypes : $scope.selection
         };
 
         $scope.addTransport = function() {
-            console.log($scope.transport);
+            Transport.addTransport($scope.transport).then(function(response){
+                $scope.message = response.data;
+                console.log($scope.message);
+            });
         }
     }]);
