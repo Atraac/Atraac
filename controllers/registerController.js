@@ -22,11 +22,9 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
             });
             
             if(!$scope.correctRegister) {
-                $scope.registerForm._email.$touched = false;
-                $scope.registerForm._password.$touched = false;
+                $scope.registerForm.email.$touched = false;
+                $scope.registerForm.password.$touched = false;
                 $scope.registerForm.passwordAgain.$touched = false;
-                //$scope.user._email = '';
-                //$scope.user._password = '';
                 $scope.passwordAgain = '';
             }
         }

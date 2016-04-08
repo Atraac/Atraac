@@ -7,18 +7,18 @@
                     Dane konta
                 </h4>
                 <ul>
-                    <li class="has-error" ng-show="duplicateEmail!=''" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
-                    <li class="has-error" ng-show="registerForm._email.$invalid && registerForm._email.$touched" class="help-block">Email jest wymagany</li>
-                    <li class="has-error" ng-show="registerForm._password.$invalid && registerForm._password.$touched" class="help-block">Hasło jest wymagane</li>
-                    <li class="has-error" ng-show="registerForm._password.$touched && registerForm.passwordAgain.$touched && user._password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
+                    <li class="has-error" ng-show="duplicateEmail=='Duplicated Email'" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
+                    <li class="has-error" ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
+                    <li class="has-error" ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
+                    <li class="has-error" ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
                 </ul>
-                <div class="field" ng-class="{'error' : registerForm._email.$invalid && registerForm._email.$touched }">
+                <div class="field" ng-class="{'error' : registerForm.email.$invalid && registerForm.email.$touched }">
                     <label>Email</label>
-                    <input ng-model="user._email" type="text" name="_email" placeholder="Email" required>
+                    <input ng-model="user.email" type="text" name="email" placeholder="Email" required>
                 </div>
-                <div class="field" ng-class="{'error' : registerForm._password.$invalid && registerForm._password.$touched }">
+                <div class="field" ng-class="{'error' : registerForm.password.$invalid && registerForm.password.$touched }">
                     <label></i>Hasło</label>
-                    <input ng-model="user._password" type="text" name="_password" placeholder="Hasło" required>
+                    <input ng-model="user.password" type="text" name="password" placeholder="Hasło" required>
                 </div>
                 <div class="field" ng-class="{'error' : registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched }">
                     <label>Potwierdź hasło</label>
