@@ -1,25 +1,26 @@
 var addTransportController = angular.module('addTransportController', ['transportFactory']);
-addTransportController.controller('AddTransportController', [ '$scope', '$http', 'Transport', '$rootScope',
-    function ($scope, $http, Transport, $rootScope) {
+addTransportController.controller('AddTransportController', [ '$scope', 'Urls', '$http', 'Transport', '$rootScope',
+    function ($scope, Urls, $http, Transport, $rootScope) {
 
-        $http.get('./fixedObject/cities.json')
+        $http.get(Urls.Base+'cities')
             .then(function (response)
             {
-                $scope.cities = response.data;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
-        // syf do obslugi checkboxow
-
-        $http.get('./fixedObject/packtypes.json')
-            .then(function (response)
-            {
-                $scope.packtypes = response.data;
+                $scope.cities = response.data.cities;
             }, function (error) {
                 $scope.error1 = JSON.stringify(error);
             });
 
-        
+
+        // checkbox control
+
+        $http.get(Urls.Base+'preferences')
+            .then(function (response)
+            {
+                $scope.packtypes = response.data.preferenceList;
+            }, function (error) {
+                $scope.error1 = JSON.stringify(error);
+            });
+
         // selected packtypes
         $scope.selection = [];
 
@@ -33,7 +34,7 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
             }
             // is newly selected
             else {
-                $scope.selection.push(packtype.name);
+                $scope.selection.push(packtype);
             }
         };
 
@@ -56,11 +57,16 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
             point7 : null
         };
 
+        $scope.parseRoutes = function(){
+            return $scope.parsedRoutes = [$scope.routes.point0, $scope.routes.point1, $scope.routes.point2, $scope.routes.point3, $scope.routes.point4, $scope.routes.point5, $scope.routes.point6, $scope.routes.point7];
+        };
+
+        $scope.packtypesError = false;
         $scope.addTransport = function() {
-            $scope.transport.idUser = $rootScope.loggedUser.id;
+            $scope.transport.userId = $rootScope.loggedUser.id;
             $scope.transport.preferences = $scope.selection;
-            $scope.transport.cities = [$scope.point0, $scope.point1, $scope.point2, $scope.point3, $scope.point4, $scope.point5, $scope.point6, $scope.point7];
-            Transport.addTransport($scope.transport).then(function(response){
+            $scope.transport.cities = $scope.parseRoutes();
+            Transport.addTransport($scope.transport).then(function(response) {
                 $scope.message = response.data;
                 console.log($scope.message);
             });

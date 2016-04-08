@@ -1,46 +1,48 @@
-[
-  {
-    "name": "Wrocław",
-    "id"  : 1
-  },
-  {
-    "name": "Warszawa",
-    "id"  : 2
-  },
-  {
-    "name": "Poznań",
-    "id"  : 3
-  },
-  {
-    "name": "Gdańsk",
-    "id"  : 4
-  },
-  {
-    "name": "Gdynia",
-    "id"  : 5
-  },
-  {
-    "name": "Lublin",
-    "id"  : 6
-  },
-  {
-    "name": "Nowa Sól",
-    "id"  : 7
-  },
-  {
-    "name": "Białystok",
-    "id"  : 8
-  },
-  {
-    "name": "Szczecin",
-    "id"  : 9
-  },
-  {
-    "name": "Czółenka Małe",
-    "id"  : 10
-  },
-  {
-    "name": "GG EZ",
-    "id"  : 11
-  }
-]
+{
+  "cities": [
+    {
+      "name": "Wrocław",
+      "id": 1
+    },
+    {
+      "name": "Warszawa",
+      "id": 2
+    },
+    {
+      "name": "Poznań",
+      "id": 3
+    },
+    {
+      "name": "Gdańsk",
+      "id": 4
+    },
+    {
+      "name": "Gdynia",
+      "id": 5
+    },
+    {
+      "name": "Lublin",
+      "id": 6
+    },
+    {
+      "name": "Nowa Sól",
+      "id": 7
+    },
+    {
+      "name": "Białystok",
+      "id": 8
+    },
+    {
+      "name": "Szczecin",
+      "id": 9
+    },
+    {
+      "name": "Czółenka Małe",
+      "id": 10
+    },
+    {
+      "name": "GG EZ",
+      "id": 11
+    }
+  ]
+}
