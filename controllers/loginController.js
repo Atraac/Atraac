@@ -14,7 +14,7 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
                     if(response.status == 200) {
                         var token = response.headers('X-CustomToken');
                         $window.localStorage.setItem('X-CustomToken', token);
-
+                        $location.path("#/");
                         $rootScope.logged = true;
                         Account.getCurrentUser().then(function (response) {
                             $rootScope.user = response.data;
