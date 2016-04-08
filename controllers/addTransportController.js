@@ -1,6 +1,6 @@
 var addTransportController = angular.module('addTransportController', []);
-addTransportController.controller('AddTransportController', [ '$scope', '$http', '$filter',
-    function ($scope, $http, $filter) {
+addTransportController.controller('AddTransportController', [ '$scope', '$http',
+    function ($scope, $http, $rootScope) {
 
         $http.get('./fixedObject/cities.json')
             .then(function (response)
@@ -42,14 +42,13 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
                 $scope.points = num;
             }
         };
+
         $scope.transport = {
             idUser : '1',
             packtypes : $scope.selection
         };
 
         $scope.addTransport = function() {
-            //po tym skroceniu daty, angular jeczy, ze spodziewa sie typowej daty w JSONie, a dostaje (chyba) string
-            //$scope.transport.date=$filter('date')($scope.transport.date, 'mediumDate');
             console.log($scope.transport);
         }
     }]);
