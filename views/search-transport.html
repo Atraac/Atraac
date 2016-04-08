@@ -5,22 +5,27 @@
                 <i class="Shipping icon"></i>
                 Wyszukiwanie
             </h4>
+            <ul>
+                <li class="has-error" ng-show="searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched" class="help-block">Miasto startowe jest wymagane</li>
+                <li class="has-error" ng-show="searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched" class="help-block">Miasto docelowe jest wymagane</li>
+                <li class="has-error" ng-show="searchTransportsForm.date.$invalid && searchTransportsForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
+            </ul>
             <div class="ui grid stackable">
                 <div class="five wide column">
                 </div>
                 <div class="four wide column">
-                    <form class="ui form">
-                        <div class="field">
+                    <form class="ui form" name="searchTransportsForm" ng-submit="onSearch()" novalidate>
+                        <div class="field" ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
                             <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
                             <select id="sourceCity" name="sourceCity" ng-model="$searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
                             </select>
                         </div>
-                        <div class="field">
+                        <div class="field" ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
                             <label><i class="Flag icon"></i>Miasto docelowe</label>
                             <select id="destinationCity" name="destinationCity" ng-model="$searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
                             </select>
                         </div>
-                        <div class="field">
+                        <div class="field" ng-class="{'error' : searchTransportsForm.date.$invalid && searchTransportsForm.date.$touched }">
                             <label><i class="Calendar icon"></i>Data nadania paczki</label>
                             <input ng-model="$searchTransport.date" type="date" name="transport-date" id="transport-date">
                         </div>

@@ -26,15 +26,20 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
         // ng-show var to control search results table
         $scope.searchResults = false;
 
-        // search function
+        // search submit function
         $scope.onSearch = function() {
-
+            $scope.searchTransport.preferences = $scope.selection;  // add preferences
+            $scope.searchTransport.offset = 0;  // current result page /25
+            $scope.searchTransport.limit = 25;  // number of results per page
             Transport.getTransports($scope.searchTransport).then(function(response){
                 if (response.status == 200) {
                     $scope.transports = response.data;
                     console.log($scope.transports);
-                    // show results table after search
+                    // show results table if search successfull
                     $scope.searchResults = true;
+                }
+                else {
+                    alert("Connection problem!");
                 }
             });
 
