@@ -1,12 +1,12 @@
 var searchTransportController = angular.module('searchTransportController', ['transportFactory']);
 
-searchTransportController.controller('SearchTransportController', ['$scope', 'Transport', '$http', '$rootScope',
-    function ($scope, Transport, $http, $rootScope) {
+searchTransportController.controller('SearchTransportController', ['$scope', 'Urls', 'Transport', '$http', '$rootScope',
+    function ($scope, Urls, Transport, $http, $rootScope) {
 
-        $http.get('./fixedObject/cities.json')
+        $http.get(Urls.Base+'cities')
             .then(function (response)
             {
-                $scope.cities = response.data;
+                $scope.cities = response.data.cities;
             }, function (error) {
                 $scope.error1 = JSON.stringify(error);
             });
@@ -37,15 +37,15 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Tr
         };
 
         // syf do obslugi checkboxow
-        $http.get('./fixedObject/packtypes.json')
+        $http.get(Urls.Base+'preferences')
             .then(function (response)
             {
-                $scope.packtypes = response.data;
+                $scope.preferences = response.data.preferences;
             }, function (error) {
                 $scope.error1 = JSON.stringify(error);
             });
 
-        // selected packtypes
+        // selected preferences
         $scope.selection = [];
 
         // toggle selection for a given packtype by name

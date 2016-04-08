@@ -19,7 +19,7 @@
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.date.$invalid && addTransportForm.date.$touched }">
                     <label>Data wyjazdu</label>
-                    <input ng-model="transport.date" type="date" name="date" required>
+                    <input ng-model="transport.departureDate" type="date" name="date" required>
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label>Wyruszam z</label>
@@ -59,15 +59,15 @@
                 <div class="grouped fields">
                     <label>Paczki jakie mogę zabrać</label>
                     <div class="field">
-                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="packtype in packtypes">
+                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="pref in preferences">
                             <input
                                     type="checkbox"
-                                    name="selectedPacktypes[]"
-                                    value="{{packtype}}"
-                                    ng-checked="selection.indexOf(packtype) > -1"
-                                    ng-click="toggleSelection(packtype)"
+                                    name="selectedPreferences[]"
+                                    value="{{pref.id}}"
+                                    ng-checked="selection.indexOf(preference) > -1"
+                                    ng-click="toggleSelection(preference)"
                             >
-                            <label>{{packtype.name}}</label>
+                            <label>{{preferenc\.name}}</label>
                         </div>
                     </div>
                 </div>

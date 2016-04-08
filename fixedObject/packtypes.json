@@ -1,26 +1,29 @@
-[
-  {
-    "name"  : "Małe",
-    "id"  : 1
-  },
-  {
-    "name"  : "Średnie",
-    "id"  : 2
-  },
-  {
-    "name"  : "Duże",
-    "id"  : 3
-  },
-  {
-    "name"  : "Niewymiarowe",
-    "id"  : 4
-  },
-  {
-    "name": "Zwierzęta",
-    "id": 5
-  },
-  {
-    "name"  : "Żywność",
-    "id"  : 6
-  }
-]
+{
+  "preferences" :
+  [
+    {
+      "name": "Małe",
+      "id": 1
+    },
+    {
+      "name": "Średnie",
+      "id": 2
+    },
+    {
+      "name": "Duże",
+      "id": 3
+    },
+    {
+      "name": "Niewymiarowe",
+      "id": 4
+    },
+    {
+      "name": "Zwierzęta",
+      "id": 5
+    },
+    {
+      "name": "Żywność",
+      "id": 6
+    }
+  ]
+}
