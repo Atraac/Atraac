@@ -16,27 +16,24 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
                         $window.localStorage.setItem('X-CustomToken', token);
                         $location.path("#/");
                         $rootScope.logged = true;
+
                         Account.getCurrentUser().then(function (response) {
                             $rootScope.loggedUser = response.data;
                         }, function(error){
                             console.log("currentUserError: " + error);
                         });
+
+                        $scope.wrongUser = false;
+                        $location.path("#/");
                     }
                 }, function (error) {
                     console.log("currentUserErrorStatus: " + error.status);
                     $rootScope.logged = false;
-                });
-
-                if($rootScope.logged){
-                    $scope.wrongUser = false;
-                    $location.path("#/");
-                }
-                else {
                     $scope.wrongUser = true;
                     $scope.loginForm.email.$touched = false;
                     $scope.loginForm.password.$touched = false;
                     $scope.user = {};
-                }
+                });
             }
         }
     }]);
