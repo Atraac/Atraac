@@ -44,12 +44,22 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
             }
         };
 
-        $scope.transport = {
-            idUser : $rootScope.user.id,
-            packtypes : $scope.selection
+        $scope.transport = { };
+        $scope.routes = {
+            point0 : null,
+            point1 : null,
+            point2 : null,
+            point3 : null,
+            point4 : null,
+            point5 : null,
+            point6 : null,
+            point7 : null
         };
 
         $scope.addTransport = function() {
+            $scope.transport.idUser = $rootScope.loggedUser.id;
+            $scope.transport.preferences = $scope.selection;
+            $scope.transport.cities = [$scope.point0, $scope.point1, $scope.point2, $scope.point3, $scope.point4, $scope.point5, $scope.point6, $scope.point7];
             Transport.addTransport($scope.transport).then(function(response){
                 $scope.message = response.data;
                 console.log($scope.message);
