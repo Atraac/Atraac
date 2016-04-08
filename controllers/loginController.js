@@ -23,7 +23,7 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
                         });
                     }
                 }, function (error) {
-                    console.log('logInError: '+error.message);
+                    console.log("currentUserErrorStatus: " + error.status);
                     $rootScope.logged = false;
                 });
 
@@ -32,7 +32,7 @@ loginController.controller('LoginController', ['$scope', '$location', '$rootScop
                     $location.path("#/");
                 }
                 else {
-                    $scope.wrongUser = false;
+                    $scope.wrongUser = true;
                     $scope.loginForm.email.$touched = false;
                     $scope.loginForm.password.$touched = false;
                     $scope.user = {};
