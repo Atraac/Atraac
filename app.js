@@ -2,10 +2,18 @@ var deliverIT = angular.module('deliverIT',
         ['ngRoute', 'ngStorage',
         'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
-        'rating', 'roundFilter']);
-deliverIT.run(function ($rootScope, $http) {
+        'rating', 'roundFilter', 'accountFactory']);
+deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
     $rootScope.loggedUser = {};
     $rootScope.logged = false;
+    if($window.localStorage.getItem('X-CustomToken')!=null){
+        $rootScope.logged = true;
+        Account.getCurrentUser().then(function (response) {
+            $rootScope.loggedUser = response.data;
+        }, function(error){
+            console.log("currentUserError: " + error);
+        });
+    }
 });
 deliverIT.constant('Urls', {
     Base: 'http://192.168.0.101:8080/'
