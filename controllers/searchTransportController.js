@@ -1,32 +1,41 @@
 var searchTransportController = angular.module('searchTransportController', ['transportFactory']);
 
-searchTransportController.controller('SearchTransportController', ['$scope', 'Transport', '$http',
-    function ($scope, Transport, $http) {
+searchTransportController.controller('SearchTransportController', ['$scope', 'Transport', '$http', '$rootScope',
+    function ($scope, Transport, $http, $rootScope) {
+
+        $http.get('./fixedObject/cities.json')
+            .then(function (response)
+            {
+                $scope.cities = response.data;
+            }, function (error) {
+                $scope.error1 = JSON.stringify(error);
+            });
+
         $scope.order = 'departureDate';
         $scope.reverse = false;
         $scope.changeOrder = function(order){
             $scope.reverse = ($scope.order === order) ? !$scope.reverse : false;
             $scope.order = order;
         };
+
         $scope.transports = {};
-        Transport.getTransports().then(function(response){
-            $scope.transports = response.data;
-            console.log($scope.transports);
-        });
-        $('.ui.dropdown').dropdown({
-            fields: { name: "name", value: "id" },
-            apiSettings: {
-                url: './fixedObject/cities.json/{query}'
-            }
-        });
+        $scope.searchTransport = {
+            idUser : $rootScope.user.id,
+            packtypes : $scope.selection
+        };
+
         $scope.searchResults=false;
+        // search function
         $scope.onSearch = function() {
             // show results table after search
+            Transport.getTransports($scope.searchTransport).then(function(response){
+                $scope.transports = response.data;
+                console.log($scope.transports);
+            });
             $scope.searchResults=true;
         };
 
         // syf do obslugi checkboxow
-
         $http.get('./fixedObject/packtypes.json')
             .then(function (response)
             {

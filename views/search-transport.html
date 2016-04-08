@@ -12,21 +12,17 @@
                     <form class="ui form">
                         <div class="field">
                             <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
-                            <div class="ui search selection dropdown">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">Miasto początkowe</div>
-                            </div>
+                            <select id="sourceCity" name="sourceCity" ng-model="$searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                            </select>
                         </div>
                         <div class="field">
                             <label><i class="Flag icon"></i>Miasto docelowe</label>
-                            <div class="ui search selection dropdown">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">Miasto docelowe</div>
-                            </div>
+                            <select id="destinationCity" name="destinationCity" ng-model="$searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                            </select>
                         </div>
                         <div class="field">
                             <label><i class="Calendar icon"></i>Data nadania paczki</label>
-                            <input ng-model="transport.date" type="date" name="transport-date" id="transport-date">
+                            <input ng-model="$searchTransport.date" type="date" name="transport-date" id="transport-date">
                         </div>
                     </form>
                 </div>
@@ -48,7 +44,7 @@
                             </div>
                         </div>
                         <div class="field">
-                            <button class="ui left floated large accent-color button" ng-click="onSearch()" type="submit">Utwórz</button>
+                            <button class="ui left floated large accent-color button" ng-click="onSearch()" type="submit">Wyszukaj</button>
                         </div>
                     </form>
                 </div>

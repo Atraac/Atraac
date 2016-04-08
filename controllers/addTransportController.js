@@ -1,6 +1,6 @@
-var addTransportController = angular.module('addTransportController', []);
-addTransportController.controller('AddTransportController', [ '$scope', '$http', '$rootScope',
-    function ($scope, $http, $rootScope) {
+var addTransportController = angular.module('addTransportController', ['transportFactory']);
+addTransportController.controller('AddTransportController', [ '$scope', '$http', 'Transport', '$rootScope',
+    function ($scope, $http, Transport, $rootScope) {
 
         $http.get('./fixedObject/cities.json')
             .then(function (response)
@@ -50,6 +50,9 @@ addTransportController.controller('AddTransportController', [ '$scope', '$http',
         };
 
         $scope.addTransport = function() {
-            console.log($scope.transport);
+            Transport.addTransport($scope.transport).then(function(response){
+                $scope.message = response.data;
+                console.log($scope.message);
+            });
         }
     }]);
