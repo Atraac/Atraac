@@ -14,10 +14,18 @@
 .primary-dark-color.button{     box-shadow: 0 0 0 1px #0097A7 inset!important; color: #0097A7 !important; background-color:#FFFFFF;}
 
 .accent-color.button:hover{
-    box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:#FFFFFF;
-}
+     box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:#FFFFFF;
+ }
 
 .accent-color.button:focus{
+    background-color:#FFFFFF;
+}
+
+.primary-color.button:hover{
+    box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:#FFFFFF;
+}
+
+.primary-color.button:focus{
     background-color:#FFFFFF;
 }
 

@@ -20,7 +20,7 @@ accountFactory.factory('Account', ['$http', 'Urls', '$localStorage', '$window',
             return $http.post(Urls.Base+'users', user);
         };
         Account.getCurrentUser = function () {
-            return $http.get(Urls.Base+'users');
+            return $http.get(Urls.Base+'users/current');
         };
 
         return Account;

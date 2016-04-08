@@ -1,8 +1,4 @@
 <div ng-controller="GreetingController">
-    <div class="loggedin">
-        <a class="ui accent-color button" id="notLoggedLoginButton" href="#login">Zaloguj</a>
-        <a class="ui accent-color button" id="notLoggedRegisterButton" href="#register">Zarejestruj</a>
-    </div>
     <div class="container ui">
         <h2 class="center aligned ui icon huge header">
             <i class="car icon primary-color"></i>
@@ -15,7 +11,7 @@
             <i class="accent-color Star icon"></i>
         </h4>
 
-        <div class="ui grid centered">
+        <div ng-show="logged" class="ui grid centered">
             <div class="row ui">
                 <h2>Proponowane przejazdy</h2>
             </div>
@@ -123,6 +119,35 @@
                 </div>
             </div>
         </div>
+
+        <div ng-show="!logged" class="ui grid">
+            <div class="eight wide column">
+                <div class="ui piled segment">
+                    <h4 class="ui header">Nagłówek</h4>
+                    <p><i class="secondary-dark-color circular users icon"></i>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. </p>
+                    <p><i class="secondary-dark-color Comment icon"></i>Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+                    <p><i class="secondary-dark-color External Square icon"></i>Eu quo homero blandit intellegebat.</p>
+                    <p><i class="secondary-dark-color Browser icon"></i>Populo quodsi te eam, wisi everti eos ex, eum elitr altera utamur at. Quodsi convenire mnesarchum eu per, quas minimum postulant per id.</p>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h2 style="margin-top:30px" class="center aligned ui icon massive header">
+                    <i class="accent-color Sign in icon"></i>
+                    <div class="content">
+                        <a type="button" href="#login" class="massive ui accent-color button">Zaloguj się!</a>
+                    </div>
+                </h2>
+            </div>
+            <div class="four wide column">
+                <h2 style="margin-top:30px" class="center aligned ui icon massive header">
+                    <i class="accent-color add User icon"></i>
+                    <div class="content">
+                        <a type="button" href="#register"  class="massive ui accent-color button">Zarejestruj się!</a>
+                    </div>
+                </h2>
+            </div>
+        </div>
+
         <h4 class="ui horizontal divider header">
             <i class="accent-color Star icon"></i>
         </h4>

@@ -65,7 +65,7 @@
 
                 <div class="right menu">
                     <a ng-show="logged"  ng-class="{ active: isActive('/my-profile') }" href="#my-profile" class="item">
-                        <i class="user icon "></i> Twój profil
+                        <i class="user icon "></i> {{user.name}} {{user.surname}}
                     </a>
                     <a ng-show="!logged" ng-class="{ active: isActive('/login') }" href="#login" class="item">
                         <i class="Sign in icon"></i>Logowanie
