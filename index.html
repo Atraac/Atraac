@@ -20,7 +20,7 @@
     <script src="./factories/userFactory.js"></script>
     <script src="./factories/transportFactory.js"></script>
     <script src="./controllers/greetingController.js"></script>
-    <script src="./controllers/myProfileController.js"></script>
+    <script src="./controllers/profileController.js"></script>
     <script src="./controllers/searchTransportController.js"></script>
     <script src="./controllers/addTransportController.js"></script>
     <script src="./controllers/myMessagesController.js"></script>
@@ -64,7 +64,7 @@
                 </a>
 
                 <div class="right menu">
-                    <a ng-show="logged"  ng-class="{ active: isActive('/my-profile') }" href="#my-profile" class="item">
+                    <a ng-show="logged"  ng-class="{ active: isActive('/profile/{{loggedUser.id}}') }" href="#profile/{{loggedUser.id}}" class="item">
                         <i class="user icon "></i> {{loggedUser.name}} {{loggedUser.surname}}
                     </a>
                     <a ng-show="!logged" ng-class="{ active: isActive('/login') }" href="#login" class="item">

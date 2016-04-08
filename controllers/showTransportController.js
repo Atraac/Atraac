@@ -3,7 +3,7 @@ var showTransportController = angular.module('showTransportController', []);
 showTransportController.controller('ShowTransportController', ['$scope', '$http',
     function ($scope, $http) {
         $scope.something = 'ShowTransportController';
-        $scope.transport = {}
+        $scope.transport = {};
         $http.get('./fixedObject/showTransport.json')
             .then(function (response)
             {

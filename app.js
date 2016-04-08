@@ -1,6 +1,6 @@
 var deliverIT = angular.module('deliverIT',
         ['ngRoute', 'ngStorage',
-        'greetingController', 'myProfileController', 'searchTransportController', 'addTransportController','myMessagesController',
+        'greetingController', 'profileController', 'searchTransportController', 'addTransportController','myMessagesController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter', 'accountFactory']);
 deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
@@ -46,9 +46,9 @@ deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $
         templateUrl: './views/search-transport.html',
         controller: 'SearchTransportController'
     }).
-    when('/my-profile', {
-        templateUrl: './views/my-profile.html',
-        controller: 'MyProfileController'
+    when('/profile/:userId', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileController'
     }).
     when('/add-transport', {
         templateUrl: './views/add-transport.html',
