@@ -67,11 +67,11 @@
                                     ng-checked="selection.indexOf(preference) > -1"
                                     ng-click="toggleSelection(preference)"
                             >
-                            <label>{{preferenc\.name}}</label>
+                            <label>{{preference.name}}</label>
                         </div>
                     </div>
                 </div>
-                <button ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</button>
+                <a href="#/my-transports" ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</a>
             </form>
         </div>
 

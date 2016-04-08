@@ -23,20 +23,29 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
             preferences : $scope.selection
         };
 
-        $scope.searchResults=false;
-        // search function
+        // ng-show var to control search results table
+        $scope.searchResults = false;
+
+        // search submit function
         $scope.onSearch = function() {
-            // show results table after search
+            $scope.searchTransport.preferences = $scope.selection;  // add preferences
+            $scope.searchTransport.offset = 0;  // current result page /25
+            $scope.searchTransport.limit = 25;  // number of results per page
             Transport.getTransports($scope.searchTransport).then(function(response){
                 if (response.status == 200) {
                     $scope.transports = response.data;
                     console.log($scope.transports);
+                    // show results table if search successfull
                     $scope.searchResults = true;
                 }
+                else {
+                    alert("Connection problem!");
+                }
             });
+
         };
 
-        // syf do obslugi checkboxow
+        // checkbox control
         $http.get(Urls.Base+'preferences')
             .then(function (response)
             {
@@ -59,13 +68,6 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
             // is newly selected
             else {
                 $scope.selection.push(packtype.name);
-            }
-        };
-
-        $scope.points=1;
-        $scope.addPoint = function(num) {
-            if ($scope.points < num) {
-                $scope.points = num;
             }
         };
     }]);

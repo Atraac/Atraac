@@ -30,6 +30,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
         };
 
+        // drive-through dropdowns control
         $scope.points=1;
         $scope.addPoint = function(num) {
             if ($scope.points < num) {
@@ -54,8 +55,8 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         $scope.parseRoutes = function(){
             return $scope.parsedRoutes = [$scope.routes.point0, $scope.routes.point1, $scope.routes.point2, $scope.routes.point3, $scope.routes.point4, $scope.routes.point5, $scope.routes.point6, $scope.routes.point7];
         };
-        
 
+        // add transport submit function
         $scope.addTransport = function() {
             $scope.transport.userId = $rootScope.loggedUser.id;
             $scope.transport.preferences = $scope.selection;
