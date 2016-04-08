@@ -7,7 +7,7 @@
                     Dane konta
                 </h4>
                 <ul>
-                    <li class="has-error" ng-show="duplicateEmail" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
+                    <li class="has-error" ng-show="duplicateEmail!=''" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
                     <li class="has-error" ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
                     <li class="has-error" ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
@@ -86,7 +86,7 @@
             </div>
         </div>
     </form>
-    <div ng-show="!correctRegister" class="ui centered card">
+    <div ng-show="correctRegister" class="ui centered card">
         <div class="content">
             <div class="header">
                 Gratulacje! :)

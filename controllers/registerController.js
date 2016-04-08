@@ -3,7 +3,7 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
     function ($scope, Account, $http) {
         $scope.user = {};
         $scope.correctRegister = false;
-        $scope.duplicateEmail = false;
+        $scope.duplicateEmail = '';
         $scope.passwordAgain = '';
 
         $scope.onRegister = function () {
@@ -11,16 +11,23 @@ registerController.controller('RegisterController', ['$scope', 'Account', '$http
             $scope.correctRegister = false;
 
             Account.register($scope.user).then(function (response) {
-                $scope.correctRegister = response.data.correct;
-                $scope.duplicateEmail = response.data.duplicate;
+                if(response.status == 200)
+                {
+                    $scope.correctRegister = response.data.result;
+                    $scope.duplicateEmail = response.data.message;
+                    console.log("Message: " + response.data.message);
+                }
             }, function (error) {
                 console.log("registerError: " + error);
             });
-
+            
             if(!$scope.correctRegister) {
+                $scope.registerForm.email.$touched = false;
+                $scope.registerForm.password.$touched = false;
+                $scope.registerForm.passwordAgain.$touched = false;
                 $scope.user.email = '';
                 $scope.user.password = '';
-                $scope.user.passwordAgain = '';
+                $scope.passwordAgain = '';
             }
         }
     }
