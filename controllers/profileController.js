@@ -12,8 +12,4 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
         }, function(error){
             console.log("getUser: "+ error);
         });
-        $scope.onUpdateProfile = function(){
-            console.log($scope.User);
-            $location.path("/profile/"+$rootScope.loggedUser.id);
-        }
     }]);

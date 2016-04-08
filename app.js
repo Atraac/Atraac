@@ -1,6 +1,6 @@
 var deliverIT = angular.module('deliverIT',
         ['ngRoute', 'ngStorage',
-        'greetingController', 'profileController', 'searchTransportController', 'addTransportController','myMessagesController',
+        'greetingController', 'profileController', 'searchTransportController', 'addTransportController','myMessagesController', 'editProfileController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
         'rating', 'roundFilter', 'accountFactory']);
 deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
@@ -72,7 +72,7 @@ deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $
     }).
     when('/edit-my-profile', {
         templateUrl: './views/edit-my-profile.html',
-        controller: 'MyProfileController'
+        controller: 'EditProfileController'
     }).
     when('/login', {
         templateUrl: './views/login.html',

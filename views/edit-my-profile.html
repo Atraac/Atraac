@@ -1,52 +1,30 @@
-<div class="ui container" ng-controller="MyProfileController">
+<div class="ui container" ng-controller="EditProfileController">
     <div class="ui grid stackable">
         <div class="eight wide column ">
             <h4 class="ui horizontal divider header">
                 <i class="user icon"></i>
                 Dane użytkownika
             </h4>
+
             <form class="ui form" name="updateProfileForm" ng-submit="onUpdateProfile()" novalidate>
-                <ul>
-                    <li class="has-error" ng-show="updateProfileForm.name.$invalid && updateProfileForm.name.$touched" class="help-block">Imię jest wymagane</li>
-                    <li class="has-error" ng-show="updateProfileForm.surname.$invalid && updateProfileForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
-                    <li class="has-error" ng-show="updateProfileForm.birthDate.$invalid && updateProfileForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
-                </ul>
-                <div class="field" ng-class="{'error' : updateProfileForm.name.$invalid && updateProfileForm.name.$touched }">
-                    <label>Imię</label>
-                    <input ng-model="user.name" type="text" name="name" placeholder="Imię" required>
+                <div class="ui piled segment">
+                    <p>Imię: <strong>{{user.name}}</strong> </p>
+                    <p>Nazwisko: <strong>{{user.surname}}</strong> </p>
+                    <p>Data urodzenia: <strong>{{user.birthDate | date:'dd-MM-yyyy'}}</strong> </p>
+                    <p>Płeć: <strong>{{user.sex}}</strong> </p>
                 </div>
-                <div class="field" ng-class="{'error' : updateProfileForm.surname.$invalid && updateProfileForm.surname.$touched }">
-                    <label>Nazwisko</label>
-                    <input ng-model="user.surname" type="text" name="surname" placeholder="Nazwisko" required>
-                </div>
+
                 <div class="field" ng-class="{'error' : updateProfileForm.phoneNumber.$invalid && updateProfileForm.phoneNumber.$touched }">
                     <label>Telefon</label>
                     <input ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                 </div>
-                <div class="field" ng-class="{'error' : updateProfileForm.birthDate.$invalid && updateProfileForm.birthDate.$touched }">
-                    <label>Data urodzenia</label>
-                    <input ng-model="user.birthDate" type="date" name="birthDate" required>
-                </div>
+
                 <div class="field" ng-class="{'error' : updateProfileForm.car.$invalid && updateProfileForm.car.$touched }">
                     <label>Auto</label>
                     <input ng-model="user.car" type="text" name="car" placeholder="Auto">
                 </div>
-                <div class="inline fields">
-                    <label>Płeć</label>
-                    <div class="field">
-                        <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="M" name="sex" ng-checked="true">
-                            <label>Mężczyzna</label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui radio checkbox">
-                            <input type="radio" ng-model="user.sex" value="K" name="sex" >
-                            <label>Kobieta</label>
-                        </div>
-                    </div>
-                </div>
-                <button ng-disabled="updateProfileForm.$invalid" class="ui right floated large accent-color button" type="submit">Zapisz</button>
+
+                <button class="ui right floated large accent-color button" type="submit">Zapisz</button>
             </form>
         </div>
         <div class="eight wide column center aligned">
@@ -55,7 +33,7 @@
                 Zdjęcie
             </h4>
             <div class="chosed-photo" ng-if="user.photo != ''" class="image center aligned">
-                <img class="ui small " src="{{user.photo}}">
+                <img class="ui small " src="./content/pictures/brak.jpg">
             </div>
             <div class="ui large accent-color button">Wybierz</div>
         </div>
