@@ -1,23 +1,38 @@
-var searchTransportController = angular.module('searchTransportController', ['transportFactory']);
+var searchTransportController = angular.module('searchTransportController', ['transportFactory', 'citiesFactory', 'preferencesFactory']);
 
-searchTransportController.controller('SearchTransportController', ['$scope', 'Urls', 'Transport', '$http', '$rootScope',
-    function ($scope, Urls, Transport, $http, $rootScope) {
+searchTransportController.controller('SearchTransportController', ['$scope', 'Urls', 'Transport', 'Cities', 'Preferences', '$http', '$rootScope',
+    function ($scope, Urls, Transport, Cities, Preferences, $http, $rootScope) {
 
-        $http.get(Urls.Base+'cities')
-            .then(function (response)
-            {
-                $scope.cities = response.data.cities;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
+        // fill dropdowns with cities
+        Cities.getCities().then(function (response) {
+            $scope.cities = response.data.cities;
+        });
 
-        $scope.order = 'departureDate';
-        $scope.reverse = false;
-        $scope.changeOrder = function(order){
-            $scope.reverse = ($scope.order === order) ? !$scope.reverse : false;
-            $scope.order = order;
+
+        // checkbox control
+        // fill checkboxees with preferences
+        Preferences.getPreferences().then(function (response) {
+            $scope.preferences = response.data.preferences;
+        });
+
+        // selected preferences
+        $scope.selection = [];
+
+        // toggle selection for a given packtype by name
+        $scope.toggleSelection = function toggleSelection(preference) {
+            var idx = $scope.selection.indexOf(preference);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.selection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.selection.push(preference);
+            }
         };
 
+        // init of searchTransport - object used to find transports like this one
         $scope.searchTransport = {
             userId : $rootScope.loggedUser.id,
             preferences : $scope.selection
@@ -25,8 +40,9 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
 
 
         $scope.searchResults = false; // ng-show var to control search results table
+        $scope.searchNotFound = false; // ng-show var to show 404 error when no search results were found
 
-        $scope.quantityTransport = 0;   // # of results for a search in DB to print
+        $scope.quantityTransports = 0;   // # of results for a search in DB to print
 
         $scope.resultsPerPage = 5; // maybe option to change in the future
 
@@ -45,11 +61,16 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
                 if (response.status == 200) {
                     // set table content to received data
                     $scope.transports = response.data.transports;
-                    $scope.quantityTransport = response.data.quantityTransport;
-                    // show results table if search successfull
-                    $scope.pageNumber = 1;
-                    $scope.totalPages = Math.round($scope.quantityTransport / $scope.resultsPerPage) + 1;
-                    $scope.searchResults = true;
+                    $scope.quantityTransports = response.data.quantityTransports;
+                    $scope.totalPages = Math.ceil($scope.quantityTransports / $scope.resultsPerPage);
+                    if($scope.quantityTransports > 0) { // if found any results
+                        $scope.searchResults = true;
+                        $scope.searchNotFound = false;
+                    }
+                    else {
+                        $scope.searchResults = false;
+                        $scope.searchNotFound = true;
+                    }
                 }
                 else {
                     $scope.searchResults = false;
@@ -60,82 +81,59 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
         };
 
         $scope.searchNext = function() {
-            // if next page would exceed number of records in DB, then do nothing
-            if ($scope.pageNumber * $scope.resultsPerPage + 1 > $scope.quantityTransport) {
-
-            }
-            // else switch to next page and refresh results
-            else {
-                $scope.pageNumber +=1;  // switch to the next results page
+            // if next page exists in DB with given offset/resultsNumber
+            if ( $scope.pageNumber < $scope.totalPages) {
                 $scope.searchTransport.offset = $scope.pageNumber * $scope.resultsPerPage + 1;  // get NEXT set of results
 
                 Transport.getTransports($scope.searchTransport, $scope.sortBy.value).then(function(response){
                     if (response.status == 200) {
-                        // set table content to received data
                         $scope.transports = response.data.transports;   // refresh the data
-                        $scope.quantityTransport = response.data.quantityTransport; // refresh number of transports in DB
+                        $scope.quantityTransports = response.data.quantityTransports; // refresh number of transports in DB
                         // show results table if search successfull
-                        $scope.totalPages = Math.round($scope.quantityTransport / $scope.resultsPerPage) + 1;
-                        $scope.searchResults = true;
+                        $scope.totalPages = Math.ceil($scope.quantityTransports / $scope.resultsPerPage);
+                        $scope.pageNumber++;  // switch to the next results page
+                        if($scope.quantityTransports > 0) { // if found any results
+                            $scope.searchResults = true;
+                            $scope.searchNotFound = false;
+                        }
+                        else {
+                            $scope.searchResults = false;
+                            $scope.searchNotFound = true;
+                        }
                     }
                     else {
                         $scope.searchResults = false;
-                        $scope.pageNumber -=1;  // fix page number
                         alert("Connection problem!");
                     }
                 });
             }
         };
         $scope.searchPrevious = function() {
-            // if next page would exceed number of records in DB, then do nothing
-            if ($scope.pageNumber == 1) {
-
-            }
-            // else switch to next page and refresh results
-            else {
-                $scope.pageNumber -=1;  // switch to the next results page
-                $scope.searchTransport.offset = $scope.pageNumber * $scope.resultsPerPage + 1;  // get NEXT set of results
+            // if we're not on first page then
+            if ($scope.pageNumber > 1) {
+                $scope.searchTransport.offset = ($scope.pageNumber - 2) * $scope.resultsPerPage + 1;  // get PREVIOUS set of results
 
                 Transport.getTransports($scope.searchTransport, $scope.sortBy.value).then(function(response){
                     if (response.status == 200) {
-                        // set table content to received data
                         $scope.transports = response.data.transports;   // refresh the data
-                        $scope.quantityTransport = response.data.quantityTransport; // refresh number of transports in DB
+                        $scope.quantityTransports = response.data.quantityTransports; // refresh number of transports in DB
                         // show results table if search successfull
-                        $scope.totalPages = Math.round($scope.quantityTransport / $scope.resultsPerPage) + 1;
-                        $scope.searchResults = true;
+                        $scope.totalPages = Math.ceil($scope.quantityTransports / $scope.resultsPerPage);
+                        $scope.pageNumber--;  // switch to the previous results page
+                        if($scope.quantityTransports > 0) { // if found any results
+                            $scope.searchResults = true;
+                            $scope.searchNotFound = false;
+                        }
+                        else {
+                            $scope.searchResults = false;
+                            $scope.searchNotFound = true;
+                        }
                     }
                     else {
-                        $scope.pageNumber +=1;  // fix page number
+                        $scope.searchResults = false;
                         alert("Connection problem!");
                     }
                 });
-            }
-        };
-
-        // checkbox control
-        $http.get(Urls.Base+'preferences')
-            .then(function (response)
-            {
-                $scope.preferences = response.data.preferences;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
-
-        // selected preferences
-        $scope.selection = [];
-
-        // toggle selection for a given packtype by name
-        $scope.toggleSelection = function toggleSelection(preference) {
-            var idx = $scope.selection.indexOf(preference.name);
-
-            // is currently selected
-            if (idx > -1) {
-                $scope.selection.splice(idx, 1);
-            }
-            // is newly selected
-            else {
-                $scope.selection.push(preference);
             }
         };
     }]);

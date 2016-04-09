@@ -62,75 +62,84 @@
         <h4 class="ui horizontal divider header">
             <i class="Shipping icon"></i>Wyszukane przejazdy
         </h4>
+        <div class="ui grid centered" ng-show="searchNotFound">
+            Nie znaleziono przejazdów dla zadanych parametrów
+        </div>
+
         <div class="ui grid centered">
             <i class="Big Angle Left icon" ng-click="searchPrevious()" style="cursor: hand;"></i>
             <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
             <i class="Big Angle Right icon" ng-click="searchNext()" style="cursor: hand;"></i>
         </div>
-        <div class="field">
-            <label> Sortuj wg: </label>
-            <select name="sortBy" id="sortBy">
-                <option value="bydateasc">Daty - rosnąco</option>
-                <option value="bydatedesc">Daty - malejąco</option>
-                <option value="byratingasc">Oceny - rosnąco</option>
-                <option value="byratingdesc">Oceny - malejąco</option>
-            </select>
-
+        <div class="ui grid centered">
+            <h4 class="ui horizontal divider header"></h4>
+            <div class="field">
+                <label> Sortuj wg: </label>
+                <select name="sortBy" id="sortBy">
+                    <option value="bydateasc">Daty - rosnąco</option>
+                    <option value="bydatedesc">Daty - malejąco</option>
+                    <option value="byratingasc">Oceny - rosnąco</option>
+                    <option value="byratingdesc">Oceny - malejąco</option>
+                </select>
+            </div>
         </div>
-        <table class="ui very basic collapsing celled table">
-            <thead>
-            <tr>
-                <th>
-                    Kierowca
-                </th>
-                <th>
-                    Tytuł
-                </th>
-                <th>
-                    Trasa
-                </th>
-                <th>
-                    Czas wyjazdu
-                </th>
-                <th>
-                    Rodzaje paczek
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="transport in transports ">
-                <td>
-                    <h4 class="ui image header">
-                        <i class="user icon"></i>
-                        <div class="content">
-                            <p>{{transport.name}} {{transport.surname}}</p>
-                            <p></p><rating id="my-rating{{transport.userId}}" size="small" type="star" ng-model="transport.rating"></rating></p>
-                            <p><div class="sub header">Ocena: {{transport.rating}}</div></p>
-                        </div>
+        <div class="ui grid centered">
+            <table class="ui very basic collapsing celled table">
+                <thead>
+                <tr>
+                    <th>
+                        Kierowca
+                    </th>
+                    <th>
+                        Tytuł
+                    </th>
+                    <th>
+                        Trasa
+                    </th>
+                    <th>
+                        Czas wyjazdu
+                    </th>
+                    <th>
+                        Rodzaje paczek
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="transport in transports ">
+                    <td>
+                        <h4 class="ui image header">
+                            <i class="user icon"></i>
+                            <div class="content">
+                                <p>{{transport.driver.name}} {{transport.driver.surname}}</p>
+                                <p></p><rating id="my-rating{{transport.driver.userId}}" size="small" type="star" ng-model="transport.driver.rating"></rating></p>
+                                <p><div class="sub header">Ocena: {{transport.driver.rating}}</div></p>
+                            </div>
 
-                    </h4>
-                </td>
-                <td>
-                    <a class="transport-title" href="#/transport/{{transport.idTransport}}" type="button">{{transport.title}}</a>
-                </td>
-                <td>
-                    Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
-                </td>
-                <td>
-                    {{transport.departureDate | date: 'short'}}
-                </td>
-                <td>
-                    <span ng-repeat="type in transport.packTypes">
-                        {{type}}
+                        </h4>
+                    </td>
+                    <td>
+                        <a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a>
+                    </td>
+                    <td>
+                        Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
+                    </td>
+                    <td>
+                        {{transport.departureDate | date: 'short'}}
+                    </td>
+                    <td>
+                    <span ng-repeat="preference in transport.preferences">
+                        {{preference.name}}
                     </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="ui grid centered">
             <i class="Big Angle Left icon" ng-click="searchPrevious()" style="cursor: hand;"></i>
             <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
             <i class="Big Angle Right icon" ng-click="searchNext()" style="cursor: hand;"></i>
         </div>
     </div>
+</div>
 </div>

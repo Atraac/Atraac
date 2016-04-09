@@ -8,20 +8,16 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         });
 
         // checkbox control
-        $http.get(Urls.Base+'preferences')
-            .then(function (response)
-            {
-                $scope.preferences = response.data.preferences;
-            }, function (error) {
-                $scope.error1 = JSON.stringify(error);
-            });
+        Preferences.getPreferences().then(function (response) {
+            $scope.preferences = response.data.preferences;
+        });
 
         // selected preferences
         $scope.selection = [];
 
         // toggle selection for a given packtype by name
         $scope.toggleSelection = function toggleSelection(preference) {
-            var idx = $scope.selection.indexOf(preference.name);
+            var idx = $scope.selection.indexOf(preference);
 
             // is currently selected
             if (idx > -1) {
