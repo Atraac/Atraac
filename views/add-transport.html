@@ -1,6 +1,6 @@
 <div class="ui container" ng-controller="AddTransportController">
     <div class="ui grid stackable">
-        <div class="eight wide column centered">
+        <div ng-show="logged" class="eight wide column centered">
             <h4 class="ui horizontal divider header">
                 <i class="Shipping icon"></i>
                 Dodaj nowy przejazd
@@ -14,20 +14,20 @@
             </ul>
             <form class="ui form" name="addTransportForm" ng-submit="addTransport()" novalidate>
                 <div class="field" ng-class="{'error' : addTransportForm.title.$invalid && addTransportForm.title.$touched }">
-                    <label>Tytuł ogłoszenia</label>
+                    <label><i class="Edit icon"></i>Tytuł ogłoszenia</label>
                     <input ng-model="transport.title" type="text" name="title" placeholder="Tytuł ogłoszenia" maxlength="100" required>
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.date.$invalid && addTransportForm.date.$touched }">
-                    <label>Data wyjazdu</label>
+                    <label><i class="Calendar icon"></i>Data wyjazdu</label>
                     <input ng-model="transport.departureDate" type="date" name="date" required>
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
-                    <label>Wyruszam z</label>
+                    <label><i class="Flag Outline icon"></i>Wyruszam z</label>
                     <select id="point0Dropdown" name="point0" ng-model="routes.point0" ng-options="point0City.name for point0City in cities" required>
                     </select>
                 </div>
                 <div class="field">
-                    <label>Jadę przez</label>
+                    <label><i class="Ellipsis Vertical icon"></i>Jadę przez</label>
                     <select class="dropdown-bottom-margin" id="point1Dropdown" ng-model="routes.point1" ng-options="point1City.name for point1City in cities" ng-change="addPoint(2)">
                         <option value=""></option>
                     </select>
@@ -48,22 +48,22 @@
                     </select>
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.point7.$invalid && addTransportForm.point7.$touched }">
-                    <label>Wyruszam do</label>
+                    <label><i class="Flag icon"></i>Wyruszam do</label>
                     <select id="point7Dropdown" name="point7" ng-model="routes.point7" ng-options="point7City.name for point7City in cities" required>
                     </select>
                 </div>
                 <div class="field" ng-class="{'error' : addTransportForm.description.$invalid && addTransportForm.description.$touched }">
-                    <label>Treść ogłoszenia</label>
+                    <label><i class="Newspaper icon"></i>Treść ogłoszenia</label>
                     <textarea ng-model="transport.description" type="description" name="description" placeholder="Treść ogłoszenia" maxlength="500" required></textarea>
                 </div>
                 <div class="grouped fields">
-                    <label>Paczki jakie mogę zabrać</label>
+                    <label><i class="Suitcase icon"></i>Paczki jakie mogę zabrać</label>
                     <div class="field">
-                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="pref in preferences">
+                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="preference in preferences">
                             <input
                                     type="checkbox"
                                     name="selectedPreferences[]"
-                                    value="{{pref.id}}"
+                                    value="{{preference.id}}"
                                     ng-checked="selection.indexOf(preference) > -1"
                                     ng-click="toggleSelection(preference)"
                             >
@@ -71,9 +71,11 @@
                         </div>
                     </div>
                 </div>
-                <a href="#/my-transports" ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</a>
+                <button ng-disabled="addTransportForm.$invalid" class="ui right floated large accent-color button" type="submit">Dodaj ogłoszenie</button>
             </form>
         </div>
+        <div ng-show="!logged">
 
+        </div>
     </div>
 </div>

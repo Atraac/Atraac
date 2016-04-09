@@ -8,10 +8,13 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         });
 
         // checkbox control
-        // fill checkboxes with preferences
-        Preferences.getPreferences().then(function (response) {
-            $scope.preferences = response.data.preferences;
-        });
+        $http.get(Urls.Base+'preferences')
+            .then(function (response)
+            {
+                $scope.preferences = response.data.preferences;
+            }, function (error) {
+                $scope.error1 = JSON.stringify(error);
+            });
 
         // selected preferences
         $scope.selection = [];

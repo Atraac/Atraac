@@ -16,7 +16,9 @@ deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
     }
 });
 deliverIT.constant('Urls', {
-    Base: 'http://192.168.0.101:8080/'
+    Base : 'http://serverapi-deliverit.rhcloud.com/DeliverITServer/'
+    //Base: 'http://192.168.0.101:8080/' //domowy Karola
+    //Base : 'http://88.156.88.32:8080/'  //publiczny-domowy Karola
 });
 deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', '$window', function ($q, $location, $localStorage, $window) {
