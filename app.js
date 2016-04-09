@@ -32,8 +32,10 @@ deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $
                 return config;
             },
             'responseError': function (response) {
-                if (response.status === 401 || response.status === 403) {
-                    $location.path('/login');
+                if ( response.status === 401 || response.status === 403 ) {
+                    if ( ! $location.path().match('/search-transport.*') && ! $location.path().match('/show-transport.*') ) {
+                        $location.path('/login');
+                    }
                 }
                 return $q.reject(response);
             }
