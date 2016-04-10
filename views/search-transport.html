@@ -110,18 +110,18 @@
                         <h4 class="ui image header">
                             <i class="user icon"></i>
                             <div class="content">
-                                <p>{{transport.driver.name}} {{transport.driver.surname}}</p>
-                                <p></p><rating id="my-rating{{transport.driver.userId}}" size="small" type="star" ng-model="transport.driver.rating"></rating></p>
+                                <a class="transport-title" type="button" href="#/profile/{{transport.driver.id}}">{{transport.driver.name}} {{transport.driver.surname}}</a>
+                                <p></p><rating id="my-rating{{transport.id}}" size="small" type="star" ng-model="transport.driver.rating"></rating></p>
                                 <p><div class="sub header">Ocena: {{transport.driver.rating}}</div></p>
                             </div>
 
                         </h4>
                     </td>
                     <td>
-                        <a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a>
+                        <h4><a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a></h4>
                     </td>
                     <td>
-                        Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
+                        Z: {{transport.cities[0].city.name}}  Do: {{transport.cities[transport.cities.length - 1].city.name}}
                     </td>
                     <td>
                         {{transport.departureDate | date: 'short'}}
