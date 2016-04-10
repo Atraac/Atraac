@@ -1,62 +1,62 @@
 <div class="ui container" ng-controller="SearchTransportController">
     <div class="ui grid stackable">
-        <div class="column">
-            <h4 class="ui horizontal divider header">
-                <i class="Shipping icon"></i>
-                Wyszukiwanie
-            </h4>
-            <ul>
-                <li class="has-error" ng-show="searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched" class="help-block">Miasto startowe jest wymagane</li>
-                <li class="has-error" ng-show="searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched" class="help-block">Miasto docelowe jest wymagane</li>
-                <li class="has-error" ng-show="searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched" class="help-block">Data wyjazdu jest wymagana</li>
-            </ul>
-            <div class="ui grid stackable">
-                <div class="five wide column">
-                </div>
-                <div class="four wide column">
-                    <form class="ui form" name="searchTransportsForm" ng-submit="onSearch()" novalidate>
-                        <div class="field" ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
-                            <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
-                            <select id="sourceCity" name="sourceCity" ng-model="searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
-                            </select>
-                        </div>
-                        <div class="field" ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
-                            <label><i class="Flag icon"></i>Miasto docelowe</label>
-                            <select id="destinationCity" name="destinationCity" ng-model="searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
-                            </select>
-                        </div>
-                        <div class="field" ng-class="{'error' : searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched }">
-                            <label><i class="Calendar icon"></i>Data nadania paczki</label>
-                            <input ng-model="searchTransport.date" type="date" name="departureDate" id="departureDate" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="three wide column">
-                    <form class="ui form">
-                        <div class="grouped fields">
-                            <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
-                            <div class="field">
-                                <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="preference in preferences">
-                                    <input
-                                            type="checkbox"
-                                            name="selectedPreferences[]"
-                                            value="{{preference.id}}"
-                                            ng-checked="selection.indexOf(preference) > -1"
-                                            ng-click="toggleSelection(preference)"
-                                    >
-                                    <label>{{preference.name}}</label>
+        <form class="ui form" name="searchTransportsForm" ng-submit="onSearch()" novalidate>
+            <div class="column">
+                <h4 class="ui horizontal divider header">
+                    <i class="Shipping icon"></i>
+                    Wyszukiwanie
+                </h4>
+                <ul>
+                    <li class="has-error" ng-show="searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched" class="help-block">Miasto startowe jest wymagane</li>
+                    <li class="has-error" ng-show="searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched" class="help-block">Miasto docelowe jest wymagane</li>
+                    <li class="has-error" ng-show="searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched" class="help-block">Data wyjazdu jest wymagana</li>
+                </ul>
+                <div class="ui grid stackable">
+                    <div class="five wide column">
+                    </div>
+                    <div class="four wide column">
+
+                            <div class="field" ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
+                                <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
+                                <select id="sourceCity" name="sourceCity" ng-model="searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                                </select>
+                            </div>
+                            <div class="field" ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
+                                <label><i class="Flag icon"></i>Miasto docelowe</label>
+                                <select id="destinationCity" name="destinationCity" ng-model="searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                                </select>
+                            </div>
+                            <div class="field" ng-class="{'error' : searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched }">
+                                <label><i class="Calendar icon"></i>Data nadania paczki</label>
+                                <input ng-model="searchTransport.date" type="date" name="departureDate" id="departureDate" required>
+                            </div>
+
+                    </div>
+                    <div class="three wide column">
+                            <div class="grouped fields">
+                                <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
+                                <div class="field">
+                                    <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="preference in preferences">
+                                        <input
+                                                type="checkbox"
+                                                name="selectedPreferences[]"
+                                                value="{{preference.id}}"
+                                                ng-checked="selection.indexOf(preference) > -1"
+                                                ng-click="toggleSelection(preference)"
+                                        >
+                                        <label>{{preference.name}}</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <button ng-disabled="searchTransportsForm.$invalid" class="ui left floated large accent-color button" type="submit">Wyszukaj</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="four wide column">
+                            <div class="field">
+                                <button ng-disabled="searchTransportsForm.$invalid" class="ui left floated large accent-color button" type="submit">Wyszukaj</button>
+                            </div>
+                    </div>
+                    <div class="four wide column">
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div id="searchResults" ng-show="searchResults">
         <h4 class="ui horizontal divider header">
