@@ -1,3 +1,46 @@
 <div ng-controller="MyTransportsController">
-    {{something}}
+    <div class="ui grid centered">
+        <table class="ui very basic collapsing celled table">
+            <thead>
+            <tr>
+                <th>
+                    Tytuł
+                </th>
+                <th>
+                    Trasa
+                </th>
+                <th>
+                    Czas wyjazdu
+                </th>
+                <th>
+                    Rodzaje paczek
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="transport in transports ">
+                <td>
+                    <h4><a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a></h4>
+                </td>
+                <td>
+                    Z: {{transport.cities[0].city.name}}  Do: {{transport.cities[transport.cities.length - 1].city.name}}
+                </td>
+                <td>
+                    {{transport.departureDate | date: 'short'}}
+                </td>
+                <td>
+                    <span ng-repeat="preference in transport.preferences">
+                        {{preference.name}}
+                    </span>
+                </td>
+                <td>
+                    {{transport.status}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
