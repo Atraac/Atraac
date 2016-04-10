@@ -8,7 +8,7 @@
             <ul>
                 <li class="has-error" ng-show="searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched" class="help-block">Miasto startowe jest wymagane</li>
                 <li class="has-error" ng-show="searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched" class="help-block">Miasto docelowe jest wymagane</li>
-                <li class="has-error" ng-show="searchTransportsForm.date.$invalid && searchTransportsForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
+                <li class="has-error" ng-show="searchTransportsForm.departureDate.$invalid && searchTransportsForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
             </ul>
             <div class="ui grid stackable">
                 <div class="five wide column">
@@ -17,34 +17,34 @@
                     <form class="ui form" name="searchTransportsForm" ng-submit="onSearch()" novalidate>
                         <div class="field" ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
                             <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
-                            <select id="sourceCity" name="sourceCity" ng-model="$searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                            <select id="sourceCity" name="sourceCity" ng-model="searchTransport.sourceCity" ng-options="sourceCity.name for sourceCity in cities" required>
                             </select>
                         </div>
                         <div class="field" ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
                             <label><i class="Flag icon"></i>Miasto docelowe</label>
-                            <select id="destinationCity" name="destinationCity" ng-model="$searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
+                            <select id="destinationCity" name="destinationCity" ng-model="searchTransport.destinationCity" ng-options="sourceCity.name for sourceCity in cities" required>
                             </select>
                         </div>
                         <div class="field" ng-class="{'error' : searchTransportsForm.date.$invalid && searchTransportsForm.date.$touched }">
                             <label><i class="Calendar icon"></i>Data nadania paczki</label>
-                            <input ng-model="$searchTransport.date" type="date" name="transport-date" id="transport-date">
+                            <input ng-model="searchTransport.date" type="date" name="departureDate" id="departureDate" required>
                         </div>
                     </form>
                 </div>
-                <div class="two wide column">
+                <div class="three wide column">
                     <form class="ui form">
                         <div class="grouped fields">
-                            <label>Rodzaje paczek</label>
+                            <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
                             <div class="field">
-                                <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="packtype in preferences">
+                                <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" ng-repeat="preference in preferences">
                                     <input
                                             type="checkbox"
-                                            name="selectedPacktypes[]"
-                                            value="{{packtype}}"
-                                            ng-checked="selection.indexOf(packtype) > -1"
-                                            ng-click="toggleSelection(packtype)"
+                                            name="selectedPreferences[]"
+                                            value="{{preference.id}}"
+                                            ng-checked="selection.indexOf(preference) > -1"
+                                            ng-click="toggleSelection(preference)"
                                     >
-                                    <label>{{packtype.name}}</label>
+                                    <label>{{preference.name}}</label>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="five wide column">
+                <div class="four wide column">
                 </div>
             </div>
         </div>
@@ -62,57 +62,84 @@
         <h4 class="ui horizontal divider header">
             <i class="Shipping icon"></i>Wyszukane przejazdy
         </h4>
-        <table class="ui very basic collapsing celled table">
-            <thead>
-            <tr>
-                <th>
-                    <span class="orderBy" ng-click="changeOrder('rating')">
-                        Kierowca
-                    </span>
-                    <span class="sortorder" ng-show="order === 'rating'" ng-class="{reverse:reverse}"></span>
-                </th>
-                <th>
-                    Tytuł
-                </th>
-                <th>Trasa</th>
-                <th>
-                    <span class="orderBy" ng-click="changeOrder('departureDate')">
-                        Czas wyjazdu
-                    </span>
-                    <span class="sortorder" ng-show="order === 'departureDate'" ng-class="{reverse:reverse}"></span>
-                </th>
-                <th>Rodzaje paczek</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="transport in transports | orderBy:order:reverse">
-                <td>
-                    <h4 class="ui image header">
-                        <i class="user icon"></i>
-                        <div class="content">
-                            <p>{{transport.name}} {{transport.surname}}</p>
-                            <p></p><rating id="my-rating{{transport.idUser}}" size="small" type="star" ng-model="transport.rating | round"></rating></p>
-                            <p><div class="sub header">Ocena: {{transport.rating}}</div></p>
-                        </div>
+        <div class="ui grid centered" ng-show="searchNotFound">
+            Nie znaleziono przejazdów dla zadanych parametrów
+        </div>
 
-                    </h4>
-                </td>
-                <td>
-                    <a class="transport-title" href="#/transport/{{transport.idTransport}}" type="button">{{transport.title}}</a>
-                </td>
-                <td>
-                    Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
-                </td>
-                <td>
-                    {{transport.departureDate | date: 'short'}}
-                </td>
-                <td>
-                    <span ng-repeat="type in transport.packTypes">
-                        {{type}}
+        <div class="ui grid centered">
+            <i class="Big Angle Left icon" ng-click="searchPrevious()" style="cursor: hand;"></i>
+            <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
+            <i class="Big Angle Right icon" ng-click="searchNext()" style="cursor: hand;"></i>
+        </div>
+        <div class="ui grid centered">
+            <h4 class="ui horizontal divider header"></h4>
+            <div class="field">
+                <label> Sortuj wg: </label>
+                <select name="sortBy" id="sortBy">
+                    <option value="bydateasc">Daty - rosnąco</option>
+                    <option value="bydatedesc">Daty - malejąco</option>
+                    <option value="byratingasc">Oceny - rosnąco</option>
+                    <option value="byratingdesc">Oceny - malejąco</option>
+                </select>
+            </div>
+        </div>
+        <div class="ui grid centered">
+            <table class="ui very basic collapsing celled table">
+                <thead>
+                <tr>
+                    <th>
+                        Kierowca
+                    </th>
+                    <th>
+                        Tytuł
+                    </th>
+                    <th>
+                        Trasa
+                    </th>
+                    <th>
+                        Czas wyjazdu
+                    </th>
+                    <th>
+                        Rodzaje paczek
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="transport in transports ">
+                    <td>
+                        <h4 class="ui image header">
+                            <i class="user icon"></i>
+                            <div class="content">
+                                <p>{{transport.driver.name}} {{transport.driver.surname}}</p>
+                                <p></p><rating id="my-rating{{transport.driver.userId}}" size="small" type="star" ng-model="transport.driver.rating"></rating></p>
+                                <p><div class="sub header">Ocena: {{transport.driver.rating}}</div></p>
+                            </div>
+
+                        </h4>
+                    </td>
+                    <td>
+                        <a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a>
+                    </td>
+                    <td>
+                        Z: {{transport.sourceCity}}  Do: {{transport.destinationCity}}
+                    </td>
+                    <td>
+                        {{transport.departureDate | date: 'short'}}
+                    </td>
+                    <td>
+                    <span ng-repeat="preference in transport.preferences">
+                        {{preference.name}}
                     </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui grid centered">
+            <i class="Big Angle Left icon" ng-click="searchPrevious()" style="cursor: hand;"></i>
+            <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
+            <i class="Big Angle Right icon" ng-click="searchNext()" style="cursor: hand;"></i>
+        </div>
     </div>
+</div>
 </div>
