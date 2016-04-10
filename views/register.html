@@ -36,6 +36,7 @@
                     Dane użytkownika
                 </h4>
                 <ul>
+                    <li class="has-error" ng-show="!hasSex" class="help-block">Płeć jest wymagana</li>
                     <li class="has-error" ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
                     <li class="has-error" ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
