@@ -8,13 +8,13 @@
 .primary-dark-color{                                                            color: #0097A7; }
 .accent-color, .ui.steps .active.step .icon, .ui.steps .step.active .title{     color: #FF6F00; }
 
-.primary-color.button{          box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:#FFFFFF;}
-.accent-color.button{        box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:#FFFFFF;}
-.primary-light-color.button{    box-shadow: 0 0 0 1px #B2EBF2 inset!important; color: #B2EBF2 !important; background-color:#FFFFFF;}
-.primary-dark-color.button{     box-shadow: 0 0 0 1px #0097A7 inset!important; color: #0097A7 !important; background-color:#FFFFFF;}
+.primary-color.button{          box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:transparent;}
+.accent-color.button{        box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:transparent;}
+.primary-light-color.button{    box-shadow: 0 0 0 1px #B2EBF2 inset!important; color: #B2EBF2 !important; background-color:transparent;}
+.primary-dark-color.button{     box-shadow: 0 0 0 1px #0097A7 inset!important; color: #0097A7 !important; background-color:transparent;}
 
 .accent-color.button:hover{
-     box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:#FFFFFF;
+     box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:transparent;
  }
 
 .accent-color.button:focus{
@@ -22,11 +22,11 @@
 }
 
 .primary-color.button:hover{
-    box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:#FFFFFF;
+    box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:transparent;
 }
 
 .primary-color.button:focus{
-    background-color:#FFFFFF;
+    background-color:transparent;
 }
 
 .ui.inverted.pointing.menu .active.item:after, .ui.inverted.pointing.menu .active.item:hover:after{
@@ -43,4 +43,8 @@ a.transport-title, span.orderBy, span.sortorder{
 
 a.transport-title:hover, span.orderBy:hover{
     color: #0097A7;
+}
+
+.description{
+    color: black;
 }

@@ -1,14 +1,15 @@
-var showTransportController = angular.module('showTransportController', []);
+var showTransportController = angular.module('showTransportController', ['transportFactory']);
 
-showTransportController.controller('ShowTransportController', ['$scope', '$http',
-    function ($scope, $http) {
+showTransportController.controller('ShowTransportController', ['$scope', '$http', 'Transport', '$routeParams',
+    function ($scope, $http, Transport, $routeParams) {
         $scope.something = 'ShowTransportController';
         $scope.transport = {};
-        $http.get('./fixedObject/showTransport.json')
-            .then(function (response)
+        $scope.error = false;
+        Transport.getTransport($routeParams.transportId).then(function (response)
             {
                 $scope.transport = response.data;
             }, function (error) {
-                $scope.error1 = JSON.stringify(error);
+                console.log(error);
+                $scope.error = true;
             });
     }]);

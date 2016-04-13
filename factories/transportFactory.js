@@ -10,6 +10,10 @@ transportFactory.factory('Transport', ['$http', 'Urls',
             return $http.post(Urls.Base+'transports', transport);
         };
 
+        Transport.getTransport = function(transportId) {
+            return $http.get(Urls.Base+'transports/'+transportId);
+        };
+
         Transport.getDriverTransports = function(userId) {
             return $http.get(Urls.Base+'transports/'+userId);
         };

@@ -1,24 +1,38 @@
 <div class="ui container" data-ng-controller="ShowTransportController">
-    <div class="ui grid stackable">
-        <div class="four wide column">
+    <div data-ng-if="error" class="ui centered card red">
+            <div class="content center aligned">
+                <div class="header">
+                    Przykro mi! :(
+                </div>
+                <div class="description">
+                    Nie ma takiego transportu.
+                </div>
+            </div>
+    </div>
+    <div data-ng-if="!error" class="ui grid stackable">
+        <div class="four wide column center aligned">
             <div class="row">
                 <h4 class="ui horizontal divider header">
                     <i class="user icon"></i>
                     Kierowca
                 </h4>
-                <div class="ui header">
-                    <rating id="my-rating" size="large" type="star" data-ng-model="transport.rating | round"></rating>
-                    <span>{{transport.rating}}</span>
-                </div>
-                <img class="image ui tiny right" src="{{transport.photo}}">
-                <div class="description">
-                    <p>Imię: <strong>{{transport.name}}</strong></p>
-                    <p>Nazwisko: <strong>{{transport.surname}}</strong></p>
-                    <p>Auto: <strong>{{transport.car}}</strong></p>
-                    <p>Telefon: <strong>{{transport.phoneNumber}}</strong></p>
+                <div class="grow">
+                    <a href="#/profile/{{transport.driver.id}}">
+                        <div class="ui header">
+                            <rating id="my-rating" size="large" type="star" data-ng-model="transport.driver.rating | round"></rating>
+                            <span>{{transport.driver.rating}}</span>
+                        </div>
+                        <img data-ng-click="" class="profile-image image center ui tiny" src="./content/pictures/brak.jpg">
+                        <div class="description">
+                            <p>Imię: <strong>{{transport.driver.name}}</strong></p>
+                            <p>Nazwisko: <strong>{{transport.driver.surname}}</strong></p>
+                            <p>Auto: <strong>{{transport.driver.car}}</strong></p>
+                            <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 <h4 class="ui horizontal divider header">
                     <i class="Calendar icon"></i>
                     Termin wyjazdu
@@ -28,7 +42,7 @@
                 </h4>
             </div>
         </div>
-        <div class="four wide column">
+        <div class="four wide column center aligned">
             <div class="row">
                 <h4 class="ui horizontal divider header">
                     <i class="Road icon"></i>
@@ -36,46 +50,47 @@
                 </h4>
                 <div class="ui list">
                     <div class="item" data-ng-repeat="city in transport.cities">
-                        <p data-ng-show="$first" ><i class="Flag Outline icon"></i><strong>{{city}}</strong></p>
-                        <p data-ng-show="$middle" ><i class="Arrow Down icon"></i>{{city}}</p>
-                        <p data-ng-show="$last" ><i class="Flag icon"></i><strong>{{city}}</strong></p>
+                        <p data-ng-show="$first" ><i class="Flag Outline icon"></i><strong>{{city.city.name}}</strong></p>
+                        <p data-ng-show="$middle" ><i class="Arrow Down icon"></i>{{city.city.name}}</p>
+                        <p data-ng-show="$last" ><i class="Flag icon"></i><strong>{{city.city.name}}</strong></p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="four wide column">
+                <div class="four wide column center aligned ">
                     <h4 class="ui horizontal divider header">
                         <i class="Dropbox icon"></i>
                         Typ paczek
                     </h4>
                     <div class="ui list">
-                        <div class="item" data-ng-repeat="type in transport.packTypes">
-                            <p><i class="Cube icon"></i>{{type}}</p>
+                        <div class="item" data-ng-repeat="type in transport.preferences">
+                            <p><i class="Cube icon"></i>{{type.name}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="eight wide column">
+        <div class="eight wide column center aligned">
             <div class="row">
                 <h4 class="ui horizontal divider header">
                     <i class="Write icon"></i>
                     Opis
                 </h4>
-                <div class="ui piled segment">
+                <div>
+                    <h4>{{transport.title}}</h4>
                     {{transport.description}}
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 <h4 class="ui horizontal divider header">
                     <i class="Heartbeat icon"></i>
                     Akcje/Stan
                 </h4>
-                <div class="ui piled segment">
-                    <p data-ng-show="transport.state === 'active'">Można zarejestrować paczkę</p>
+                <div >
+                        <p data-ng-show="transport.state === 'OPENED'">Można zarejestrować paczkę</p>
+                        <div class="ui  large accent-color button" type="button">Zarezerwuj</div>
                 </div>
-                <button class="ui right floated large accent-color button" type="button">Zarezerwuj</button>
             </div>
         </div>
     </div>

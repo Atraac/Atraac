@@ -69,7 +69,7 @@ deliverIT.config(['$routeProvider', '$httpProvider', function ($routeProvider, $
         templateUrl: './views/my-transports.html',
         controller: 'MyTransportsController'
     }).
-    when('/transport/:transportId', {
+    when('/transports/:transportId', {
         templateUrl: './views/show-transport.html',
         controller: 'ShowTransportController'
     }).

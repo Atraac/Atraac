@@ -67,3 +67,15 @@ h4.ui.horizontal.divider.from-where{
 div.field select.dropdown-bottom-margin{
     margin-bottom: 10px;
 }
+
+img.profile-image.image.center.ui.tiny {
+    display: inline-block;
+}
+
+.grow {
+    transition: all .5s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.035);
+}
