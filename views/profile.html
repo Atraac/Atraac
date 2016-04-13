@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="ProfileController">
+<div class="ui container" data-ng-controller="ProfileController">
 
     <div class="ui grid stackable">
         <div class="eight wide column">
@@ -10,9 +10,9 @@
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
-                            <rating id="my-rating" size="large" type="star" ng-model="user.rating | round"></rating>
-                            <span ng-show="user.rating!=0">{{user.rating}}</span>
-                            <span ng-show="user.rating==0">Brak ocen</span>
+                            <rating id="my-rating" size="large" type="star" data-ng-model="user.rating | round"></rating>
+                            <span data-ng-show="user.rating!=0">{{user.rating}}</span>
+                            <span data-ng-show="user.rating==0">Brak ocen</span>
                         </div>
                         <div class="image right">
                             <img src="./content/pictures/brak.jpg">
@@ -28,9 +28,9 @@
                         <p>Płeć: <strong>{{user.sex}}</strong></p>
                         <p>Telefon: <strong>{{user.phoneNumber}}</strong></p>
                         <p>Auto: <strong>{{user.car}}</strong></p>
-                        <p ng-show="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
-                        <p ng-show="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
-                        <a ng-show="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
+                        <p data-ng-show="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
+                        <p data-ng-show="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
+                        <a data-ng-show="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
                     </div>
                 </div>
             </div>

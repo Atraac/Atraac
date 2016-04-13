@@ -1,3 +1,46 @@
-<div ng-controller="MyPackagesController">
-    {{something}}
+<div data-ng-controller="MyPackagesController">
+    <div class="ui grid centered">
+        <table class="ui very basic collapsing celled table">
+            <thead>
+            <tr>
+                <th>
+                    Tytuł ogłoszenia
+                </th>
+                <th>
+                    Trasa
+                </th>
+                <th>
+                    Czas wyjazdu
+                </th>
+                <th>
+                    Rodzaje paczek
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="reservation in reservations" href="#/transport/{{reservation.transport.id}}" type="button" >
+                <td>
+                    <h4>{{reservation.transport.title}}</h4>
+                </td>
+                <td>
+                    Z: {{reservation.transport.cities[0].city.name}}  Do: {{reservation.transport.cities[reservation.transport.cities.length - 1].city.name}}
+                </td>
+                <td>
+                    {{reservation.transport.departureDate | date: 'short'}}
+                </td>
+                <td>
+                    <span data-ng-repeat="preference in reservation.transport.preferences">
+                        {{preference.name}}
+                    </span>
+                </td>
+                <td>
+                    {{reservation.status}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

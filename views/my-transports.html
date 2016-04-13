@@ -1,4 +1,4 @@
-<div ng-controller="MyTransportsController">
+<div data-ng-controller="MyTransportsController">
     <div class="ui grid centered">
         <table class="ui very basic collapsing celled table">
             <thead>
@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="transport in transports ">
+            <tr data-ng-repeat="transport in transports ">
                 <td>
                     <h4><a class="transport-title" href="#/transport/{{transport.id}}" type="button">{{transport.title}}</a></h4>
                 </td>
@@ -32,7 +32,7 @@
                     {{transport.departureDate | date: 'short'}}
                 </td>
                 <td>
-                    <span ng-repeat="preference in transport.preferences">
+                    <span data-ng-repeat="preference in transport.preferences">
                         {{preference.name}}
                     </span>
                 </td>

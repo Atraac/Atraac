@@ -1,5 +1,5 @@
-<div class="ui container"  ng-controller="RegisterController">
-    <form ng-show="!correctRegister" class="ui form" name="registerForm" ng-submit="onRegister()" novalidate>
+<div class="ui container"  data-ng-controller="RegisterController">
+    <form data-ng-show="!correctRegister" class="ui form" name="registerForm" data-ng-submit="onRegister()" novalidate>
         <div class="ui grid stackable">
             <div class="eight wide column ">
                 <h4 class="ui horizontal divider header">
@@ -7,22 +7,22 @@
                     Dane konta
                 </h4>
                 <ul>
-                    <li class="has-error" ng-show="duplicateEmail=='Duplicated Email'" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
-                    <li class="has-error" ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
-                    <li class="has-error" ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
-                    <li class="has-error" ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
+                    <li class="has-error" data-ng-show="duplicateEmail=='Duplicated Email'" class="help-block">Użytkownik o podanym adresie email już istnieje</li>
+                    <li class="has-error" data-ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
+                    <li class="has-error" data-ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
+                    <li class="has-error" data-ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
                 </ul>
-                <div class="field" ng-class="{'error' : registerForm.email.$invalid && registerForm.email.$touched }">
+                <div class="field" data-ng-class="{'error' : registerForm.email.$invalid && registerForm.email.$touched }">
                     <label>Email</label>
-                    <input ng-model="user.email" type="email" name="email" placeholder="Email" required>
+                    <input data-ng-model="user.email" type="email" name="email" placeholder="Email" required>
                 </div>
-                <div class="field" ng-class="{'error' : registerForm.password.$invalid && registerForm.password.$touched }">
+                <div class="field" data-ng-class="{'error' : registerForm.password.$invalid && registerForm.password.$touched }">
                     <label></i>Hasło</label>
-                    <input ng-model="user.password" type="password" name="password" placeholder="Hasło" required>
+                    <input data-ng-model="user.password" type="password" name="password" placeholder="Hasło" required>
                 </div>
-                <div class="field" ng-class="{'error' : registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched }">
+                <div class="field" data-ng-class="{'error' : registerForm.passwordAgain.$invalid && registerForm.passwordAgain.$touched }">
                     <label>Potwierdź hasło</label>
-                    <input ng-model="passwordAgain" type="password" name="passwordAgain" placeholder="Potwierdź hasło" required>
+                    <input data-ng-model="passwordAgain" type="password" name="passwordAgain" placeholder="Potwierdź hasło" required>
                 </div>
             </div>
             <div class="eight wide column center aligned">
@@ -36,40 +36,40 @@
                     Dane użytkownika
                 </h4>
                 <ul>
-                    <li class="has-error" ng-show="!hasSex" class="help-block">Płeć jest wymagana</li>
-                    <li class="has-error" ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
-                    <li class="has-error" ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
-                    <li class="has-error" ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
+                    <li class="has-error" data-ng-show="!hasSex" class="help-block">Płeć jest wymagana</li>
+                    <li class="has-error" data-ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
+                    <li class="has-error" data-ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
+                    <li class="has-error" data-ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
                 </ul>
-                 <div class="field" ng-class="{'error' : registerForm.name.$invalid && registerForm.name.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.name.$invalid && registerForm.name.$touched }">
                      <label>Imię</label>
-                     <input ng-model="user.name" type="text" name="name" placeholder="Imię" required>
+                     <input data-ng-model="user.name" type="text" name="name" placeholder="Imię" required>
                  </div>
-                 <div class="field" ng-class="{'error' : registerForm.surname.$invalid && registerForm.surname.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.surname.$invalid && registerForm.surname.$touched }">
                      <label>Nazwisko</label>
-                     <input ng-model="user.surname" type="text" name="surname" placeholder="Nazwisko" required>
+                     <input data-ng-model="user.surname" type="text" name="surname" placeholder="Nazwisko" required>
                  </div>
-                 <div class="field" ng-class="{'error' : registerForm.phoneNumber.$invalid && registerForm.phoneNumber.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.phoneNumber.$invalid && registerForm.phoneNumber.$touched }">
                      <label>Telefon</label>
-                     <input ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
+                     <input data-ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                  </div>
-                 <div class="field" ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }">
                      <label>Data urodzenia</label>
-                     <input ng-model="user.birthDate" type="date" name="birthDate" value="{{user.birthDate}}" required>
+                     <input data-ng-model="user.birthDate" type="date" name="birthDate" value="{{user.birthDate}}" required>
                  </div>
-                 <div class="field" ng-class="{'error' : registerForm.car.$invalid && registerForm.car.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.car.$invalid && registerForm.car.$touched }">
                      <label>Auto</label>
-                     <input ng-model="user.car" type="text" name="car" placeholder="Auto">
+                     <input data-ng-model="user.car" type="text" name="car" placeholder="Auto">
                  </div>
                 <div class="field">
                     <label>Płeć:</label>
-                    <select class="ui dropdown" ng-model="user.sex">
+                    <select class="ui dropdown" data-ng-model="user.sex">
                         <option value=""></option>
                         <option value="M">Mężczyzna</option>
                         <option value="K">Kobieta</option>
                     </select>
                 </div>
-                <button ng-disabled="registerForm.$invalid" href="#/" class="ui right floated large accent-color button" type="submit">Zarejestruj</button>
+                <button data-ng-disabled="registerForm.$invalid" href="#/" class="ui right floated large accent-color button" type="submit">Zarejestruj</button>
             </div>
             <div class="eight wide column center aligned">
                 <h4 class="ui horizontal divider header">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </form>
-    <div ng-show="correctRegister" class="ui centered card">
+    <div data-ng-show="correctRegister" class="ui centered card">
         <div class="content">
             <div class="header">
                 Gratulacje! :)

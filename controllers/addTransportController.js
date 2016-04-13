@@ -7,6 +7,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             $scope.cities = response.data.cities;
         });
 
+
         // checkbox control
         Preferences.getPreferences().then(function (response) {
             $scope.preferences = response.data.preferences;

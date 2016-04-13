@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="EditProfileController">
+<div class="ui container" data-ng-controller="EditProfileController">
     <div class="ui grid stackable">
         <div class="eight wide column ">
             <h4 class="ui horizontal divider header">
@@ -6,7 +6,7 @@
                 Dane użytkownika
             </h4>
 
-            <form class="ui form" name="updateProfileForm" ng-submit="onUpdateProfile()" novalidate>
+            <form class="ui form" name="updateProfileForm" data-ng-submit="onUpdateProfile()" novalidate>
                 <div class="ui piled segment">
                     <p>Imię: <strong>{{user.name}}</strong> </p>
                     <p>Nazwisko: <strong>{{user.surname}}</strong> </p>
@@ -14,14 +14,14 @@
                     <p>Płeć: <strong>{{user.sex}}</strong> </p>
                 </div>
 
-                <div class="field" ng-class="{'error' : updateProfileForm.phoneNumber.$invalid && updateProfileForm.phoneNumber.$touched }">
+                <div class="field" data-ng-class="{'error' : updateProfileForm.phoneNumber.$invalid && updateProfileForm.phoneNumber.$touched }">
                     <label>Telefon</label>
-                    <input ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
+                    <input data-ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                 </div>
 
-                <div class="field" ng-class="{'error' : updateProfileForm.car.$invalid && updateProfileForm.car.$touched }">
+                <div class="field" data-ng-class="{'error' : updateProfileForm.car.$invalid && updateProfileForm.car.$touched }">
                     <label>Auto</label>
-                    <input ng-model="user.car" type="text" name="car" placeholder="Auto">
+                    <input data-ng-model="user.car" type="text" name="car" placeholder="Auto">
                 </div>
 
                 <button class="ui right floated large accent-color button" type="submit">Zapisz</button>
@@ -32,7 +32,7 @@
                 <i class="Photo icon"></i>
                 Zdjęcie
             </h4>
-            <div class="chosed-photo" ng-if="user.photo != ''" class="image center aligned">
+            <div class="chosed-photo" data-ng-if="user.photo != ''" class="image center aligned">
                 <img class="ui small " src="./content/pictures/brak.jpg">
             </div>
             <div class="ui large accent-color button">Wybierz</div>
