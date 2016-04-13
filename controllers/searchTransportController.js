@@ -108,6 +108,7 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
                 });
             }
         };
+        
         $scope.searchPrevious = function() {
             // if we're not on first page then
             if ($scope.pageNumber > 1) {
