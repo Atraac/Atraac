@@ -7,5 +7,9 @@ reservationFactory.factory('Reservation', ['$http', 'Urls',
             return $http.get(Urls.Base+"reservations/"+userId);
         };
 
+        Reservation.addReservation = function(reservation){
+            return $http.post(Urls.Base+"reservations", reservation);
+        };
+
         return Reservation;
     }]);

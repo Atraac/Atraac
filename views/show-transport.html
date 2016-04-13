@@ -89,9 +89,75 @@
                 </h4>
                 <div >
                         <p data-ng-show="transport.state === 'OPENED'">Można zarejestrować paczkę</p>
-                        <div class="ui  large accent-color button" type="button">Zarezerwuj</div>
+                        <div data-ng-click="onModalReservation()" class="ui  large accent-color button" type="button">Zarezerwuj</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="ui small modal">
+        <i data-ng-click="closeModal()" class="close icon"></i>
+        <div data-ng-if="!correctReservation" class="header">
+            Zarezerwuj paczkę!
+        </div>
+        <div data-ng-if="correctReservation" class="header">
+            Pomyślna rezerwacja!
+        </div>
+        <div data-ng-if="correctReservation" class="content">
+            Teraz czekaj na zaakceptowanie twojej rezerwacji przez kierowcę.
+            Możesz sprawdzić status rezerwacji w szczegółach transportu oraz w zakładce "Twoje przesyłki".
+        </div>
+        <div data-ng-if="!correctReservation" class="content">
+            <form class="ui form" name="reservationForm" data-ng-submit="onReservation()" novalidate>
+                <div class="ui grid center stackable">
+                    <div class="two wide column"></div>
+                    <div class="six wide column">
+                        <div data-ng-if="noPreference" div class="row">
+                            <ul>
+                                <li class="has-error">Podaj chociaż jedną preferencję</li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="grouped fields">
+                                <label><i class="Suitcase icon"></i>Jakie są twoje paczki?</label>
+                                <div class="field">
+                                    <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" data-ng-repeat="preference in preferences">
+                                        <input
+                                                type="checkbox"
+                                                name="selectedPreferences[]"
+                                                value="{{preference.id}}"
+                                                data-ng-checked="reservation.selection.indexOf(preference) > -1"
+                                                data-ng-click="toggleSelection(preference)"
+                                        >
+                                        <label>{{preference.name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="six wide column">
+                        <div class="row">
+                            <div class="field" data-ng-class="{'error' : reservationForm.receiverEmail.$invalid && reservationForm.receiverEmail.$touched }">
+                                <label><i class="at icon"></i>(Opcjonalnie) Email odbiorcy: </label>
+                                <input data-ng-model="reservation.receiverEmail" type="email" name="receiverEmail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="margin-top: 10px" class="row">
+                                <div class="two ui buttons">
+                                    <button data-ng-disabled="reservationForm.$invalid" class="ui green basic button" type="submit">
+                                        Zarezerwuj
+                                    </button>
+                                    <button data-ng-click="closeModal()" class="ui red basic button">
+                                        Cofnij
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="two wide column"></div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
