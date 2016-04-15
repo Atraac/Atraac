@@ -56,12 +56,19 @@ showTransportController.controller('ShowTransportController',
             {
                 $scope.transport = response.data;
                 $scope.userIsDriver = $rootScope.loggedUser.id === $scope.transport.driver.id;
-                for (index = 0; index < $scope.transport.reservations.length; ++index) {
-                    if($scope.transport.reservations[index].sender.id === $rootScope.loggedUser.id
-                    || $scope.transport.reservations[index].reciever.id === $rootScope.loggedUser.id)
+                for (var index = 0; index <= $scope.transport.reservations.length; index++) {
+                    if($scope.transport.reservations[index].sender.id === $rootScope.loggedUser.id)
                     {
                         $scope.userReservation = $scope.transport.reservations[index];
                         break;
+                    }
+                    else {
+                        if($scope.transport.reservations[index].reciever != null){
+                            if($scope.transport.reservations[index].reciever.id === $rootScope.loggedUser.id){
+                                $scope.userReservation = $scope.transport.reservations[index];
+                                break;
+                            }
+                        }
                     }
                 }
             }, function (error) {

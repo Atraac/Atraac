@@ -87,7 +87,10 @@
                     <i class="Heartbeat icon"></i>
                     Akcje/Stan
                 </h4>
-                <div data-ng-if="userReservation!=null">
+                <div data-ng-if="userIsDriver">
+
+                </div>
+                <div data-ng-if="!userIsDriver && userReservation!=null">
                     <div class="ui Yellow segment" data-ng-if="userReservation.state==='NOTACCEPTED'">
                         Twoja rezerwacja oczekuje na decyzję kierowcy
                     </div>
