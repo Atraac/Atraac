@@ -88,7 +88,23 @@
                     Akcje/Stan
                 </h4>
                 <div data-ng-if="userIsDriver">
-
+                    <div class="ui segment" data-ng-repeat="reservation in transport.reservations">
+                        <h4><a href="#/profile/{{reservation.sender.id}}" style="display: inline-block;">
+                            {{reservation.sender.name}} {{reservation.sender.surname}}
+                        </a></h4>
+                        <span>Paczki:</span>
+                        <span data-ng-repeat="preference in reservation.preferences">
+                            {{preference.name}}
+                        </span>
+                        <div class="two ui buttons">
+                            <button style="display: inline-block; float: right" class="ui reservation green basic button">
+                                Zaakceptuj
+                            </button>
+                            <button style="display: inline-block; float: right" class="ui reservation red basic button">
+                                Odrzuć
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div data-ng-if="!userIsDriver && userReservation!=null">
                     <div class="ui Yellow segment" data-ng-if="userReservation.state==='NOTACCEPTED'">

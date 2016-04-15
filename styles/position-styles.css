@@ -79,3 +79,7 @@ img.profile-image.image.center.ui.tiny {
 .grow:hover {
     transform: scale(1.035);
 }
+
+div button.ui.reservation.basic.button{
+
+}
