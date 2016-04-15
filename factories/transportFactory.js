@@ -14,8 +14,8 @@ transportFactory.factory('Transport', ['$http', 'Urls',
             return $http.get(Urls.Base+'transports/'+transportId);
         };
 
-        Transport.getDriverTransports = function(userId) {
-            return $http.get(Urls.Base+'transports/'+userId);
+        Transport.getDriverTransports = function() {
+            return $http.get(Urls.Base+'users/transports');
         };
 
         return Transport;

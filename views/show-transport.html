@@ -87,8 +87,19 @@
                     <i class="Heartbeat icon"></i>
                     Akcje/Stan
                 </h4>
-                <div >
-                        <p data-ng-show="transport.state === 'OPENED'">Można zarejestrować paczkę</p>
+                <div data-ng-if="userReservation!=null">
+                    <div class="ui Yellow segment" data-ng-if="userReservation.state==='NOTACCEPTED'">
+                        Twoja rezerwacja oczekuje na decyzję kierowcy
+                    </div>
+                    <div class="ui Green segment" data-ng-if="userReservation.state==='ACCEPTED'">
+                        Twoja rezerwacja została zaakceptowana przez kierowcy
+                    </div>
+                    <div class="ui Red segment" data-ng-if="userReservation.state==='REJECTED'">
+                        Twoja rezerwacja została odrzucona przez kierowcę
+                    </div>
+                </div>
+                <div data-ng-if="!userIsDriver && userReservation==null && transport.state === 'OPENED'">
+                        <p>Można zarejestrować paczkę</p>
                         <div data-ng-click="onModalReservation()" class="ui  large accent-color button" type="button">Zarezerwuj</div>
                 </div>
             </div>
@@ -97,17 +108,20 @@
 
     <div class="ui small modal">
         <i data-ng-click="closeModal()" class="close icon"></i>
-        <div data-ng-if="!correctReservation" class="header">
+        <div data-ng-if="!correctReservation && error" class="header">
+            Nie udało się! Jakiś błąd serwera :(
+        </div>
+        <div data-ng-if="!correctReservation && !error" class="header">
             Zarezerwuj paczkę!
         </div>
-        <div data-ng-if="correctReservation" class="header">
+        <div data-ng-if="correctReservation && !error" class="header">
             Pomyślna rezerwacja!
         </div>
-        <div data-ng-if="correctReservation" class="content">
+        <div data-ng-if="correctReservation && !error" class="content">
             Teraz czekaj na zaakceptowanie twojej rezerwacji przez kierowcę.
             Możesz sprawdzić status rezerwacji w szczegółach transportu oraz w zakładce "Twoje przesyłki".
         </div>
-        <div data-ng-if="!correctReservation" class="content">
+        <div data-ng-if="!correctReservation && !error" class="content">
             <form class="ui form" name="reservationForm" data-ng-submit="onReservation()" novalidate>
                 <div class="ui grid center stackable">
                     <div class="two wide column"></div>
@@ -126,7 +140,7 @@
                                                 type="checkbox"
                                                 name="selectedPreferences[]"
                                                 value="{{preference.id}}"
-                                                data-ng-checked="reservation.selection.indexOf(preference) > -1"
+                                                data-ng-checked="reservation.preferences.indexOf(preference) > -1"
                                                 data-ng-click="toggleSelection(preference)"
                                         >
                                         <label>{{preference.name}}</label>

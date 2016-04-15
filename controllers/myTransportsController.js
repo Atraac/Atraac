@@ -3,7 +3,7 @@ var myTransportsController = angular.module('myTransportsController', ['transpor
 myTransportsController.controller('MyTransportsController', ['$scope', '$rootScope', 'Transport',
     function ($scope, $rootScope, Transport) {
 
-        Transport.getDriverTransports($rootScope.loggedUser.id).then(function (response) {
+        Transport.getDriverTransports().then(function (response) {
             $scope.transports = response.data;    
         }, function(error){
             console.log("getDriverTransportsError: "+error);

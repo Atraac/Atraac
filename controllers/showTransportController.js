@@ -1,41 +1,50 @@
-var showTransportController = angular.module('showTransportController', ['transportFactory', 'preferencesFactory', 'reservationFactory']);
+var showTransportController = angular.module('showTransportController', 
+    ['transportFactory', 'preferencesFactory', 'reservationFactory']);
 
-showTransportController.controller('ShowTransportController', ['$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation',
-    function ($scope, $http, Transport, $routeParams, Preferences, Reservation) {
+showTransportController.controller('ShowTransportController', 
+    ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation',
+    function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation) {
         $scope.something = 'ShowTransportController';
         $scope.transport = {};
         $scope.reservation = {};
         $scope.error = false;
+        $scope.userIsDriver = false;
+        $scope.noPreference = false;
+        $scope.error = false;
+        $scope.correctReservation = false;
+
+
+
+
         $scope.onModalReservation = function(){
             $scope.preferences = $scope.transport.preferences;
-            $scope.reservation.selection = [];
+            $scope.reservation.preferences = [];
             $scope.toggleSelection = function toggleSelection(preference) {
-                var idx = $scope.reservation.selection.indexOf(preference);
+                var idx = $scope.reservation.preferences.indexOf(preference);
                 if (idx > -1) {
-                    $scope.reservation.selection.splice(idx, 1);
+                    $scope.reservation.preferences.splice(idx, 1);
                 }
                 else {
-                    $scope.reservation.selection.push(preference);
+                    $scope.reservation.preferences.push(preference);
                 }
             };
             $scope.noPreference = false;
             $('.ui.small.modal').modal('show');
         };
+
         $scope.closeModal = function () {
             $('.ui.small.modal').modal('hide');
             $scope.noPreference = false;
         }
-        $scope.noPreference = false;
-        $scope.correctReservation = false;
+
         $scope.onReservation = function(){
             console.log("Reservation: "+$scope.reservation);
-            if($scope.reservation.selection.length > 0){
+            if($scope.reservation.preferences.length > 0){
                 $scope.reservation.transportId = $scope.transport.id;
-                Reservation.addReservation($scope.reservation).than(function(response){
+                Reservation.addReservation($scope.reservation).then(function(response){
                     $scope.correctReservation = true;
-                    $scope.closeModal();
                 }, function (error) {
-
+                    $scope.error = true;
                 });
             }
             else {
@@ -46,6 +55,15 @@ showTransportController.controller('ShowTransportController', ['$scope', '$http'
         Transport.getTransport($routeParams.transportId).then(function (response)
             {
                 $scope.transport = response.data;
+                $scope.userIsDriver = $rootScope.loggedUser.id === $scope.transport.driver.id;
+                for (index = 0; index < $scope.transport.reservations.length; ++index) {
+                    if($scope.transport.reservations[index].sender.id === $rootScope.loggedUser.id
+                    || $scope.transport.reservations[index].reciever.id === $rootScope.loggedUser.id)
+                    {
+                        $scope.userReservation = $scope.transport.reservations[index];
+                        break;
+                    }
+                }
             }, function (error) {
                 console.log(error);
                 $scope.error = true;
