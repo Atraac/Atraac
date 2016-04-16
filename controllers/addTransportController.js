@@ -23,11 +23,14 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
         });
 
+        // NIE DZIALA
         $('.Help.Circle')
             .popup({
                 on: 'click'
             })
         ;
+
+        $('input[name="daterange"]').daterangepicker();
 
         // selected preferences
         $scope.selection = [];

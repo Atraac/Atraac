@@ -1,0 +1,37 @@
+{
+  "name": "semantic-datepicker",
+  "version": "0.1.0",
+  "description": "Date picker component for Semantic UI.  Supports single date and date range picking, almost entirely copied from Dan Grossman's Bootstrap version.",
+  "main": "daterangepicker.js",
+  "style": "daterangepicker.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/milimetric/semantic-ui-daterangepicker.git"
+  },
+  "author": {
+    "name": "Dan Grossman"
+  },
+  "contributors": {
+    "name": "Dan Andreescu",
+    "email": "dandreescu@wikimedia.org"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/milimetric/semantic-ui-daterangepicker/issues"
+  },
+  "homepage": "https://github.com/milimetric/semantic-ui-daterangepicker",
+  "engines": {
+    "node": "0.10.24",
+    "nmp": "3.5.2"
+  },
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.0",
+    "gulp-clean-css": "^2.0.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.5.3",
+    "jshint-stylish": "^2.0.1"
+  }
+}
