@@ -29,7 +29,6 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
                 on: 'click'
             })
         ;
-
         $('#departureDate').on('apply.daterangepicker', function(ev, picker) {
            $scope.timeRangePickerDeparturDate=picker.startDate.toISOString();
         });
