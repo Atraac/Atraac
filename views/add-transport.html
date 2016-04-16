@@ -59,37 +59,19 @@
                     <label><i class="Newspaper icon"></i>Treść ogłoszenia</label>
                     <textarea data-ng-model="transport.description" type="description" name="description" placeholder="Treść ogłoszenia" maxlength="500" required></textarea>
                 </div>
-                <label><i class="Dollar icon"></i>Cena przewozu paczek</label>
-                <div class="ui grid">
-                    <div class="eight wide column">
-                        <div class="ui grid">
-                            <div class="one wide column">
-                                <label>Od: </label>
-                            </div>
-                            <div class="nine wide column">
-                                <div class="field" data-ng-class="{'error' : addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched }">
-                                    <input data-ng-model="transport.pricemin" type="number" name="pricemin" placeholder="0.00" required>
-                                </div>
-                            </div>
-                            <div class="one wide column">
-                                <p>PLN</p>
-                            </div>
-                        </div>
+                <div class="inline fields center aligned">
+                    <label><i class="Dollar icon"></i>Cena przewozu paczek</label>
+                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched }">
+                        <input data-ng-model="transport.pricemin" type="number" name="pricemin" placeholder="0.00" required>
                     </div>
-                    <div class="eight wide column">
-                        <div class="ui grid">
-                            <div class="one wide column">
-                                <label>Do: </label>
-                            </div>
-                            <div class="nine wide column">
-                                <div class="field" data-ng-class="{'error' : addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched }">
-                                    <input data-ng-model="transport.pricemax" type="number" name="pricemax" placeholder="9999.99" required>
-                                </div>
-                            </div>
-                            <div class="one wide column">
-                                <p>PLN</p>
-                            </div>
-                        </div>
+                    <div class="one wide field center aligned">
+                        <i class="Minus icon"></i>
+                    </div>
+                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched }">
+                        <input data-ng-model="transport.pricemax" type="number" name="pricemax" placeholder="0.00" required>
+                    </div>
+                    <div class="two wide field">
+                        <h5>Zł</h5>
                     </div>
                 </div>
                 <div class="grouped fields">
