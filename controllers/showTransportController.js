@@ -69,25 +69,28 @@ showTransportController.controller('ShowTransportController',
             $scope.noPreference = false;
             $('#addReservationModal').modal('show');
         };
-
+        $scope.hideModalReservation = false;
         $scope.closeModal = function () {
-            $('#addReservationModal').modal('hide');
             $scope.noPreference = false;
+            $scope.hideModalReservation = true;
+            $('#addReservationModal').modal('hide');
         }
 
         $scope.onReservation = function(){
-            console.log("Reservation: "+$scope.reservation);
-            if($scope.reservation.preferences.length > 0){
-                $scope.reservation.transportId = $scope.transport.id;
-                Reservation.addReservation($scope.reservation).then(function(response){
-                    $scope.correctReservation = true;
-                    getCurrentTransport();
-                }, function (error) {
-                    $scope.error = true;
-                });
-            }
-            else {
-                $scope.noPreference = true;
+            if(!$scope.hideModalReservation){
+                console.log("Reservation: "+$scope.reservation);
+                if($scope.reservation.preferences.length > 0){
+                    $scope.reservation.transportId = $scope.transport.id;
+                    Reservation.addReservation($scope.reservation).then(function(response){
+                        $scope.correctReservation = true;
+                        getCurrentTransport();
+                    }, function (error) {
+                        $scope.error = true;
+                    });
+                }
+                else {
+                    $scope.noPreference = true;
+                }
             }
         };
 
