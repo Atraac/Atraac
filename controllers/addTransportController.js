@@ -82,7 +82,8 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
                 $scope.dontUseTimeRangePicker = true;
             }
             else {
-                $scope.transport.departureDate = $scope.timeRangePickerDeparturDate;
+                $scope.transport.departureDate = new Date($scope.timeRangePickerDeparturDate).toJSON();
+                console.log($scope.transport.departureDate);
                 $scope.transport.userId = $rootScope.loggedUser.id;
                 $scope.transport.preferences = $scope.selection;
                 $scope.transport.cities = $scope.parseRoutes();
