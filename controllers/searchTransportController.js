@@ -5,14 +5,24 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
 
         // fill dropdowns with cities
         Cities.getCities().then(function (response) {
-            $scope.cities = response.data.cities;
+            if(response.status == 200) {
+                $scope.cities = response.data.cities;
+            }
+            else {
+                alert("Wystąpił problem połączenia z serwerem")
+            }
         });
 
 
         // checkbox control
         // fill checkboxees with preferences
         Preferences.getPreferences().then(function (response) {
-            $scope.preferences = response.data.preferences;
+            if (response.status == 200) {
+                $scope.preferences = response.data.preferences;
+            }
+            else {
+                alert("Wystąpił problem połączenia z serwerem")
+            }
         });
 
         // selected preferences
@@ -108,7 +118,7 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
                 });
             }
         };
-        
+
         $scope.searchPrevious = function() {
             // if we're not on first page then
             if ($scope.pageNumber > 1) {

@@ -11,6 +11,8 @@
                 <li class="has-error" data-ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.point7.$invalid && addTransportForm.point7.$touched" class="help-block">Koniec trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.description.$invalid && addTransportForm.description.$touched" class="help-block">Opis jest wymagany</li>
+                <li class="has-error" data-ng-show="addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched" class="help-block">Cena minimalna jest wymagana</li>
+                <li class="has-error" data-ng-show="addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched" class="help-block">Cena maksymalna jest wymagana</li>
             </ul>
             <form class="ui form" name="addTransportForm" data-ng-submit="addTransport()" novalidate>
                 <div class="field" data-ng-class="{'error' : addTransportForm.title.$invalid && addTransportForm.title.$touched }">
@@ -19,12 +21,19 @@
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.date.$invalid && addTransportForm.date.$touched }">
                     <label><i class="Calendar icon"></i>Data wyjazdu</label>
-                    <input data-ng-model="transport.departureDate" type="date" name="date" required>
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <input data-ng-model="transport.departureDate" type="date" name="date" required>
+                        </div>
+                        <div class="four wide column">
+                            <input data-ng-model="transport.departureTime" type="time" name="time" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label><i class="Flag Outline icon"></i>Wyruszam z</label>
-                     <select class="dropdown-bottom-margin" id="point0Dropdown" name="point0" data-ng-model="routes.point0" data-ng-options="point0City.name for point0City in cities" required>
-                     </select>
+                    <select class="dropdown-bottom-margin" id="point0Dropdown" name="point0" data-ng-model="routes.point0" data-ng-options="point0City.name for point0City in cities" required>
+                    </select>
                 </div>
                 <div class="field">
                     <label><i class="Ellipsis Vertical icon"></i>Jadę przez</label>
@@ -56,18 +65,53 @@
                     <label><i class="Newspaper icon"></i>Treść ogłoszenia</label>
                     <textarea data-ng-model="transport.description" type="description" name="description" placeholder="Treść ogłoszenia" maxlength="500" required></textarea>
                 </div>
+                <label><i class="Dollar icon"></i>Cena przewozu paczek</label>
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <div class="ui grid">
+                            <div class="one wide column">
+                                <label>Od: </label>
+                            </div>
+                            <div class="nine wide column">
+                                <div class="field" data-ng-class="{'error' : addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched }">
+                                    <input data-ng-model="transport.pricemin" type="number" name="pricemin" placeholder="0.00" required>
+                                </div>
+                            </div>
+                            <div class="one wide column">
+                                <p>PLN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eight wide column">
+                        <div class="ui grid">
+                            <div class="one wide column">
+                                <label>Do: </label>
+                            </div>
+                            <div class="nine wide column">
+                                <div class="field" data-ng-class="{'error' : addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched }">
+                                    <input data-ng-model="transport.pricemax" type="number" name="pricemax" placeholder="9999.99" required>
+                                </div>
+                            </div>
+                            <div class="one wide column">
+                                <p>PLN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="grouped fields">
                     <label><i class="Suitcase icon"></i>Paczki jakie mogę zabrać</label>
                     <div class="field">
-                        <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" data-ng-repeat="preference in preferences">
+                        <div style="display: block; margin-bottom: 5px " class="ui slider checkbox" data-ng-repeat="preference in preferences">
                             <input
                                     type="checkbox"
                                     name="selectedPreferences[]"
                                     value="{{preference.id}}"
                                     data-ng-checked="selection.indexOf(preference) > -1"
-                                    data-ng-click="toggleSelection(preference)"
-                            >
-                            <label>{{preference.name}}</label>
+                                    data-ng-click="toggleSelection(preference)">
+                            <label>
+                                {{preference.name}}
+                                <i class="Large Help Circle Grey icon"></i>
+                            </label>
                         </div>
                     </div>
                 </div>

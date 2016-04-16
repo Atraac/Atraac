@@ -4,14 +4,30 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
 
         // fill dropdowns with cities
         Cities.getCities().then(function (response) {
-            $scope.cities = response.data.cities;
+            if(response.status == 200) {
+                $scope.cities = response.data.cities;
+            }
+            else {
+                alert("Wystąpił problem połączenia z serwerem")
+            }
         });
 
 
         // checkbox control
         Preferences.getPreferences().then(function (response) {
-            $scope.preferences = response.data.preferences;
+            if (response.status == 200) {
+                $scope.preferences = response.data.preferences;
+            }
+            else {
+                alert("Wystąpił problem połączenia z serwerem")
+            }
         });
+
+        $('.Help.Circle')
+            .popup({
+                on: 'click'
+            })
+        ;
 
         // selected preferences
         $scope.selection = [];
