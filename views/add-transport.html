@@ -6,6 +6,7 @@
                 Dodaj nowy przejazd
             </h4>
             <ul>
+                <li class="has-error" data-ng-show="dontUseTimeRangePicker" class="help-block">Użyj widżetu i zaakceptuj datę przyciskiem akceptuj, w razie kłopotów z widźetem załaduj ponownie stronę</li>
                 <li class="has-error" data-ng-show="addTransportForm.title.$invalid && addTransportForm.title.$touched" class="help-block">Tytuł jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.date.$invalid && addTransportForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
                 <li class="has-error" data-ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
@@ -19,10 +20,9 @@
                     <label><i class="Edit icon"></i>Tytuł ogłoszenia</label>
                     <input data-ng-model="transport.title" type="text" name="title" placeholder="Tytuł ogłoszenia" maxlength="100" required>
                 </div>
-                <div class="field" data-ng-class="{'error' : addTransportForm.date.$invalid && addTransportForm.date.$touched }">
+                <div class="field" data-ng-class="{'error' : addTransportForm.departureDate.$invalid && addTransportForm.departureDate.$touched }">
                     <label><i class="Calendar icon"></i>Data wyjazdu</label>
-                    <input type="text" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" data-ng-model="transport.departureTime" required>
-
+                    <input type="text" data-ng-model="transport.departureDate" name="departureDate" id="departureDate" value="04/18/2016" required/>
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label><i class="Flag Outline icon"></i>Wyruszam z</label>
@@ -117,3 +117,16 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#departureDate').daterangepicker({
+            singleDatePicker: true,
+            timePicker: true,
+            timePickerIncrement: 15,
+            timePicker12Hour: false,
+            format: 'MM-DD-YYYY h:mm A'
+        }, function(start, end, label) {
+            console.log(start.toISOString());
+        });
+    });
+</script>

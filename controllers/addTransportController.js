@@ -30,8 +30,9 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             })
         ;
 
-        $('input[name="daterange"]').daterangepicker();
-
+        $('#departureDate').on('apply.daterangepicker', function(ev, picker) {
+           $scope.timeRangePickerDeparturDate=picker.startDate.toISOString();
+        });
         // selected preferences
         $scope.selection = [];
 
@@ -74,15 +75,22 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         $scope.parseRoutes = function(){
             return $scope.parsedRoutes = [$scope.routes.point0, $scope.routes.point1, $scope.routes.point2, $scope.routes.point3, $scope.routes.point4, $scope.routes.point5, $scope.routes.point6, $scope.routes.point7];
         };
-
+        $scope.dontUseTimeRangePicker = false;
         // add transport submit function
         $scope.addTransport = function() {
-            $scope.transport.userId = $rootScope.loggedUser.id;
-            $scope.transport.preferences = $scope.selection;
-            $scope.transport.cities = $scope.parseRoutes();
-            Transport.addTransport($scope.transport).then(function(response) {
-                $scope.message = response.data;
-                console.log($scope.message);
-            });
+            if(angular.isUndefined($scope.timeRangePickerDeparturDate)){
+                $scope.dontUseTimeRangePicker = true;
+            }
+            else {
+                $scope.transport.departureDate = $scope.timeRangePickerDeparturDate;
+                $scope.transport.userId = $rootScope.loggedUser.id;
+                $scope.transport.preferences = $scope.selection;
+                $scope.transport.cities = $scope.parseRoutes();
+
+                Transport.addTransport($scope.transport).then(function(response) {
+                    $scope.message = response.data;
+                    console.log($scope.message);
+                });
+            }
         }
     }]);
