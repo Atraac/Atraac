@@ -11,6 +11,7 @@
                     <li class="has-error" data-ng-show="registerForm.email.$invalid && registerForm.email.$touched" class="help-block">Email jest wymagany</li>
                     <li class="has-error" data-ng-show="registerForm.password.$invalid && registerForm.password.$touched" class="help-block">Hasło jest wymagane</li>
                     <li class="has-error" data-ng-show="registerForm.password.$touched && registerForm.passwordAgain.$touched && user.password != passwordAgain" class="help-block">Hasło oraz jego potwierdzenie się różnią</li>
+                    <li class="has-warning" data-ng-show="isCapsLockOn" class="help-block">Uwaga! Caps Lock jest włączony!</li>
                 </ul>
                 <div class="field" data-ng-class="{'error' : registerForm.email.$invalid && registerForm.email.$touched }">
                     <label>Email</label>

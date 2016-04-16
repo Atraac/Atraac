@@ -1,4 +1,4 @@
-var registerController = angular.module('registerController', ['accountFactory']);
+var registerController = angular.module('registerController', ['accountFactory', 'ngCapsLock']);
 registerController.controller('RegisterController', ['$scope', 'Account', '$http',
     function ($scope, Account, $http) {
         $scope.user = {};
