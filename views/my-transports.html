@@ -23,7 +23,7 @@
             <tbody>
             <tr data-ng-repeat="transport in transports.transports">
                 <td>
-                    <h4><a class="transport-title" href="#/transports/{{transport.id}}" type="button">{{transport.title}}</a></h4>
+                    <h4><a class="accent-color-link" href="#/transports/{{transport.id}}" type="button">{{transport.title}}</a></h4>
                 </td>
                 <td>
                     Z: {{transport.cities[0].city.name}}  Do: {{transport.cities[transport.cities.length - 1].city.name}}

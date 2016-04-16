@@ -88,22 +88,48 @@
                     Akcje/Stan
                 </h4>
                 <div data-ng-if="userIsDriver">
-                    <div class="ui segment" data-ng-repeat="reservation in transport.reservations">
-                        <h4><a href="#/profile/{{reservation.sender.id}}" style="display: inline-block;">
-                            {{reservation.sender.name}} {{reservation.sender.surname}}
-                        </a></h4>
-                        <span>Paczki:</span>
-                        <span data-ng-repeat="preference in reservation.preferences">
-                            {{preference.name}}
-                        </span>
-                        <div class="two ui buttons">
-                            <button style="display: inline-block; float: right" class="ui reservation green basic button">
-                                Zaakceptuj
-                            </button>
-                            <button style="display: inline-block; float: right" class="ui reservation red basic button">
-                                Odrzuć
-                            </button>
-                        </div>
+                    <div class="ui grid centered">
+                        <table class="ui very basic collapsing celled table">
+                            <thead>
+                                <tr>
+                                    <th>Imię Nazwisko</th>
+                                    <th>Typy paczek</th>
+                                    <th>Akcje/Stan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="reservation in transport.reservations">
+                                    <td>
+                                        <h4>
+                                            <a class="accent-color-link" href="#/profile/{{reservation.sender.id}}">
+                                                {{reservation.sender.name}} {{reservation.sender.surname}}
+                                            </a>
+                                        </h4>
+                                    </td>
+                                    <td>
+                                        <span data-ng-repeat="preference in reservation.preferences">
+                                            {{preference.name}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
+                                            <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
+                                                Zaakceptuj
+                                            </button>
+                                            <button data-ng-click="rejectReservation(reservation.id)" class="ui reservation red basic button">
+                                                Odrzuć
+                                            </button>
+                                        </div>
+                                        <div data-ng-if="reservation.state==='ACCEPTED'">
+                                            <h4 style="color:green">Zaakceptowana</h4>
+                                        </div>
+                                        <div data-ng-if="reservation.state==='REJECTED'">
+                                            <h4 style="color:red">Odrzucona</h4>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div data-ng-if="!userIsDriver && userReservation!=null">
@@ -125,7 +151,59 @@
         </div>
     </div>
 
-    <div class="ui small modal">
+    <div id="acceptReservationModal" class="ui basic modal">
+        <i data-ng-click="acceptReservationModalCancel()" class="close icon"></i>
+        <div class="header">
+            Potwierdzenie
+        </div>
+        <div class="image content">
+            <i class="Check Circle Outline huge icon"></i>
+            <div class="description white-description">
+                <h4>Czy napewno chcesz potwierdzić tą rezerwację?</h4>
+                <h4>Potem nie będzie odwrotu!</h4>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="two fluid ui inverted buttons">
+                <div data-ng-click="acceptReservationModalOK()" class="ui green basic inverted button">
+                    <i class="checkmark icon"></i>
+                    Tak
+                </div>
+                <div data-ng-click="acceptReservationModalCancel()" class="ui red basic inverted button">
+                    <i class="remove icon"></i>
+                    Nie
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rejectReservationModal" class="ui basic modal">
+        <i data-ng-click="rejectReservationModalCancel()" class="close icon"></i>
+        <div class="header">
+            Potwierdzenie
+        </div>
+        <div class="image content">
+            <i class="Remove Circle Outline huge icon"></i>
+            <div class="description white-description">
+                <h4>Czy napewno chcesz odrzucić tą rezerwację?</h4>
+                <h4>Potem nie będzie odwrotu!</h4>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="two fluid ui inverted buttons">
+                <div data-ng-click="rejectReservationModalOK()" class="ui green basic inverted button">
+                    <i class="checkmark icon"></i>
+                    Tak
+                </div>
+                <div data-ng-click="rejectReservationModalCancel()" class="ui red basic inverted button">
+                    <i class="remove icon"></i>
+                    Nie
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addReservationModal" class="ui small modal">
         <i data-ng-click="closeModal()" class="close icon"></i>
         <div data-ng-if="!correctReservation && error" class="header">
             Nie udało się! Jakiś błąd serwera :(

@@ -37,7 +37,7 @@
     color: #9f3a38 !important;
 }
 
-a.transport-title, span.orderBy, span.sortorder{
+a.accent-color-link, span.orderBy, span.sortorder{
     color: #FF6F00;
 }
 
@@ -47,5 +47,9 @@ a.transport-title:hover, span.orderBy:hover{
 
 .description{
     color: black;
+}
+
+.white-description{
+    color: white;
 }
 

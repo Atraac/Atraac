@@ -11,5 +11,13 @@ reservationFactory.factory('Reservation', ['$http', 'Urls',
             return $http.post(Urls.Base+"reservations", reservation);
         };
 
+        Reservation.acceptReservation = function(reservationId){
+            return $http.put(Urls.Base+"reservations/"+reservationId+"/accepted");
+        }
+
+        Reservation.rejectReservation = function(reservationId){
+            return $http.put(Urls.Base+"reservations/"+reservationId+"/rejected");
+        }
+
         return Reservation;
     }]);

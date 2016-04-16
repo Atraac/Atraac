@@ -4,6 +4,7 @@ var showTransportController = angular.module('showTransportController',
 showTransportController.controller('ShowTransportController', 
     ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation',
     function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation) {
+        'use strict'
         $scope.something = 'ShowTransportController';
         $scope.transport = {};
         $scope.reservation = {};
@@ -12,9 +13,46 @@ showTransportController.controller('ShowTransportController',
         $scope.noPreference = false;
         $scope.error = false;
         $scope.correctReservation = false;
+        $scope.reservationInModal = null;
 
+        $scope.acceptReservation = function(reservationId){
+            $('#acceptReservationModal').modal('show');
+            $scope.reservationInModal = reservationId;
+        };
+        
+        $scope.acceptReservationModalOK = function(){
+             Reservation.acceptReservation($scope.reservationInModal).then(function(response){
+                console.log("acceptReservationSucces:"+response);
+                $scope.acceptReservationModalCancel();
+                getCurrentTransport();
+             }, function(error){
+                console.log("acceptReservationError:"+error);
+             });
+        };
 
+        $scope.acceptReservationModalCancel = function(){
+            $('#acceptReservationModal').modal('hide');
+        };
 
+        $scope.rejectReservation = function(reservationId){
+            $('#rejectReservationModal').modal('show');
+            $scope.reservationInModal = reservationId;
+
+        };
+
+        $scope.rejectReservationModalOK = function(){
+            Reservation.rejectReservation($scope.reservationInModal).then(function(response){
+                console.log("rejectReservationSucces:"+response);
+                $scope.rejectReservationModalCancel();
+                getCurrentTransport();
+            }, function(error){
+                console.log("rejectReservationError:"+error);
+            });
+        };
+
+        $scope.rejectReservationModalCancel = function(){
+            $('#rejectReservationModal').modal('hide');
+        };
 
         $scope.onModalReservation = function(){
             $scope.preferences = $scope.transport.preferences;
@@ -29,11 +67,11 @@ showTransportController.controller('ShowTransportController',
                 }
             };
             $scope.noPreference = false;
-            $('.ui.small.modal').modal('show');
+            $('#addReservationModal').modal('show');
         };
 
         $scope.closeModal = function () {
-            $('.ui.small.modal').modal('hide');
+            $('#addReservationModal').modal('hide');
             $scope.noPreference = false;
         }
 
@@ -43,6 +81,7 @@ showTransportController.controller('ShowTransportController',
                 $scope.reservation.transportId = $scope.transport.id;
                 Reservation.addReservation($scope.reservation).then(function(response){
                     $scope.correctReservation = true;
+                    getCurrentTransport();
                 }, function (error) {
                     $scope.error = true;
                 });
@@ -52,7 +91,8 @@ showTransportController.controller('ShowTransportController',
             }
         };
 
-        Transport.getTransport($routeParams.transportId).then(function (response)
+        var getCurrentTransport = function(){
+            Transport.getTransport($routeParams.transportId).then(function (response)
             {
                 $scope.transport = response.data;
                 $scope.userIsDriver = $rootScope.loggedUser.id === $scope.transport.driver.id;
@@ -75,4 +115,7 @@ showTransportController.controller('ShowTransportController',
                 console.log(error);
                 $scope.error = true;
             });
+        }
+
+        getCurrentTransport();
     }]);
