@@ -37,6 +37,10 @@
     color: #9f3a38 !important;
 }
 
+.has-warning{
+    color: #FF6F00 !important;
+}
+
 a.accent-color-link, span.orderBy, span.sortorder{
     color: #FF6F00;
 }
