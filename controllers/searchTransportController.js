@@ -79,7 +79,7 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
         // search submit function
         $scope.onSearch = function() {
             $scope.searchTransport.preferences = $scope.selection;  // add preferences
-            $scope.searchTransport.departureDate = new Date($scope.departureDate);
+            $scope.searchTransport.date = new Date($scope.departureDate);
             $scope.searchTransport.offset = 0;  // get first set of results
             $scope.searchTransport.limit = $scope.resultsPerPage;  // number of results per page
             $scope.searchTransport.transportsSearchOrder = $scope.sortBy.value;

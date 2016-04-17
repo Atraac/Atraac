@@ -33,7 +33,7 @@
         // Finally, as a browser global.
     } else {
         root.daterangepicker = factory(root, {}, root.moment, (root.jQuery || root.Zepto ||
-            root.ender || root.$));
+        root.ender || root.$));
     }
 
 }(this, function (root, daterangepicker, moment, $) {
@@ -75,7 +75,7 @@
         }
 
         this.parentEl = (typeof options === 'object' && options.parentEl &&
-            $(options.parentEl).length) ? $(options.parentEl) : $(this.parentEl);
+        $(options.parentEl).length) ? $(options.parentEl) : $(this.parentEl);
         this.container = $(DRPTemplate).appendTo(this.parentEl);
 
         this.setOptions(options, cb);
@@ -107,13 +107,13 @@
                 this))
             .on('click.daterangepicker',
                 '.daterangepicker_start_input,.daterangepicker_end_input', $
-                .proxy(this.showCalendars, this))
+                    .proxy(this.showCalendars, this))
             .on('change.daterangepicker',
                 '.daterangepicker_start_input,.daterangepicker_end_input', $
-                .proxy(this.inputsChanged, this))
+                    .proxy(this.inputsChanged, this))
             .on('keydown.daterangepicker',
                 '.daterangepicker_start_input,.daterangepicker_end_input', $
-                .proxy(this.inputsKeydown, this))
+                    .proxy(this.inputsKeydown, this))
             .on('click.daterangepicker', 'li', $.proxy(this.clickRange, this))
             .on('mouseenter.daterangepicker', 'li', $.proxy(this.enterRange,
                 this))
@@ -342,7 +342,7 @@
 
             //if no start/end dates set, check if an input element contains initial values
             if(typeof options.startDate === 'undefined' && typeof options
-                .endDate === 'undefined') {
+                    .endDate === 'undefined') {
                 if($(this.element).is('input[type=text]')) {
                     var val = $(this.element).val(),
                         split = val.split(this.separator);
@@ -369,9 +369,9 @@
             if(typeof options.timeZone === 'string' || typeof options.timeZone ===
                 'number') {
                 if(typeof options.timeZone === 'string' && typeof moment
-                    .tz !== 'undefined') {
+                        .tz !== 'undefined') {
                     this.timeZone = moment.tz.zone(options.timeZone).parse(
-                        new Date()) * -1; // Offset is positive if the timezone is behind UTC and negative if it is ahead.
+                            new Date()) * -1; // Offset is positive if the timezone is behind UTC and negative if it is ahead.
                 } else {
                     this.timeZone = options.timeZone;
                 }
@@ -411,7 +411,7 @@
                     // the start of the range is after the max (also if set) don't display this
                     // range option.
                     if((this.minDate && end.isBefore(this.minDate)) || (
-                            this.maxDate && start.isAfter(this.maxDate))) {
+                        this.maxDate && start.isAfter(this.maxDate))) {
                         continue;
                     }
 
@@ -624,7 +624,7 @@
             this.endDate = end;
 
             if(!this.startDate.isSame(this.oldStartDate) || !this.endDate
-                .isSame(this.oldEndDate)) {
+                    .isSame(this.oldEndDate)) {
                 this.notify();
             }
 
@@ -657,7 +657,7 @@
                         .scrollLeft()
                 };
                 parentRightEdge = this.parentEl[0].clientWidth + this.parentEl
-                    .offset().left;
+                        .offset().left;
             }
 
             if(this.drops === 'up') {
@@ -691,8 +691,8 @@
                 this.container.css({
                     top: containerTop,
                     left: this.element.offset().left -
-                        parentOffset.left + this.element.outerWidth() /
-                        2 - this.container.outerWidth() / 2,
+                    parentOffset.left + this.element.outerWidth() /
+                    2 - this.container.outerWidth() / 2,
                     right: 'auto'
                 });
                 if(this.container.offset().left < 0) {
@@ -705,7 +705,7 @@
                 this.container.css({
                     top: containerTop,
                     left: this.element.offset().left -
-                        parentOffset.left,
+                    parentOffset.left,
                     right: 'auto'
                 });
                 if(this.container.offset().left + this.container.outerWidth() >
@@ -758,10 +758,10 @@
             // itself then call this.hide()
             if(
                 // ie modal dialog fix
-                e.type === 'focusin' ||
-                target.closest(this.element).length ||
-                target.closest(this.container).length ||
-                target.closest('.calendar-date').length
+            e.type === 'focusin' ||
+            target.closest(this.element).length ||
+            target.closest(this.container).length ||
+            target.closest('.calendar-date').length
             ) { return; }
             this.hide();
         },
@@ -776,7 +776,7 @@
             this.container.hide();
 
             if(!this.startDate.isSame(this.oldStartDate)
-               || !this.endDate.isSame(this.oldEndDate)) {
+                || !this.endDate.isSame(this.oldEndDate)) {
                 this.notify();
             }
 
@@ -867,7 +867,7 @@
                 }
 
                 this.leftCalendar.month.month(this.startDate.month()).year(
-                        this.startDate.year()).hour(this.startDate.hour())
+                    this.startDate.year()).hour(this.startDate.hour())
                     .minute(this.startDate.minute());
                 this.rightCalendar.month.month(this.endDate.month()).year(
                     this.endDate.year()).hour(this.endDate.hour()).minute(
@@ -1003,7 +1003,7 @@
 
         updateMonthYear: function (e) {
             var isLeft = $(e.target).closest('.calendar').hasClass(
-                    'left'),
+                'left'),
                 leftOrRight = isLeft ? 'left' : 'right',
                 cal = this.container.find('.calendar.' + leftOrRight);
 
@@ -1021,7 +1021,7 @@
 
             if(this.minDate) {
                 if(year < this.minDate.year() || (year === this.minDate.year() &&
-                        month < this.minDate.month())) {
+                    month < this.minDate.month())) {
                     month = this.minDate.month();
                     year = this.minDate.year();
                 }
@@ -1029,7 +1029,7 @@
 
             if(this.maxDate) {
                 if(year > this.maxDate.year() || (year === this.maxDate.year() &&
-                        month > this.maxDate.month())) {
+                    month > this.maxDate.month())) {
                     month = this.maxDate.month();
                     year = this.maxDate.year();
                 }
@@ -1098,14 +1098,14 @@
             this.rightCalendar.calendar = this.buildCalendar(this.rightCalendar
                 .month.month(), this.rightCalendar.month.year(),
                 this.rightCalendar.month.hour(), this.rightCalendar.month
-                .minute(), this.rightCalendar.month.second(),
+                    .minute(), this.rightCalendar.month.second(),
                 'right');
             this.container.find('.calendar.left').empty().html(this.renderCalendar(
                 this.leftCalendar.calendar, this.startDate, this
-                .minDate, this.maxDate, 'left'));
+                    .minDate, this.maxDate, 'left'));
             this.container.find('.calendar.right').empty().html(this.renderCalendar(
                 this.rightCalendar.calendar, this.endDate, this.singleDatePicker ?
-                this.minDate : this.startDate, this.maxDate,
+                    this.minDate : this.startDate, this.maxDate,
                 'right'));
 
             this.container.find('.ranges li').removeClass('active');
@@ -1124,7 +1124,7 @@
                     //ignore times when comparing dates if time picker is not enabled
                     if(this.startDate.format('YYYY-MM-DD') === this.ranges[
                             range][0].format('YYYY-MM-DD') && this.endDate
-                        .format('YYYY-MM-DD') === this.ranges[range][1].format(
+                            .format('YYYY-MM-DD') === this.ranges[range][1].format(
                             'YYYY-MM-DD')) {
                         customRange = false;
                         this.chosenLabel = this.container.find(
@@ -1221,7 +1221,7 @@
 
             for(var m = 0; m < 12; m++) {
                 if((!inMinYear || m >= minDate.month()) && (!inMaxYear ||
-                        m <= maxDate.month())) {
+                    m <= maxDate.month())) {
                     monthHtml += '<option value="' + m + '"' +
                         (m === currentMonth ? ' selected="selected"' :
                             '') +
@@ -1285,7 +1285,7 @@
             // add week number label
             if(this.showWeekNumbers) {
                 html += '<th class="week">' + this.locale.weekLabel +
-                '</th>';
+                    '</th>';
             }
 
             $.each(this.locale.daysOfWeek, function (index, dayOfWeek) {
@@ -1302,14 +1302,14 @@
                 // add week number
                 if(this.showWeekNumbers) {
                     html += '<td class="week">' + calendar[row][0].week() +
-                    '</td>';
+                        '</td>';
                 }
 
                 for(var col = 0; col < 7; col++) {
                     var cname = 'available ';
                     cname += (calendar[row][col].month() === calendar[1][
                         1
-                    ].month()) ? '' : 'off';
+                        ].month()) ? '' : 'off';
 
                     if((minDate && calendar[row][col].isBefore(minDate,
                             'day')) || (maxDate && calendar[row][col].isAfter(
