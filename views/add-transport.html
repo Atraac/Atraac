@@ -24,7 +24,7 @@
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.departureDate.$invalid && addTransportForm.departureDate.$touched }">
                     <label><i class="Calendar icon"></i>Data wyjazdu</label>
-                    <input type="text" data-ng-model="transport.departureDate" name="departureDate" id="departureDate" required>
+                    <input type="text" data-ng-model="departureDate" name="departureDate" id="departureDate" required>
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label><i class="Flag Outline icon"></i>Wyruszam z</label>
@@ -101,17 +101,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#departureDate').daterangepicker({
-            singleDatePicker: true,
-            timePicker: true,
-            timePickerIncrement: 15,
-            timePicker12Hour: false,
-            zone: 1,
-            format: 'MM-DD-YYYY h:mm A'
-        }, function(start, end, label) {
-            console.log(start.toISOString());
-        });
-    });
-</script>

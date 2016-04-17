@@ -84,7 +84,7 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
             $scope.searchTransport.limit = $scope.resultsPerPage;  // number of results per page
             $scope.searchTransport.transportsSearchOrder = $scope.sortBy.value;
             $scope.pageNumber = 1;  // reset page number for new search
-
+            alert($scope.searchTransport.date + "    " + new Date($scope.departureDate) + "     " +$scope.departureDate);
             Transport.getTransports($scope.searchTransport).then(function(response){
                 if (response.status == 200) {
                     // set table content to received data
