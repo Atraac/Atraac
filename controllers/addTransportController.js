@@ -38,6 +38,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
                 timePickerIncrement : 15,
                 timePicker12Hour : false,
                 showDropdowns : true,
+                format : "MM-DD-YYYY HH:MM",
                 locale: {
                     applyLabel: 'Wybierz',
                     cancelLabel: 'Wyczyść',
@@ -111,14 +112,14 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         // add transport submit function
         $scope.addTransport = function() {
             console.log($scope.selection.length);
-            if(angular.isUndefined($scope.transport.departureDate)){
+            if(angular.isUndefined($scope.departureDate)){
                 $scope.dontUseTimeRangePicker = true;
             }
             else if (!$scope.preferencesSelected) {
                 $scope.choosePreference = true;
             }
             else {
-                $scope.transport.departureDate = new Date($scope.transport.departureDate);
+                $scope.transport.departureDate = new Date($scope.departureDate);
                 $scope.transport.userId = $rootScope.loggedUser.id;
                 $scope.transport.preferences = $scope.selection;
                 $scope.transport.cities = $scope.parseRoutes();

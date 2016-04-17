@@ -17,6 +17,7 @@ registerController.controller('RegisterController', ['$scope', '$rootScope', 'Ac
             {
                 singleDatePicker : true,
                 showDropdowns : true,
+                format : "MM-DD-YYYY",
                 locale: {
                     applyLabel: 'Wybierz',
                     cancelLabel: 'Wyczyść',
