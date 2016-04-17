@@ -15,42 +15,41 @@
                     <div class="five wide column">
                     </div>
                     <div class="four wide column">
-
-                            <div class="field" data-ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
-                                <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
-                                <select id="sourceCity" name="sourceCity" data-ng-model="searchTransport.sourceCity" data-ng-options="sourceCity.name for sourceCity in cities" required>
-                                </select>
-                            </div>
-                            <div class="field" data-ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
-                                <label><i class="Flag icon"></i>Miasto docelowe</label>
-                                <select id="destinationCity" name="destinationCity" data-ng-model="searchTransport.destinationCity" data-ng-options="sourceCity.name for sourceCity in cities" required>
-                                </select>
-                            </div>
-                            <div class="field" data-ng-class="{'error' : searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched }">
-                                <label><i class="Calendar icon"></i>Data nadania paczki</label>
-                                <input data-ng-model="searchTransport.date" type="date" name="departureDate" id="departureDate" required>
-                            </div>
+                        <div class="field" data-ng-class="{'error' : searchTransportsForm.sourceCity.$invalid && searchTransportsForm.sourceCity.$touched }">
+                            <label><i class="Flag Outline icon"></i>Miasto początkowe</label>
+                            <select id="sourceCity" name="sourceCity" data-ng-model="searchTransport.sourceCity" data-ng-options="sourceCity.name for sourceCity in cities" required>
+                            </select>
+                        </div>
+                        <div class="field" data-ng-class="{'error' : searchTransportsForm.destinationCity.$invalid && searchTransportsForm.destinationCity.$touched }">
+                            <label><i class="Flag icon"></i>Miasto docelowe</label>
+                            <select id="destinationCity" name="destinationCity" data-ng-model="searchTransport.destinationCity" data-ng-options="sourceCity.name for sourceCity in cities" required>
+                            </select>
+                        </div>
+                        <div class="field" data-ng-class="{'error' : searchTransportsForm.departureDate.$invalid && searchTransportsForm.departureDate.$touched }">
+                            <label><i class="Calendar icon"></i>Data nadania paczki</label>
+                            <input data-ng-model="departureDate" id="departureDate" type="text" name="departureDate" required>
+                        </div>
 
                     </div>
                     <div class="three wide column">
-                            <div class="grouped fields">
-                                <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
-                                <div class="field">
-                                    <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" data-ng-repeat="preference in preferences">
-                                        <input
-                                                type="checkbox"
-                                                name="selectedPreferences[]"
-                                                value="{{preference.id}}"
-                                                data-ng-checked="selection.indexOf(preference) > -1"
-                                                data-ng-click="toggleSelection(preference)"
-                                        >
-                                        <label>{{preference.name}}</label>
-                                    </div>
+                        <div class="grouped fields">
+                            <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
+                            <div class="field">
+                                <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" data-ng-repeat="preference in preferences">
+                                    <input
+                                            type="checkbox"
+                                            name="selectedPreferences[]"
+                                            value="{{preference.id}}"
+                                            data-ng-checked="selection.indexOf(preference) > -1"
+                                            data-ng-click="toggleSelection(preference)"
+                                    >
+                                    <label>{{preference.name}}</label>
                                 </div>
                             </div>
-                            <div class="field">
-                                <button data-ng-disabled="searchTransportsForm.$invalid" class="ui left floated large accent-color button" type="submit">Wyszukaj</button>
-                            </div>
+                        </div>
+                        <div class="field">
+                            <button data-ng-disabled="searchTransportsForm.$invalid" class="ui left floated large accent-color button" type="submit">Wyszukaj</button>
+                        </div>
                     </div>
                     <div class="four wide column">
                     </div>
@@ -76,10 +75,12 @@
             <div class="field">
                 <label> Sortuj wg: </label>
                 <select name="sortBy" id="sortBy">
-                    <option value="bydateasc">Daty - rosnąco</option>
-                    <option value="bydatedesc">Daty - malejąco</option>
-                    <option value="byratingasc">Oceny - rosnąco</option>
-                    <option value="byratingdesc">Oceny - malejąco</option>
+                    <option value="BYDATEASC">Daty - rosnąco</option>
+                    <option value="BYDATEDESC">Daty - malejąco</option>
+                    <option value="BYDRIVERRATINGASC">Oceny - rosnąco</option>
+                    <option value="BYDRIVERRATINGDESC">Oceny - malejąco</option>
+                    <option value="BYPRICEASC">Ceny - rosnąco</option>
+                    <option value="BYPRICEDESC">Ceny - malejąco</option>
                 </select>
             </div>
         </div>

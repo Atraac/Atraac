@@ -8,12 +8,14 @@
             <ul>
                 <li class="has-error" data-ng-show="dontUseTimeRangePicker" class="help-block">Użyj widżetu i zaakceptuj datę przyciskiem akceptuj, w razie kłopotów z widźetem załaduj ponownie stronę</li>
                 <li class="has-error" data-ng-show="addTransportForm.title.$invalid && addTransportForm.title.$touched" class="help-block">Tytuł jest wymagany</li>
-                <li class="has-error" data-ng-show="addTransportForm.date.$invalid && addTransportForm.date.$touched" class="help-block">Data wyjazdu jest wymagana</li>
+                <li class="has-error" data-ng-show="addTransportForm.departureDate.$invalid && addTransportForm.departureDate.$dirty" class="help-block">Data wyjazdu jest wymagana</li>
+                <li class="has-error" data-ng-show="isDateValid()" class="help-block">Data wyjazdu jest niepoprawna!</li>
                 <li class="has-error" data-ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.point7.$invalid && addTransportForm.point7.$touched" class="help-block">Koniec trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.description.$invalid && addTransportForm.description.$touched" class="help-block">Opis jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched" class="help-block">Cena minimalna jest wymagana</li>
                 <li class="has-error" data-ng-show="addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched" class="help-block">Cena maksymalna jest wymagana</li>
+                <li class="has-error" data-ng-show="choosePreference" class="help-block">Należy wybrać co najmniej jeden rodzaj transportowanych paczek</li>
             </ul>
             <form class="ui form" name="addTransportForm" data-ng-submit="addTransport()" novalidate>
                 <div class="field" data-ng-class="{'error' : addTransportForm.title.$invalid && addTransportForm.title.$touched }">
@@ -22,7 +24,7 @@
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.departureDate.$invalid && addTransportForm.departureDate.$touched }">
                     <label><i class="Calendar icon"></i>Data wyjazdu</label>
-                    <input type="text" data-ng-model="transport.departureDate" name="departureDate" id="departureDate" required/>
+                    <input type="text" data-ng-model="transport.departureDate" name="departureDate" id="departureDate" required>
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label><i class="Flag Outline icon"></i>Wyruszam z</label>

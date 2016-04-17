@@ -37,10 +37,11 @@
                     Dane użytkownika
                 </h4>
                 <ul>
-                    <li class="has-error" data-ng-show="!hasSex" class="help-block">Płeć jest wymagana</li>
+                    <li class="has-error" data-ng-show="!hasSex && !yanek" class="help-block">Płeć jest wymagana</li>
                     <li class="has-error" data-ng-show="registerForm.name.$invalid && registerForm.name.$touched" class="help-block">Imię jest wymagane</li>
                     <li class="has-error" data-ng-show="registerForm.surname.$invalid && registerForm.surname.$touched" class="help-block">Nazwisko jest wymagane</li>
-                    <li class="has-error" data-ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched" class="help-block">Data urodzenia jest wymagana</li>
+                    <li class="has-error" data-ng-show="registerForm.birthDate.$invalid && registerForm.birthDate.$touched && yanek" class="help-block">Data urodzenia jest wymagana</li>
+                    <li class="has-error" data-ng-show="isDateValid()" class="help-block">Data urodzenia jest niepoprawna!</li>
                 </ul>
                  <div class="field" data-ng-class="{'error' : registerForm.name.$invalid && registerForm.name.$touched }">
                      <label>Imię</label>
@@ -54,15 +55,15 @@
                      <label>Telefon</label>
                      <input data-ng-model="user.phoneNumber" type="text" name="phoneNumber" placeholder="Telefon">
                  </div>
-                 <div class="field" data-ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }">
+                 <div class="field" data-ng-class="{'error' : registerForm.birthDate.$invalid && registerForm.birthDate.$touched }" ng-show="yanek">
                      <label>Data urodzenia</label>
-                     <input data-ng-model="user.birthDate" type="date" name="birthDate" value="{{user.birthDate}}" required>
+                     <input data-ng-model="user.birthDate" id="birthDate" type="text" name="birthDate" required>
                  </div>
                  <div class="field" data-ng-class="{'error' : registerForm.car.$invalid && registerForm.car.$touched }">
                      <label>Auto</label>
                      <input data-ng-model="user.car" type="text" name="car" placeholder="Auto">
                  </div>
-                <div class="field">
+                <div class="field" ng-show="yanek">
                     <label>Płeć:</label>
                     <select class="ui dropdown" data-ng-model="user.sex">
                         <option value=""></option>

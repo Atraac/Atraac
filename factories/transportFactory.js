@@ -3,8 +3,8 @@ transportFactory.factory('Transport', ['$http', 'Urls',
     function ($http, Urls){
         var Transport = {};
 
-        Transport.getTransports = function(searchTransport, sortby) {
-            return $http.post(Urls.Base+'transports/bydate', searchTransport);  // defaulted to /bydate for now
+        Transport.getTransports = function(searchTransport) {
+            return $http.post(Urls.Base+'transports/filtered', searchTransport);
         };
         Transport.addTransport = function(transport) {
             return $http.post(Urls.Base+'transports', transport);

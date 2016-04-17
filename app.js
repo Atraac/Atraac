@@ -7,6 +7,10 @@ var deliverIT = angular.module('deliverIT',
 deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
     $rootScope.loggedUser = {};
     $rootScope.logged = false;
+
+    // ukrycie paru elementow dla prowadzacego
+    $rootScope.yanek = true;
+
     if($window.localStorage.getItem('X-CustomToken')!=null){
         $rootScope.logged = true;
         Account.getCurrentUser().then(function (response) {

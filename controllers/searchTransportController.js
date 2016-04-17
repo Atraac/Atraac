@@ -12,8 +12,7 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
                 alert("Wystąpił problem połączenia z serwerem")
             }
         });
-
-
+        
         // checkbox control
         // fill checkboxees with preferences
         Preferences.getPreferences().then(function (response) {
@@ -42,6 +41,23 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
             }
         };
 
+        $('#departureDate').on('apply.daterangepicker', function(ev, picker) {
+        }).daterangepicker(
+            {
+                singleDatePicker : true,
+                showDropdowns : true,
+                locale: {
+                    applyLabel: 'Wybierz',
+                    cancelLabel: 'Wyczyść',
+                    fromLabel: 'Od',
+                    toLabel: 'Do',
+                    daysOfWeek: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
+                    monthNames: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+                    firstDay: 1
+                }
+            }
+        );
+
         // init of searchTransport - object used to find transports like this one
         $scope.searchTransport = {
             userId : $rootScope.loggedUser.id,
@@ -50,24 +66,26 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
 
 
         $scope.searchResults = false; // ng-show var to control search results table
-        $scope.searchNotFound = false; // ng-show var to show 404 error when no search results were found
+        $scope.searchNotFound = false; // ng-show var to show error when no search results were found
 
         $scope.quantityTransports = 0;   // # of results for a search in DB to print
 
         $scope.resultsPerPage = 5; // maybe option to change in the future
 
         $scope.sortBy = document.getElementById('sortBy');  // get sorting dropdown
-        $scope.sortBy.value = "bydateasc";  // set default sorting to date - ascending
-        $scope.sortBy.onchange = function() {$scope.onSearch()};
+        $scope.sortBy.value = "BYDATEASC";  // set default sorting to date - ascending
+        $scope.sortBy.onchange = function() {$scope.onSearch()};    //refresh results when changed sorting
 
         // search submit function
         $scope.onSearch = function() {
             $scope.searchTransport.preferences = $scope.selection;  // add preferences
+            $scope.searchTransport.departureDate = new Date($scope.departureDate);
             $scope.searchTransport.offset = 0;  // get first set of results
             $scope.searchTransport.limit = $scope.resultsPerPage;  // number of results per page
+            $scope.searchTransport.transportsSearchOrder = $scope.sortBy.value;
             $scope.pageNumber = 1;  // reset page number for new search
 
-            Transport.getTransports($scope.searchTransport, $scope.sortBy.value).then(function(response){
+            Transport.getTransports($scope.searchTransport).then(function(response){
                 if (response.status == 200) {
                     // set table content to received data
                     $scope.transports = response.data.transports;
