@@ -61,7 +61,6 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
 
         // init of searchTransport - object used to find transports like this one
         $scope.searchTransport = {
-            userId : $rootScope.loggedUser.id,
             preferences : $scope.selection
         };
 

@@ -12,8 +12,8 @@
                 <li class="has-error" data-ng-show="addTransportForm.point0.$invalid && addTransportForm.point0.$touched" class="help-block">Początek trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.point7.$invalid && addTransportForm.point7.$touched" class="help-block">Koniec trasy jest wymagany</li>
                 <li class="has-error" data-ng-show="addTransportForm.description.$invalid && addTransportForm.description.$touched" class="help-block">Opis jest wymagany</li>
-                <li class="has-error" data-ng-show="addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched" class="help-block">Cena minimalna jest wymagana</li>
-                <li class="has-error" data-ng-show="addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched" class="help-block">Cena maksymalna jest wymagana</li>
+                <li class="has-error" data-ng-show="addTransportForm.minPrice.$invalid && addTransportForm.minPrice.$touched" class="help-block">Cena minimalna jest wymagana</li>
+                <li class="has-error" data-ng-show="addTransportForm.maxPrice.$invalid && addTransportForm.maxPrice.$touched" class="help-block">Cena maksymalna jest wymagana</li>
                 <li class="has-error" data-ng-show="choosePreference" class="help-block">Należy wybrać co najmniej jeden rodzaj transportowanych paczek</li>
             </ul>
             <form class="ui form" name="addTransportForm" data-ng-submit="addTransport()" novalidate>
@@ -62,14 +62,14 @@
                 </div>
                 <div class="inline fields center aligned">
                     <label><i class="Dollar icon"></i>Cena przewozu paczek</label>
-                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.pricemin.$invalid && addTransportForm.pricemin.$touched }">
-                        <input data-ng-model="transport.pricemin" type="number" name="pricemin" placeholder="0.00" required>
+                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.minPrice.$invalid && addTransportForm.minPrice.$touched }">
+                        <input data-ng-model="transport.minPrice" type="number" name="minPrice" placeholder="0.00" required>
                     </div>
                     <div class="one wide field center aligned">
                         <i class="Minus icon"></i>
                     </div>
-                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.pricemax.$invalid && addTransportForm.pricemax.$touched }">
-                        <input data-ng-model="transport.pricemax" type="number" name="pricemax" placeholder="0.00" required>
+                    <div class="four wide field" data-ng-class="{'error' : addTransportForm.maxPrice.$invalid && addTransportForm.maxPrice.$touched }">
+                        <input data-ng-model="transport.maxPrice" type="number" name="maxPrice" placeholder="0.00" required>
                     </div>
                     <div class="two wide field">
                         <h5>Zł</h5>
