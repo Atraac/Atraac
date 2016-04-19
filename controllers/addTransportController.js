@@ -24,10 +24,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         });
 
         // NIE DZIALA
-        $('.Help.Circle')
-            .popup({
-                on: 'click'
-            });
+        
 
         // datetime picker
         $('#departureDate').on('apply.daterangepicker', function(ev, picker) {

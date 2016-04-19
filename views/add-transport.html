@@ -87,7 +87,12 @@
                                     data-ng-click="toggleSelection(preference)">
                             <label>
                                 {{preference.name}}
-                                <i class="Large Help Circle Grey icon"></i>
+                                <i class="help-popup Large Help Circle Grey icon" data-content="10cm x 10cm x 10 cm"></i>
+                                <script>
+                                    $('.help-popup').popup({
+                                        on: 'hover'
+                                    });
+                                </script>
                             </label>
                         </div>
                     </div>
@@ -99,4 +104,8 @@
 
         </div>
     </div>
+
 </div>
+<script>
+
+</script>
