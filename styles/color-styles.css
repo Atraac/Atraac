@@ -45,7 +45,7 @@ a.accent-color-link, span.orderBy, span.sortorder{
     color: #FF6F00;
 }
 
-a.transport-title:hover, span.orderBy:hover{
+a.accent-color-link:hover, span.orderBy:hover{
     color: #0097A7;
 }
 

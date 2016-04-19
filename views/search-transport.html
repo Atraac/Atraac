@@ -64,24 +64,26 @@
         <div class="ui grid centered" data-ng-show="searchNotFound">
             Nie znaleziono przejazdów dla zadanych parametrów
         </div>
-
         <div class="ui grid centered">
-            <i class="Big Angle Left icon" data-ng-click="searchPrevious()" style="cursor: hand;"></i>
-            <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
-            <i class="Big Angle Right icon" data-ng-click="searchNext()" style="cursor: hand;"></i>
-        </div>
-        <div class="ui grid centered">
-            <h4 class="ui horizontal divider header"></h4>
-            <div class="field">
-                <label> Sortuj wg: </label>
-                <select name="sortBy" id="sortBy">
-                    <option value="BYDATEASC">Daty - rosnąco</option>
-                    <option value="BYDATEDESC">Daty - malejąco</option>
-                    <option value="BYDRIVERRATINGASC">Oceny - rosnąco</option>
-                    <option value="BYDRIVERRATINGDESC">Oceny - malejąco</option>
-                    <option value="BYPRICEASC">Ceny - rosnąco</option>
-                    <option value="BYPRICEDESC">Ceny - malejąco</option>
-                </select>
+            <div class="row">
+                <div class="ui form">
+                    <div class="field">
+                        <label><i class="Sort icon"></i>Sortuj według</label>
+                        <select name="sortBy" id="sortBy">
+                            <option value="BYDATEASC">Daty - rosnąco</option>
+                            <option value="BYDATEDESC">Daty - malejąco</option>
+                            <option value="BYDRIVERRATINGASC">Oceny - rosnąco</option>
+                            <option value="BYDRIVERRATINGDESC">Oceny - malejąco</option>
+                            <option value="BYPRICEASC">Ceny - rosnąco</option>
+                            <option value="BYPRICEDESC">Ceny - malejąco</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <i class="Big Angle Left icon" data-ng-click="searchPrevious()" style="cursor: hand;"></i>
+                <label>  Strona {{pageNumber}} z {{totalPages}}  </label>
+                <i class="Big Angle Right icon" data-ng-click="searchNext()" style="cursor: hand;"></i>
             </div>
         </div>
         <div class="ui grid centered">
@@ -111,7 +113,7 @@
                         <h4 class="ui image header">
                             <i class="user icon"></i>
                             <div class="content">
-                                <a class="transport-title" type="button" href="#/profile/{{transport.driver.id}}">{{transport.driver.name}} {{transport.driver.surname}}</a>
+                                <a class="accent-color-link" type="button" href="#/profile/{{transport.driver.id}}">{{transport.driver.name}} {{transport.driver.surname}}</a>
                                 <p></p><rating id="my-rating{{transport.id}}" size="small" type="star" data-ng-model="transport.driver.rating"></rating></p>
                                 <p><div class="sub header">Ocena: {{transport.driver.rating}}</div></p>
                             </div>
@@ -119,7 +121,7 @@
                         </h4>
                     </td>
                     <td>
-                        <h4><a class="transport-title" href="#/transports/{{transport.id}}" type="button">{{transport.title}}</a></h4>
+                        <h4><a class="accent-color-link" href="#/transports/{{transport.id}}" type="button">{{transport.title}}</a></h4>
                     </td>
                     <td>
                         Z: {{transport.cities[0].city.name}}  Do: {{transport.cities[transport.cities.length - 1].city.name}}
