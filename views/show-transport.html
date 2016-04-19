@@ -94,7 +94,8 @@
                                 <tr>
                                     <th>Imię Nazwisko</th>
                                     <th>Typy paczek</th>
-                                    <th>Akcje/Stan</th>
+                                    <th>Stan</th>
+                                    <th>Akcje</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,6 +113,17 @@
                                         </span>
                                     </td>
                                     <td>
+                                        <div data-ng-if="reservation.state==='ACCEPTED'">
+                                            <i class="Checkmark green large icon"></i>
+                                        </div>
+                                        <div data-ng-if="reservation.state==='REJECTED'">
+                                            <i class="remove red large icon"></i>
+                                        </div>
+                                        <div data-ng-if="reservation.state==='NOTACCEPTED'">
+                                            <i class="Help grey large icon"></i>
+                                        </div>
+                                    </td>
+                                    <td>
                                         <div data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
                                             <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
                                                 Zaakceptuj
@@ -119,12 +131,6 @@
                                             <button data-ng-click="rejectReservation(reservation.id)" class="ui reservation red basic button">
                                                 Odrzuć
                                             </button>
-                                        </div>
-                                        <div data-ng-if="reservation.state==='ACCEPTED'">
-                                            <h4 style="color:green">Zaakceptowana</h4>
-                                        </div>
-                                        <div data-ng-if="reservation.state==='REJECTED'">
-                                            <h4 style="color:red">Odrzucona</h4>
                                         </div>
                                     </td>
                                 </tr>
