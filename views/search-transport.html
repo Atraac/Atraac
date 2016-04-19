@@ -138,7 +138,10 @@
                             <div class="content">
                                 <a class="accent-color-link" type="button" href="#/profile/{{transport.driver.id}}">{{transport.driver.name}} {{transport.driver.surname}}</a>
                                 <p></p><rating id="my-rating{{transport.id}}" size="small" type="star" data-ng-model="transport.driver.rating"></rating></p>
-                                <p><div class="sub header">Ocena: {{transport.driver.rating}}</div></p>
+                                <p>
+                                    <div data-ng-show="(transport.driver.rating <= 0)" class="sub header">Ocena: Brak ocen</div>
+                                    <div data-ng-show="(transport.driver.rating > 0)" class="sub header">Ocena: {{transport.driver.rating}}</div>
+                                </p>
                             </div>
 
                         </h4>
