@@ -38,7 +38,7 @@
                     Termin wyjazdu
                 </h4>
                 <h4>
-                    {{transport.departureDate | date:'short'}}
+                    {{transport.departureDate | date:'yyyy-MM-dd HH:mm'}}
                 </h4>
             </div>
         </div>
@@ -100,19 +100,19 @@
                             </thead>
                             <tbody>
                                 <tr data-ng-repeat="reservation in transport.reservations">
-                                    <td>
+                                    <td class="center aligned">
                                         <h4>
                                             <a class="accent-color-link" href="#/profile/{{reservation.sender.id}}">
                                                 {{reservation.sender.name}} {{reservation.sender.surname}}
                                             </a>
                                         </h4>
                                     </td>
-                                    <td>
+                                    <td class="center aligned">
                                         <span data-ng-repeat="preference in reservation.preferences">
                                             {{preference.name}}
                                         </span>
                                     </td>
-                                    <td>
+                                    <td class="center aligned">
                                         <div data-ng-if="reservation.state==='ACCEPTED'">
                                             <i class="Checkmark green large icon"></i>
                                         </div>
@@ -123,7 +123,7 @@
                                             <i class="Help grey large icon"></i>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="center aligned">
                                         <div data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
                                             <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
                                                 Zaakceptuj
@@ -131,6 +131,9 @@
                                             <button data-ng-click="rejectReservation(reservation.id)" class="ui reservation red basic button">
                                                 Odrzuć
                                             </button>
+                                        </div>
+                                        <div data-ng-if="reservation.state==='ACCEPTED'">
+                                            <button class="ui accent-color button">Komentarz</button>
                                         </div>
                                     </td>
                                 </tr>
