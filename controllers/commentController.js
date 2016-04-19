@@ -1,5 +1,5 @@
-var commentController = angular.module('commentController', []);
+var commentController = angular.module('commentController', ['commentFactory']);
 
-commentController.controller('CommentController', ['$scope', function ($scope) {
+commentController.controller('CommentController', ['$scope', 'Comment', function ($scope) {
     
 }]);
