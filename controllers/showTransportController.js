@@ -14,7 +14,7 @@ showTransportController.controller('ShowTransportController',
         $scope.error = false;
         $scope.correctReservation = false;
         $scope.reservationInModal = null;
-
+        $scope.allowedComments = false;
         $scope.acceptReservation = function(reservationId){
             $('#acceptReservationModal').modal('show');
             $scope.reservationInModal = reservationId;
@@ -99,6 +99,16 @@ showTransportController.controller('ShowTransportController',
             {
                 $scope.transport = response.data;
                 $scope.userIsDriver = $rootScope.loggedUser.id === $scope.transport.driver.id;
+                var currentDate = new Date();
+                var startDate = new Date($scope.transport.departureDate);
+                if($scope.transport.state === 'OVER' || $scope.transport.state === 'INPROGRESS' || $scope.transport.state === 'CANCELED'
+                    || ($scope.transport.state === 'OPEN' && currentDate > startDate)) {
+                    $scope.allowedComments = true;
+                }
+                else {
+                    $scope.allowedComments = false;
+                }
+
                 for (var index = 0; index <= $scope.transport.reservations.length; index++) {
                     if($scope.transport.reservations[index].sender.id === $rootScope.loggedUser.id)
                     {

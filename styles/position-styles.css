@@ -80,6 +80,26 @@ img.profile-image.image.center.ui.tiny {
     transform: scale(1.035);
 }
 
-div button.ui.reservation.basic.button{
+.accordion-user-icon{
+    transition: all .5s ease-in-out;
+}
 
+.accordion-user-icon:hover {
+    transform: scale(1.135);
+}
+
+.single-reservation .title .left-title{
+    text-align: left;
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+
+.single-reservation .title .right-title{
+    text-align: right;
+    position: relative;
+}
+
+.left-aligned-text{
+    text-align: left;
 }

@@ -41,6 +41,15 @@
                     {{transport.departureDate | date:'yyyy-MM-dd HH:mm'}}
                 </h4>
             </div>
+            <div class="row">
+                <div class="four wide column center aligned ">
+                    <h4 class="ui horizontal divider header">
+                        <i class="Dollar icon"></i>
+                        Cena
+                    </h4>
+                    <p><strong>{{transport.minPrice}}</strong> - <strong>{{transport.maxPrice}}</strong> zł</p>
+                </div>
+            </div>
         </div>
         <div class="four wide column center aligned">
             <div class="row">
@@ -69,19 +78,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="four wide column center aligned ">
-                    <h4 class="ui horizontal divider header">
-                        <i class="Dollar icon"></i>
-                        Cena
-                    </h4>
-                    <h4>
-                        <p>Od: <strong>{{transport.minPrice}}</strong></p>
-                        <p>Do: <strong>{{transport.maxPrice}}</strong></p>
-                    </h4>
-                </div>
-            </div>
-
         </div>
         <div class="eight wide column center aligned">
             <div class="row">
@@ -97,9 +93,133 @@
             <div class="row ">
                 <h4 class="ui horizontal divider header">
                     <i class="Heartbeat icon"></i>
-                    Akcje/Stan
+                    Stan
+                </h4>
+                <div class="transport-state" style="margin-bottom: 15px">
+                    <div class="ui Yellow segment" data-ng-if="transport.state==='OPENED'">
+                        Transport jest otwarty na rezerwacje.
+                    </div>
+                    <div class="ui Orange segment" data-ng-if="userReservation.state==='CLOSED'">
+                        Transport jest zamknięty na rezerwacje.
+                    </div>
+                    <div class="ui Red segment" data-ng-if="userReservation.state==='CANCELED'">
+                        Transport został anulowany na mniej niż 24h przez wyjazdem. Kierowca dostaje ostrzeżenie.
+                    </div>
+                    <div class="ui Red segment" data-ng-if="transport.state==='CANCELED24'">
+                        Transport został anulowany wcześniej niż 24h przez wyjazdem.
+                    </div>
+                    <div class="ui Olive segment" data-ng-if="userReservation.state==='INPROGRESS'">
+                        Transort wyruszył z miasta źródłowego do docelowego przez miasta pośrednie.
+                    </div>
+                    <div class="ui Green segment" data-ng-if="userReservation.state==='OVER'">
+                        Transport został zrealizowany.
+                    </div>
+                </div>
+                <div data-ng-if="userIsDriver">
+                    <div style="display: inline-block" data-ng-if="transport.state === 'INPROGRESS'">
+                        <div data-ng-click="changeStateToOver()" class="ui accent-color button" type="button">Zakończ transport</div>
+                    </div>
+                    <div style="display: inline-block" data-ng-if="false">
+                        <div data-ng-click="changeStateToCanceled()" class="ui accent-color button" type="button">Anuluj transport (Dostaniesz ostrzeżenie)</div>
+                    </div>
+                    <div style="display: inline-block" data-ng-if="transport.state === 'CLOSED'">
+                        <div data-ng-click="changeStateToInProgres()" class="ui accent-color button" type="button">Rozpocznij transport</div>
+                    </div>
+                    <div style="display: inline-block" data-ng-if="transport.state === 'OPENED'">
+                        <div data-ng-click="changeStateToClosed()" class="ui accent-color button" type="button">Zakończ rezerwacje</div>
+                    </div>
+                    <div style="display: inline-block" data-ng-if="true">
+                        <div data-ng-click="changeStateToCanceled24()" class="ui accent-color button" type="button">Anuluj transport</div>
+                    </div>
+                </div>
+                <div data-ng-if="!userIsDriver && userReservation!=null">
+                    <div class="ui Yellow segment" data-ng-if="userReservation.state==='NOTACCEPTED'">
+                        Twoja rezerwacja oczekuje na decyzję kierowcy
+                    </div>
+                    <div class="ui Green segment" data-ng-if="userReservation.state==='ACCEPTED'">
+                        Twoja rezerwacja została zaakceptowana przez kierowcę
+                    </div>
+                    <div class="ui Red segment" data-ng-if="userReservation.state==='REJECTED'">
+                        Twoja rezerwacja została odrzucona przez kierowcę
+                    </div>
+                </div>
+                <div data-ng-if="!userIsDriver && userReservation==null && transport.state === 'OPENED'">
+                    <div data-ng-click="onModalReservation()" class="ui  large accent-color button" type="button">Zarezerwuj</div>
+                </div>
+            </div>
+            <div data-ng-if="userIsDriver" class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="Book icon"></i>
+                    Rezerwacje
                 </h4>
                 <div data-ng-if="userIsDriver">
+                    <div class="ui styled fluid accordion">
+                        <div class="single-reservation" data-ng-repeat="reservation in transport.reservations">
+                            <div class="title">
+                                <div class="left-title">
+                                    <div data-ng-if="reservation.state==='ACCEPTED'">
+                                        <i class="Checkmark green large icon"></i>
+                                        <span class="green">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                    </div>
+                                    <div data-ng-if="reservation.state==='REJECTED'">
+                                        <i class="remove red large icon"></i>
+                                        <span class="red">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                    </div>
+                                    <div data-ng-if="reservation.state==='NOTACCEPTED'">
+                                        <i class="Help grey large icon"></i>
+                                        <span class="gray">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                    </div>
+                                </div>
+                                <div class="right-title">
+                                    <i class="Dropbox icon"></i> Typ paczek:
+                                    <span data-ng-repeat="preference in reservation.preferences">
+                                            {{preference.name}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="accordion-contact-data left-aligned-text">
+                                    <div class="accordion-user-icon" style="display: inline-block; float: left">
+                                        <a href="#/profile/{{reservation.sender.id}}" type="button"><i class="user black huge icon"></i></a>
+                                    </div>
+                                    <div>
+                                        <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
+                                        <p>Email: <strong>{{transport.driver.email}}</strong></p>
+                                    </div>
+                                </div>
+
+                                <div data-ng-if="reservation.state==='ACCEPTED'">
+                                    <h4 class="ui horizontal divider header">
+                                        <i class="Comments icon"></i>
+                                        Ocena przejazdu
+                                    </h4>
+                                    <div class="left-aligned-text">
+                                        <i class="user icon"></i>Nadawca
+                                        <p>Jakas ocena...</p>
+                                    </div>
+                                    <div class="left-aligned-text">
+                                        <i class="Shipping icon"></i>Ty
+                                        <p>Twoja ocena...</p>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 10px" data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
+                                    <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
+                                        Zaakceptuj
+                                    </button>
+                                    <button data-ng-click="rejectReservation(reservation.id)" class="ui reservation red basic button">
+                                        Odrzuć
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $('.ui.accordion')
+                                .accordion()
+                        ;
+                    </script>
+                    <!--
                     <div class="ui grid centered">
                         <table class="ui very basic collapsing celled table">
                             <thead>
@@ -151,23 +271,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>-->
                 </div>
-                <div data-ng-if="!userIsDriver && userReservation!=null">
-                    <div class="ui Yellow segment" data-ng-if="userReservation.state==='NOTACCEPTED'">
-                        Twoja rezerwacja oczekuje na decyzję kierowcy
-                    </div>
-                    <div class="ui Green segment" data-ng-if="userReservation.state==='ACCEPTED'">
-                        Twoja rezerwacja została zaakceptowana przez kierowcy
-                    </div>
-                    <div class="ui Red segment" data-ng-if="userReservation.state==='REJECTED'">
-                        Twoja rezerwacja została odrzucona przez kierowcę
-                    </div>
-                </div>
-                <div data-ng-if="!userIsDriver && userReservation==null && transport.state === 'OPENED'">
-                        <p>Można zarejestrować paczkę</p>
-                        <div data-ng-click="onModalReservation()" class="ui  large accent-color button" type="button">Zarezerwuj</div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -292,4 +398,5 @@
             </form>
         </div>
     </div>
+
 </div>
