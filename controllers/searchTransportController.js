@@ -76,36 +76,44 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
         $scope.sortBy = document.getElementById('sortBy');  // get sorting dropdown
         $scope.sortBy.value = "BYDATEASC";  // set default sorting to date - ascending
         $scope.sortBy.onchange = function() {$scope.onSearch()};    //refresh results when changed sorting
-
+        $scope.missedSelection = false;
+        $scope.getTransportsError = false;
         // search submit function
         $scope.onSearch = function() {
-            $scope.searchTransport.preferences = $scope.selection;  // add preferences
-            $scope.searchTransport.date = new Date($scope.departureDate);
-            $scope.searchTransport.offset = 0;  // get first set of results
-            $scope.searchTransport.limit = $scope.resultsPerPage;  // number of results per page
-            $scope.searchTransport.transportsSearchOrder = $scope.sortBy.value;
-            $scope.pageNumber = 1;  // reset page number for new search
-            Transport.getTransports($scope.searchTransport).then(function(response){
-                if (response.status == 200) {
-                    // set table content to received data
-                    $scope.transports = response.data.transports;
-                    $scope.quantityTransports = response.data.quantityTransports;
-                    $scope.totalPages = Math.ceil($scope.quantityTransports / $scope.resultsPerPage);
-                    if($scope.quantityTransports > 0) { // if found any results
-                        $scope.searchResults = true;
-                        $scope.searchNotFound = false;
+            if($scope.selection.length > 0){
+                $scope.missedSelection = false;
+                $scope.searchTransport.preferences = $scope.selection;  // add preferences
+                $scope.searchTransport.date = new Date($scope.departureDate);
+                $scope.searchTransport.offset = 0;  // get first set of results
+                $scope.searchTransport.limit = $scope.resultsPerPage;  // number of results per page
+                $scope.searchTransport.transportsSearchOrder = $scope.sortBy.value;
+                $scope.pageNumber = 1;  // reset page number for new search
+                Transport.getTransports($scope.searchTransport).then(function(response){
+                    if (response.status == 200) {
+                        // set table content to received data
+                        $scope.transports = response.data.transports;
+                        $scope.quantityTransports = response.data.quantityTransports;
+                        $scope.totalPages = Math.ceil($scope.quantityTransports / $scope.resultsPerPage);
+                        if($scope.quantityTransports > 0) { // if found any results
+                            $scope.searchResults = true;
+                            $scope.searchNotFound = false;
+                        }
+                        else {
+                            $scope.searchResults = false;
+                            $scope.searchNotFound = true;
+                        }
                     }
                     else {
                         $scope.searchResults = false;
-                        $scope.searchNotFound = true;
+                        alert("Connection problem!");
                     }
-                }
-                else {
-                    $scope.searchResults = false;
-                    alert("Connection problem!");
-                }
-            });
-
+                }, function (error) {
+                    $scope.getTransportsError = true;
+                });
+            }
+            else {
+                $scope.missedSelection = true;
+            }
         };
 
         $scope.searchNext = function() {
