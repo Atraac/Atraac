@@ -18,6 +18,6 @@ reservationFactory.factory('Reservation', ['$http', 'Urls',
         Reservation.rejectReservation = function(reservationId){
             return $http.put(Urls.Base+"reservations/"+reservationId+"/rejected");
         }
-
+        
         return Reservation;
     }]);

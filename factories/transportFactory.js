@@ -18,5 +18,9 @@ transportFactory.factory('Transport', ['$http', 'Urls',
             return $http.get(Urls.Base+'users/transports');
         };
 
+        Transport.changeTransportState = function(transportId, state){
+            return $http.put(Urls.Base+'transports/'+transportId, state);
+        };
+
         return Transport;
     }]);

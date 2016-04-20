@@ -28,6 +28,7 @@
                             <p>Nazwisko: <strong>{{transport.driver.surname}}</strong></p>
                             <p>Auto: <strong>{{transport.driver.car}}</strong></p>
                             <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
+                            <p>Email: <strong>{{transport.driver.email}}</strong></p>
                         </div>
                     </a>
                 </div>
@@ -117,19 +118,19 @@
                 </div>
                 <div data-ng-if="userIsDriver">
                     <div style="display: inline-block" data-ng-if="transport.state === 'INPROGRESS'">
-                        <div data-ng-click="changeStateToOver()" class="ui accent-color button" type="button">Zakończ transport</div>
+                        <div data-ng-click="changeTransportState('OVER')" class="ui accent-color button" type="button">Zakończ transport</div>
                     </div>
                     <div style="display: inline-block" data-ng-if="false">
-                        <div data-ng-click="changeStateToCanceled()" class="ui accent-color button" type="button">Anuluj transport (Dostaniesz ostrzeżenie)</div>
+                        <div data-ng-click="changeTransportState('CANCELED')" class="ui accent-color button" type="button">Anuluj transport (Dostaniesz ostrzeżenie)</div>
                     </div>
                     <div style="display: inline-block" data-ng-if="transport.state === 'CLOSED'">
-                        <div data-ng-click="changeStateToInProgres()" class="ui accent-color button" type="button">Rozpocznij transport</div>
+                        <div data-ng-click="changeTransportState('INPROGRESS')" class="ui accent-color button" type="button">Rozpocznij transport</div>
                     </div>
                     <div style="display: inline-block" data-ng-if="transport.state === 'OPENED'">
-                        <div data-ng-click="changeStateToClosed()" class="ui accent-color button" type="button">Zakończ rezerwacje</div>
+                        <div data-ng-click="changeTransportState('CLOSED')" class="ui accent-color button" type="button">Zakończ rezerwacje</div>
                     </div>
                     <div style="display: inline-block" data-ng-if="true">
-                        <div data-ng-click="changeStateToCanceled24()" class="ui accent-color button" type="button">Anuluj transport</div>
+                        <div data-ng-click="changeTransportState('CANCELED24')" class="ui accent-color button" type="button">Anuluj transport</div>
                     </div>
                 </div>
                 <div data-ng-if="!userIsDriver && userReservation!=null">
@@ -159,15 +160,15 @@
                                 <div class="left-title">
                                     <div data-ng-if="reservation.state==='ACCEPTED'">
                                         <i class="Checkmark green large icon"></i>
-                                        <span class="green">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                        <span class="green-text">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
                                     </div>
                                     <div data-ng-if="reservation.state==='REJECTED'">
                                         <i class="remove red large icon"></i>
-                                        <span class="red">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                        <span class="red-text">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
                                     </div>
                                     <div data-ng-if="reservation.state==='NOTACCEPTED'">
                                         <i class="Help grey large icon"></i>
-                                        <span class="gray">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
+                                        <span class="gray-text">{{reservation.sender.name}} {{reservation.sender.surname}}</span>
                                     </div>
                                 </div>
                                 <div class="right-title">
@@ -195,14 +196,25 @@
                                     </h4>
                                     <div class="left-aligned-text">
                                         <i class="user icon"></i>Nadawca
-                                        <p>Jakas ocena...</p>
+                                        <p></p>
                                     </div>
                                     <div class="left-aligned-text">
                                         <i class="Shipping icon"></i>Ty
-                                        <p>Twoja ocena...</p>
+                                        <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
+                                            <div class="field" data-ng-class="{'error' : commentForm.rate.$invalid && commentForm.rate.$touched }">
+                                                <div class="ui star rating" value="" data-rating="1" data-max-rating="5"></div>
+                                                <label ><i class="star icon"></i>Ocena</label>
+                                                <input data-ng-model="comment.rate" type="number" name="rate" required>
+                                            </div>
+                                            <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
+                                                <label><i class="write icon"></i>Treść komentarza</label>
+                                                <input data-ng-model="comment.content" type="text" name="content" placeholder="Komentarz..." required>
+                                            </div>
+                                            <button class="ui accent-color button" type="submit">Dodaj</button>
+                                        </form>
                                     </div>
                                 </div>
-
+                                <div class="ui star rating" data-rating="1" data-max-rating="5"></div>
                                 <div style="margin-top: 10px" data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
                                     <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
                                         Zaakceptuj
@@ -215,9 +227,9 @@
                         </div>
                     </div>
                     <script>
-                        $('.ui.accordion')
-                                .accordion()
-                        ;
+                        $(document).ready(function(){
+                            $('.ui.accordion').accordion();
+                        });
                     </script>
                     <!--
                     <div class="ui grid centered">

@@ -57,3 +57,14 @@ a.accent-color-link:hover, span.orderBy:hover{
     color: white;
 }
 
+.green-text{
+    color: green; !important;
+}
+
+.red-text{
+    color: red; !important;
+}
+
+.grey-text{
+    color: gray; !important;
+}

@@ -1,13 +1,14 @@
 var showTransportController = angular.module('showTransportController', 
-    ['transportFactory', 'preferencesFactory', 'reservationFactory']);
+    ['transportFactory', 'preferencesFactory', 'reservationFactory', 'commentFactory']);
 
 showTransportController.controller('ShowTransportController', 
-    ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation',
-    function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation) {
+    ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation', 'Comment',
+    function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation, Comment) {
         'use strict'
         $scope.something = 'ShowTransportController';
         $scope.transport = {};
         $scope.reservation = {};
+        $scope.comment = {};
         $scope.error = false;
         $scope.userIsDriver = false;
         $scope.noPreference = false;
@@ -15,6 +16,31 @@ showTransportController.controller('ShowTransportController',
         $scope.correctReservation = false;
         $scope.reservationInModal = null;
         $scope.allowedComments = false;
+        $scope.rate = 1;
+        this.rate = 1;
+        $scope.changeRate = function (reservationId, rate) {
+            console.log(reservationId+" "+rate);
+        };
+
+        $scope.addComment = function (reservationId) {
+            $scope.comment.reservationId = reservationId;
+            Comment.addComment($scope.comment).then(function (response) {
+                console.log(response.data);
+            }, function (error) {
+                console.log(error.toString);
+            });
+            getCurrentTransport();
+        }
+
+        $scope.changeTransportState = function (state) {
+            Transport.changeTransportState($scope.transport.id, state).then(function (response) {
+                console.log(response.data);
+            }, function (error) {
+                console.log(error.toString);
+            });
+            getCurrentTransport();
+        }
+
         $scope.acceptReservation = function(reservationId){
             $('#acceptReservationModal').modal('show');
             $scope.reservationInModal = reservationId;
