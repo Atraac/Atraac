@@ -143,6 +143,58 @@
                     <div class="ui Red segment" data-ng-if="userReservation.state==='REJECTED'">
                         Twoja rezerwacja została odrzucona przez kierowcę
                     </div>
+                    <div data-ng-if="userReservation.state==='ACCEPTED' && (transport.state === 'INPROGRESS' || transport.state === 'OVER')">
+                        <h4 class="ui horizontal divider header">
+                            <i class="Comments icon"></i>
+                            Ocena przejazdu
+                        </h4>
+                        <div class="left-aligned-text">
+                            <div class="ui black segment">
+                                <h4><i class="user icon"></i>Ocena kierowcy</h4>
+                                <div data-ng-if="angular.isUndefined(reservation.commentByDriver) || reservation.commentByDriver === null">
+                                    Kierowca nie wystawił jeszcze oceny
+                                </div>
+                                <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
+                                    <p><label><i class="star icon"></i>Ocena</label></p>
+                                    <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="false" data-ng-model="reservation.commentByDriver.rate"></rating></p>
+                                    <p><label><i class="write icon"></i>Treść komentarza</label></p>
+                                    <p>{{reservation.commentByDriver.content}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="left-aligned-text">
+                            <div class="ui black segment">
+                                <h4><i class="Shipping icon"></i>Twoja ocena</h4>
+                                <div data-ng-if="angular.isUndefined(reservation.commentByUser) || reservation.commentByUser === null">
+                                    <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
+                                        <div class="field">
+                                            <label><i class="star icon"></i>Ocena</label>
+                                            <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
+                                            {{rate}}
+                                        </div>
+                                        <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
+                                            <label><i class="write icon"></i>Treść komentarza</label>
+                                            <textarea data-ng-model="comment.content" type="description" maxlength="250" name="content" placeholder="Komentarz..." required></textarea>
+                                        </div>
+                                        <button class="ui accent-color button" type="submit">Dodaj</button>
+                                    </form>
+                                </div>
+                                <div data-ng-if="angular.isDefined(reservation.commentByUser) || reservation.commentByUser !== null">
+                                    <p><label><i class="star icon"></i>Ocena</label></p>
+                                    <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="false" data-ng-model="reservation.commentByUser.rate"></rating></p>
+                                    <p><label><i class="write icon"></i>Treść komentarza</label></p>
+                                    <p>{{reservation.commentByUser.content}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
                 </div>
                 <div data-ng-if="!userIsDriver && userReservation==null && transport.state === 'OPENED'">
                     <div data-ng-click="onModalReservation()" class="ui  large accent-color button" type="button">Zarezerwuj</div>
@@ -189,31 +241,51 @@
                                     </div>
                                 </div>
 
-                                <div data-ng-if="reservation.state==='ACCEPTED'">
+                                <div data-ng-if="reservation.state==='ACCEPTED' && (transport.state === 'INPROGRESS' || transport.state === 'OVER')">
                                     <h4 class="ui horizontal divider header">
                                         <i class="Comments icon"></i>
                                         Ocena przejazdu
                                     </h4>
                                     <div class="left-aligned-text">
-                                        <i class="user icon"></i>Nadawca
-                                        <p></p>
+                                        <div class="ui black segment">
+                                            <h4><i class="user icon"></i>Ocena nadawcy paczki</h4>
+                                            <div data-ng-if="angular.isUndefined(reservation.commentByUser) || reservation.commentByUser === null">
+                                                Użytkownik nie wystawił jeszcze oceny
+                                            </div>
+                                            <div data-ng-if="angular.isDefined(reservation.commentByUser) || reservation.commentByUser !== null">
+                                                <p><label><i class="star icon"></i>Ocena</label></p>
+                                                <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="false" data-ng-model="reservation.commentByUser.rate"></rating></p>
+                                                <p><label><i class="write icon"></i>Treść komentarza</label></p>
+                                                <p>{{reservation.commentByUser.content}}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="left-aligned-text">
-                                        <i class="Shipping icon"></i>Ty
-                                        <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
-                                            <div class="field" data-ng-class="{'error' : commentForm.rate.$invalid && commentForm.rate.$touched }">
-                                                <label ><i class="star icon"></i>Ocena</label>
-                                                <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" data-ng-model="reservation.comment[0].rate"></rating>
+                                        <div class="ui black segment">
+                                            <h4><i class="Shipping icon"></i>Twoja ocena</h4>
+                                            <div data-ng-if="angular.isUndefined(reservation.commentByDriver) || reservation.commentByDriver === null">
+                                                <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
+                                                    <div class="field">
+                                                        <label><i class="star icon"></i>Ocena</label>
+                                                        <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
+                                                        {{rate}}
+                                                    </div>
+                                                    <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
+                                                        <label><i class="write icon"></i>Treść komentarza</label>
+                                                        <textarea data-ng-model="comment.content" type="description" maxlength="250" name="content" placeholder="Komentarz..." required></textarea>
+                                                    </div>
+                                                    <button class="ui accent-color button" type="submit">Dodaj</button>
+                                                </form>
                                             </div>
-                                            <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
-                                                <label><i class="write icon"></i>Treść komentarza</label>
-                                                <input data-ng-model="comment.content" type="text" name="content" placeholder="Komentarz..." required>
+                                            <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
+                                                <p><label><i class="star icon"></i>Ocena</label></p>
+                                                <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="false" data-ng-model="reservation.commentByDriver.rate"></rating></p>
+                                                <p><label><i class="write icon"></i>Treść komentarza</label></p>
+                                                <p>{{reservation.commentByDriver.content}}</p>
                                             </div>
-                                            <button class="ui accent-color button" type="submit">Dodaj</button>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="ui star rating" data-rating="1" data-max-rating="5"></div>
                                 <div style="margin-top: 10px" data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
                                     <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
                                         Zaakceptuj

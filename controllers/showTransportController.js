@@ -18,10 +18,11 @@ showTransportController.controller('ShowTransportController',
         $scope.allowedComments = false;
         $scope.commentByDriver = {};
         $scope.commentByUser = {};
+        $scope.rate = 3;
 
         $scope.addComment = function (reservationId) {
             $scope.comment.reservationId = reservationId;
-            $scope.comment.rate = 3;
+            $scope.comment.rate = $scope.rate;
             Comment.addComment($scope.comment).then(function (response) {
                 console.log(response.data);
                 getCurrentTransport();
@@ -125,6 +126,51 @@ showTransportController.controller('ShowTransportController',
                 $scope.userIsDriver = $rootScope.loggedUser.id === $scope.transport.driver.id;
                 var currentDate = new Date();
                 var startDate = new Date($scope.transport.departureDate);
+                var firstFinished = false;
+                if(!firstFinished){
+                    for (var index1 = 0; index1 < $scope.transport.reservations.length; index1++) {
+                        if($scope.transport.reservations[index1].sender.id === $rootScope.loggedUser.id)
+                        {
+                            $scope.userReservation = $scope.transport.reservations[index1];
+                            firstFinished = true;
+                            break;
+                        }
+                        else {
+                            if($scope.transport.reservations[index1].reciever != null){
+                                if($scope.transport.reservations[index1].reciever.id === $rootScope.loggedUser.id){
+                                    $scope.userReservation = $scope.transport.reservations[index1];
+                                    firstFinished = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if(firstFinished){
+                    for (var index = 0; index < $scope.transport.reservations.length; index++) {
+                        $scope.transport.reservations[index].commentByUser = null;
+                        $scope.transport.reservations[index].commentByDriver = null;
+                        if($scope.transport.reservations[index].comment.length === 1){
+                            if($scope.transport.reservations[index].comment[0].author.id === $scope.transport.driver.id){
+                                $scope.transport.reservations[index].commentByDriver = $scope.transport.reservations[index].comment[0];
+                            }
+                            else {
+                                $scope.transport.reservations[index].commentByUser = $scope.transport.reservations[index].comment[0];
+                            }
+                        }
+                        if($scope.transport.reservations[index].comment.length === 2) {
+                            if($scope.transport.reservations[index].comment[0].author.id === $scope.transport.driver.id){
+                                $scope.transport.reservations[index].commentByDriver = $scope.transport.reservations[index].comment[0];
+                                $scope.transport.reservations[index].commentByUser = $scope.transport.reservations[index].comment[1];
+                            }
+                            else {
+                                $scope.transport.reservations[index].commentByUser = $scope.transport.reservations[index].comment[0];
+                                $scope.transport.reservations[index].commentByDriver = $scope.transport.reservations[index].comment[1];
+                            }
+                        }
+                    }
+                }
+
                 if($scope.transport.state === 'OVER' || $scope.transport.state === 'INPROGRESS' || $scope.transport.state === 'CANCELED'
                     || ($scope.transport.state === 'OPEN' && currentDate > startDate)) {
                     $scope.allowedComments = true;
@@ -133,21 +179,6 @@ showTransportController.controller('ShowTransportController',
                     $scope.allowedComments = false;
                 }
 
-                for (var index = 0; index <= $scope.transport.reservations.length; index++) {
-                    if($scope.transport.reservations[index].sender.id === $rootScope.loggedUser.id)
-                    {
-                        $scope.userReservation = $scope.transport.reservations[index];
-                        break;
-                    }
-                    else {
-                        if($scope.transport.reservations[index].reciever != null){
-                            if($scope.transport.reservations[index].reciever.id === $rootScope.loggedUser.id){
-                                $scope.userReservation = $scope.transport.reservations[index];
-                                break;
-                            }
-                        }
-                    }
-                }
             }, function (error) {
                 console.log(error);
                 $scope.error = true;

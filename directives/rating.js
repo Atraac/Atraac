@@ -95,7 +95,7 @@ angular.module('angularify.semantic.rating', [])
                         for (i=icon_index+1; i <= 5; i++){
                             document.getElementById(scope.id + i).className = 'icon';
                         }
-
+                        scope.model = icon_index;
                         if (icon_index !== 0)
                             checked = true;
                     }
