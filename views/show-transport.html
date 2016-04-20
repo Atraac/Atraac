@@ -252,7 +252,7 @@
                                             <div data-ng-if="angular.isUndefined(reservation.commentByUser) || reservation.commentByUser === null">
                                                 Użytkownik nie wystawił jeszcze oceny
                                             </div>
-                                            <div data-ng-if="angular.isDefined(reservation.commentByUser) || reservation.commentByUser !== null">
+                                            <div data-ng-if="reservation.commentByUser !== null">
                                                 <p><label><i class="star icon"></i>Ocena</label></p>
                                                 <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="false" data-ng-model="reservation.commentByUser.rate"></rating></p>
                                                 <p><label><i class="write icon"></i>Treść komentarza</label></p>

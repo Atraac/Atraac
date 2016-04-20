@@ -132,19 +132,18 @@ showTransportController.controller('ShowTransportController',
                         if($scope.transport.reservations[index1].sender.id === $rootScope.loggedUser.id)
                         {
                             $scope.userReservation = $scope.transport.reservations[index1];
-                            firstFinished = true;
                             break;
                         }
                         else {
                             if($scope.transport.reservations[index1].reciever != null){
                                 if($scope.transport.reservations[index1].reciever.id === $rootScope.loggedUser.id){
                                     $scope.userReservation = $scope.transport.reservations[index1];
-                                    firstFinished = true;
                                     break;
                                 }
                             }
                         }
                     }
+                    firstFinished = true;
                 }
                 if(firstFinished){
                     for (var index = 0; index < $scope.transport.reservations.length; index++) {
