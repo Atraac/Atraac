@@ -19,7 +19,7 @@ transportFactory.factory('Transport', ['$http', 'Urls',
         };
 
         Transport.changeTransportState = function(transportId, state){
-            return $http.put(Urls.Base+'transports/'+transportId, state);
+            return $http.put(Urls.Base+'transports/'+transportId+'/state', state);
         };
 
         return Transport;

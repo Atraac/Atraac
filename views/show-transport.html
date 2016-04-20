@@ -19,7 +19,7 @@
                 <div class="grow">
                     <a href="#/profile/{{transport.driver.id}}">
                         <div class="ui header">
-                            <rating id="my-rating" size="large" type="star" data-ng-model="transport.driver.rating | round"></rating>
+                            <rating id="my-rating" size="large" type="star" readonly="true" data-ng-model="transport.driver.rating | round"></rating>
                             <span>{{transport.driver.rating}}</span>
                         </div>
                         <img data-ng-click="" class="profile-image image center ui tiny" src="./content/pictures/brak.jpg">
@@ -100,19 +100,19 @@
                     <div class="ui Yellow segment" data-ng-if="transport.state==='OPENED'">
                         Transport jest otwarty na rezerwacje.
                     </div>
-                    <div class="ui Orange segment" data-ng-if="userReservation.state==='CLOSED'">
+                    <div class="ui Orange segment" data-ng-if="transport.state==='CLOSED'">
                         Transport jest zamknięty na rezerwacje.
                     </div>
-                    <div class="ui Red segment" data-ng-if="userReservation.state==='CANCELED'">
-                        Transport został anulowany na mniej niż 24h przez wyjazdem. Kierowca dostaje ostrzeżenie.
+                    <div class="ui Red segment" data-ng-if="transport.state==='CANCELED'">
+                        Transport został anulowany przz admina na mniej niż 24h przez wyjazdem. .
                     </div>
                     <div class="ui Red segment" data-ng-if="transport.state==='CANCELED24'">
                         Transport został anulowany wcześniej niż 24h przez wyjazdem.
                     </div>
-                    <div class="ui Olive segment" data-ng-if="userReservation.state==='INPROGRESS'">
-                        Transort wyruszył z miasta źródłowego do docelowego przez miasta pośrednie.
+                    <div class="ui Olive segment" data-ng-if="transport.state==='INPROGRESS'">
+                        Transport wyruszył z miasta źródłowego do docelowego przez miasta pośrednie.
                     </div>
-                    <div class="ui Green segment" data-ng-if="userReservation.state==='OVER'">
+                    <div class="ui Green segment" data-ng-if="transport.state==='OVER'">
                         Transport został zrealizowany.
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                     <div style="display: inline-block" data-ng-if="transport.state === 'OPENED'">
                         <div data-ng-click="changeTransportState('CLOSED')" class="ui accent-color button" type="button">Zakończ rezerwacje</div>
                     </div>
-                    <div style="display: inline-block" data-ng-if="true">
+                    <div style="display: inline-block" data-ng-if="transport.state === 'OPENED' || transport.state === 'CLOSED'">
                         <div data-ng-click="changeTransportState('CANCELED24')" class="ui accent-color button" type="button">Anuluj transport</div>
                     </div>
                 </div>
@@ -202,9 +202,8 @@
                                         <i class="Shipping icon"></i>Ty
                                         <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
                                             <div class="field" data-ng-class="{'error' : commentForm.rate.$invalid && commentForm.rate.$touched }">
-                                                <div class="ui star rating" value="" data-rating="1" data-max-rating="5"></div>
                                                 <label ><i class="star icon"></i>Ocena</label>
-                                                <input data-ng-model="comment.rate" type="number" name="rate" required>
+                                                <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" data-ng-model="reservation.comment[0].rate"></rating>
                                             </div>
                                             <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
                                                 <label><i class="write icon"></i>Treść komentarza</label>

@@ -10,7 +10,7 @@
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
-                            <rating id="my-rating" size="large" type="star" data-ng-model="user.rating | round"></rating>
+                            <rating id="my-rating" readonly="true" size="large" type="star" data-ng-model="user.rating | round"></rating>
                             <span data-ng-show="user.rating!=0">{{user.rating}}</span>
                             <span data-ng-show="user.rating==0">Brak ocen</span>
                         </div>

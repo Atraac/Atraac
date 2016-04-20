@@ -16,30 +16,28 @@ showTransportController.controller('ShowTransportController',
         $scope.correctReservation = false;
         $scope.reservationInModal = null;
         $scope.allowedComments = false;
-        $scope.rate = 1;
-        this.rate = 1;
-        $scope.changeRate = function (reservationId, rate) {
-            console.log(reservationId+" "+rate);
-        };
+        $scope.commentByDriver = {};
+        $scope.commentByUser = {};
 
         $scope.addComment = function (reservationId) {
             $scope.comment.reservationId = reservationId;
+            $scope.comment.rate = 3;
             Comment.addComment($scope.comment).then(function (response) {
                 console.log(response.data);
+                getCurrentTransport();
             }, function (error) {
                 console.log(error.toString);
             });
-            getCurrentTransport();
         }
 
         $scope.changeTransportState = function (state) {
-            Transport.changeTransportState($scope.transport.id, state).then(function (response) {
+            Transport.changeTransportState($scope.transport.id, {newTransportState: state}).then(function (response) {
                 console.log(response.data);
+                getCurrentTransport();
             }, function (error) {
-                console.log(error.toString);
+                console.log(error);
             });
-            getCurrentTransport();
-        }
+        };
 
         $scope.acceptReservation = function(reservationId){
             $('#acceptReservationModal').modal('show');

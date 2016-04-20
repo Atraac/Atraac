@@ -1,4 +1,6 @@
-angular.module('rating', [])
+'use strict';
+
+angular.module('angularify.semantic.rating', [])
     .directive('rating', function(){
         return {
             restrict: "E",
@@ -8,7 +10,8 @@ angular.module('rating', [])
                 id: "@",
                 size: "@",
                 type: "@",
-                model : '=ngModel'
+                model : '=ngModel',
+                readonly : "@"
             },
             template: '<div class={{div_class}}>' +
             '<i id="{{id + 1}}" class="{{icon_class}}" ng-click="click(1)" ng-mouseenter="mouse_enter(1)" ng-mouseleave="mouse_leave(1)"></i>' +
@@ -51,17 +54,60 @@ angular.module('rating', [])
                 scope.icon_class = 'icon';
 
                 //
-                // Watch for model
+                // Handle mouse enter
                 //
-                scope.$watch('model', function(val){
+                scope.mouse_enter = function(icon_index){
+                    if (checked == true || scope.readonly === "true")
+                        return;
+
                     var i = 1;
-                    for (i; i <= val; i++){
+                    for (i; i <= icon_index; i++){
                         document.getElementById(scope.id + i).className = 'icon active';
                     }
 
-                    if (val !== 0)
-                        checked = true;
                     return;
+                };
+
+                //
+                // Handle mouse leave
+                //
+                scope.mouse_leave = function(icon_index){
+                    if (checked == true || scope.readonly === "true")
+                        return;
+
+                    var i = 1;
+                    for (i; i <= 5; i++){
+                        document.getElementById(scope.id + i).className = 'icon';
+                    }
+
+                    return;
+                };
+
+                //
+                // Handle click
+                //
+                scope.click = function(icon_index, mode){
+                    if(scope.readonly === "false"){
+                        var i = 1;
+                        for (i; i <= icon_index; i++){
+                            document.getElementById(scope.id + i).className = 'icon active';
+                        }
+                        for (i=icon_index+1; i <= 5; i++){
+                            document.getElementById(scope.id + i).className = 'icon';
+                        }
+
+                        if (icon_index !== 0)
+                            checked = true;
+                    }
+
+                    return;
+                };
+
+                //
+                // Watch for model
+                //
+                scope.$watch('model', function(val){
+                    scope.click(val);
                 });
             }
         };

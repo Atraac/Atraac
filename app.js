@@ -2,7 +2,7 @@ var deliverIT = angular.module('deliverIT',
         ['ngRoute', 'ngStorage',
         'greetingController', 'profileController', 'searchTransportController', 'addTransportController','myMessagesController', 'editProfileController',
         'myPackagesController', 'myTransportsController', 'loginController', 'registerController', 'menuController','showTransportController',
-        'rating', 'roundFilter', 'accountFactory', 'commentController']);
+        'angularify.semantic.rating', 'roundFilter', 'accountFactory', 'commentController']);
 
 deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
     $rootScope.loggedUser = {};
