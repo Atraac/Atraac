@@ -150,26 +150,24 @@
                         </h4>
                         <div class="left-aligned-text">
                             <div class="ui black segment">
-                                <h4><i class="user icon"></i>Ocena kierowcy</h4>
-                                <div data-ng-if="angular.isUndefined(reservation.commentByDriver) || reservation.commentByDriver === null">
+                                <h4><i class="Shipping icon"></i>Ocena wystawiona przez kierowce</h4>
+                                <div data-ng-if="angular.isUndefined(userReservation.commentByDriver) || userReservation.commentByDriver === null">
                                     Kierowca nie wystawił jeszcze oceny
                                 </div>
-                                <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
-                                    <p><label><i class="star icon"></i>Ocena</label></p>
-                                    <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="true" data-ng-model="reservation.commentByDriver.rate"></rating>{{reservation.commentByDriver.rate}}</p>
-                                    <p><label><i class="write icon"></i>Treść komentarza</label></p>
-                                    <p>{{reservation.commentByDriver.content}}</p>
+                                <div data-ng-if="angular.isDefined(userReservation.commentByDriver) || userReservation.commentByDriver !== null">
+                                    <p><rating id="my-rating{{userReservation.id}}1" size="large" type="star" readonly="true" data-ng-model="userReservation.commentByDriver.rate"></rating>{{userReservation.commentByDriver.rate}}</p>
+                                    <p>{{userReservation.commentByDriver.content}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="left-aligned-text">
                             <div class="ui black segment">
-                                <h4><i class="Shipping icon"></i>Twoja ocena</h4>
-                                <div data-ng-if="angular.isUndefined(reservation.commentByUser) || reservation.commentByUser === null">
-                                    <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
+                                <h4><i class="user icon"></i>Ocena wystawiona przez Ciebie</h4>
+                                <div data-ng-if="angular.isUndefined(userReservation.commentByUser) || userReservation.commentByUser === null">
+                                    <form class="ui form" name="commentForm" data-ng-submit="addComment(userReservation.id)" novalidate>
                                         <div class="field">
                                             <label><i class="star icon"></i>Ocena</label>
-                                            <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
+                                            <rating id="my-rating{{userReservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
                                             {{rate}}
                                         </div>
                                         <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
@@ -179,11 +177,9 @@
                                         <button class="ui accent-color button" type="submit">Dodaj</button>
                                     </form>
                                 </div>
-                                <div data-ng-if="angular.isDefined(reservation.commentByUser) || reservation.commentByUser !== null">
-                                    <p><label><i class="star icon"></i>Ocena</label></p>
-                                    <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="true" data-ng-model="reservation.commentByUser.rate"></rating>{{reservation.commentByUser.rate}}</p>
-                                    <p><label><i class="write icon"></i>Treść komentarza</label></p>
-                                    <p>{{reservation.commentByUser.content}}</p>
+                                <div data-ng-if="angular.isDefined(userReservation.commentByUser) || userReservation.commentByUser !== null">
+                                    <p><rating id="my-rating{{userReservation.id}}3" size="large" type="star" readonly="true" data-ng-model="userReservation.commentByUser.rate"></rating>{{userReservation.commentByUser.rate}}</p>
+                                    <p>{{userReservation.commentByUser.content}}</p>
                                 </div>
                             </div>
                         </div>
@@ -248,21 +244,19 @@
                                     </h4>
                                     <div class="left-aligned-text">
                                         <div class="ui black segment">
-                                            <h4><i class="user icon"></i>Ocena nadawcy paczki</h4>
+                                            <h4><i class="user icon"></i>Ocena wystawiona przez nadawcę paczki</h4>
                                             <div data-ng-if="angular.isUndefined(reservation.commentByUser) || reservation.commentByUser === null">
                                                 Użytkownik nie wystawił jeszcze oceny
                                             </div>
                                             <div data-ng-if="reservation.commentByUser !== null">
-                                                <p><label><i class="star icon"></i>Ocena</label></p>
                                                 <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="true" data-ng-model="reservation.commentByUser.rate"></rating>{{reservation.commentByUser.rate}}</p>
-                                                <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                                 <p>{{reservation.commentByUser.content}}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="left-aligned-text">
                                         <div class="ui black segment">
-                                            <h4><i class="Shipping icon"></i>Twoja ocena</h4>
+                                            <h4><i class="Shipping icon"></i>Ocena wystawiona przez Ciebie</h4>
                                             <div data-ng-if="angular.isUndefined(reservation.commentByDriver) || reservation.commentByDriver === null">
                                                 <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
                                                     <div class="field">
@@ -278,9 +272,7 @@
                                                 </form>
                                             </div>
                                             <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
-                                                <p><label><i class="star icon"></i>Ocena</label></p>
                                                 <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="true" data-ng-model="reservation.commentByDriver.rate"></rating>{{reservation.commentByDriver.rate}}</p>
-                                                <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                                 <p>{{reservation.commentByDriver.content}}</p>
                                             </div>
                                         </div>

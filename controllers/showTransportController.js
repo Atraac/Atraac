@@ -18,6 +18,7 @@ showTransportController.controller('ShowTransportController',
         $scope.allowedComments = false;
         $scope.commentByDriver = {};
         $scope.commentByUser = {};
+        $scope.userReservation = null;
         $scope.rate = 3;
 
         $scope.addComment = function (reservationId) {
