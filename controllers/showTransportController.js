@@ -22,8 +22,9 @@ showTransportController.controller('ShowTransportController',
 
         $scope.addComment = function (reservationId) {
             $scope.comment.reservationId = reservationId;
-            $scope.comment.rate = $scope.rate;
+            $scope.comment.rate = $rootScope.rateRoot;
             Comment.addComment($scope.comment).then(function (response) {
+                $rootScope.rateRoot = 3;
                 console.log(response.data);
                 getCurrentTransport();
             }, function (error) {
@@ -120,6 +121,7 @@ showTransportController.controller('ShowTransportController',
         };
 
         var getCurrentTransport = function(){
+
             Transport.getTransport($routeParams.transportId).then(function (response)
             {
                 $scope.transport = response.data;

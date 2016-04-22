@@ -10,7 +10,7 @@ deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
 
     // ukrycie paru elementow dla prowadzacego
     $rootScope.yanek = true;
-
+    $rootScope.rateRoot = 0;
     if($window.localStorage.getItem('X-CustomToken')!=null){
         $rootScope.logged = true;
         Account.getCurrentUser().then(function (response) {

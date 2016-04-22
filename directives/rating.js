@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularify.semantic.rating', [])
-    .directive('rating', function(){
+    .directive('rating', function($rootScope){
         return {
             restrict: "E",
             replace: true,
@@ -88,6 +88,7 @@ angular.module('angularify.semantic.rating', [])
                 //
                 scope.click = function(icon_index, mode){
                     if(scope.readonly === "false"){
+                        $rootScope.rateRoot = icon_index;
                         var i = 1;
                         for (i; i <= icon_index; i++){
                             document.getElementById(scope.id + i).className = 'icon active';
@@ -108,6 +109,13 @@ angular.module('angularify.semantic.rating', [])
                 //
                 scope.$watch('model', function(val){
                     scope.click(val);
+                    var i = 1;
+                    for (i; i <= val; i++){
+                        document.getElementById(scope.id + i).className = 'icon active';
+                    }
+                    for (i=val+1; i <= 5; i++){
+                        document.getElementById(scope.id + i).className = 'icon';
+                    }
                 });
             }
         };

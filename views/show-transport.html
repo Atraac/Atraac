@@ -156,7 +156,7 @@
                                 </div>
                                 <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
                                     <p><label><i class="star icon"></i>Ocena</label></p>
-                                    <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="false" data-ng-model="reservation.commentByDriver.rate"></rating></p>
+                                    <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="true" data-ng-model="reservation.commentByDriver.rate"></rating>{{reservation.commentByDriver.rate}}</p>
                                     <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                     <p>{{reservation.commentByDriver.content}}</p>
                                 </div>
@@ -181,7 +181,7 @@
                                 </div>
                                 <div data-ng-if="angular.isDefined(reservation.commentByUser) || reservation.commentByUser !== null">
                                     <p><label><i class="star icon"></i>Ocena</label></p>
-                                    <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="false" data-ng-model="reservation.commentByUser.rate"></rating></p>
+                                    <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="true" data-ng-model="reservation.commentByUser.rate"></rating>{{reservation.commentByUser.rate}}</p>
                                     <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                     <p>{{reservation.commentByUser.content}}</p>
                                 </div>
@@ -205,7 +205,7 @@
                     <i class="Book icon"></i>
                     Rezerwacje
                 </h4>
-                <div data-ng-if="userIsDriver">
+                <div data-ng-if="transport.reservations.length > 0">
                     <div class="ui styled fluid accordion">
                         <div class="single-reservation" data-ng-repeat="reservation in transport.reservations">
                             <div class="title">
@@ -254,7 +254,7 @@
                                             </div>
                                             <div data-ng-if="reservation.commentByUser !== null">
                                                 <p><label><i class="star icon"></i>Ocena</label></p>
-                                                <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="false" data-ng-model="reservation.commentByUser.rate"></rating></p>
+                                                <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="true" data-ng-model="reservation.commentByUser.rate"></rating>{{reservation.commentByUser.rate}}</p>
                                                 <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                                 <p>{{reservation.commentByUser.content}}</p>
                                             </div>
@@ -267,7 +267,7 @@
                                                 <form class="ui form" name="commentForm" data-ng-submit="addComment(reservation.id)" novalidate>
                                                     <div class="field">
                                                         <label><i class="star icon"></i>Ocena</label>
-                                                        <rating id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
+                                                        <rating data-ng-click="changeRateModel()" id="my-rating{{reservation.id}}2" size="large" type="star" readonly="false" ng-model="rate"></rating>
                                                         {{rate}}
                                                     </div>
                                                     <div class="field" data-ng-class="{'error' : commentForm.content.$invalid && commentForm.content.$touched }">
@@ -279,7 +279,7 @@
                                             </div>
                                             <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
                                                 <p><label><i class="star icon"></i>Ocena</label></p>
-                                                <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="false" data-ng-model="reservation.commentByDriver.rate"></rating></p>
+                                                <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="true" data-ng-model="reservation.commentByDriver.rate"></rating>{{reservation.commentByDriver.rate}}</p>
                                                 <p><label><i class="write icon"></i>Treść komentarza</label></p>
                                                 <p>{{reservation.commentByDriver.content}}</p>
                                             </div>
@@ -297,66 +297,17 @@
                             </div>
                         </div>
                     </div>
+
                     <script>
                         $(document).ready(function(){
                             $('.ui.accordion').accordion();
                         });
                     </script>
-                    <!--
-                    <div class="ui grid centered">
-                        <table class="ui very basic collapsing celled table">
-                            <thead>
-                                <tr>
-                                    <th>Imię Nazwisko</th>
-                                    <th>Typy paczek</th>
-                                    <th>Stan</th>
-                                    <th>Akcje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr data-ng-repeat="reservation in transport.reservations">
-                                    <td class="center aligned">
-                                        <h4>
-                                            <a class="accent-color-link" href="#/profile/{{reservation.sender.id}}">
-                                                {{reservation.sender.name}} {{reservation.sender.surname}}
-                                            </a>
-                                        </h4>
-                                    </td>
-                                    <td class="center aligned">
-                                        <span data-ng-repeat="preference in reservation.preferences">
-                                            {{preference.name}}
-                                        </span>
-                                    </td>
-                                    <td class="center aligned">
-                                        <div data-ng-if="reservation.state==='ACCEPTED'">
-                                            <i class="Checkmark green large icon"></i>
-                                        </div>
-                                        <div data-ng-if="reservation.state==='REJECTED'">
-                                            <i class="remove red large icon"></i>
-                                        </div>
-                                        <div data-ng-if="reservation.state==='NOTACCEPTED'">
-                                            <i class="Help grey large icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="center aligned">
-                                        <div data-ng-if="reservation.state==='NOTACCEPTED'" class="two ui buttons">
-                                            <button data-ng-click="acceptReservation(reservation.id)" class="ui reservation green basic button">
-                                                Zaakceptuj
-                                            </button>
-                                            <button data-ng-click="rejectReservation(reservation.id)" class="ui reservation red basic button">
-                                                Odrzuć
-                                            </button>
-                                        </div>
-                                        <div data-ng-if="reservation.state==='ACCEPTED'">
-                                            <button class="ui accent-color button">Komentarz</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>-->
-                </div>
 
+                </div>
+                <div class="ui orange segment" data-ng-if="transport.reservations.length === 0">
+                    Jeszcze nikt nie dokonał rezerwacji tego transportu.
+                </div>
             </div>
         </div>
     </div>
