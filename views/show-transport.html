@@ -156,6 +156,7 @@
                                 </div>
                                 <div data-ng-if="angular.isDefined(userReservation.commentByDriver) || userReservation.commentByDriver !== null">
                                     <p><rating id="my-rating{{userReservation.id}}1" size="large" type="star" readonly="true" data-ng-model="userReservation.commentByDriver.rate"></rating>{{userReservation.commentByDriver.rate}}</p>
+                                    <p><i class="write icon"></i><strong>Treść komentarza</strong></p>
                                     <p>{{userReservation.commentByDriver.content}}</p>
                                     <div data-ng-if="userReservation.commentByDriver.response === null">
                                         <form class="ui form" name="replyToCommentForm" data-ng-submit="replyToComment(userReservation.commentByDriver.id, commentReply.content)" novalidate>
@@ -167,7 +168,7 @@
                                         </form>
                                     </div>
                                     <div data-ng-if="userReservation.commentByDriver.response !== null">
-                                        <p><i class="write icon"></i>Treść odpowiedzi</p>
+                                        <p><i class="write icon"></i><strong>Treść odpowiedzi</strong></p>
                                         <p>{{userReservation.commentByDriver.response.content}}</p>
                                     </div>
                                 </div>
@@ -192,17 +193,15 @@
                                 </div>
                                 <div data-ng-if="angular.isDefined(userReservation.commentByUser) || userReservation.commentByUser !== null">
                                     <p><rating id="my-rating{{userReservation.id}}3" size="large" type="star" readonly="true" data-ng-model="userReservation.commentByUser.rate"></rating>{{userReservation.commentByUser.rate}}</p>
+                                    <p><i class="write icon"></i><strong>Treść komentarza</strong></p>
                                     <p>{{userReservation.commentByUser.content}}</p>
+                                    <div data-ng-if="userReservation.commentByUser.response !== null">
+                                        <p><i class="write icon"></i><strong>Treść odpowiedzi</strong></p>
+                                        <p>{{userReservation.commentByUser.response.content}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
                     </div>
                 </div>
                 <div data-ng-if="!userIsDriver && userReservation==null && transport.state === 'OPENED'">
@@ -263,7 +262,21 @@
                                             </div>
                                             <div data-ng-if="reservation.commentByUser !== null">
                                                 <p><rating id="my-rating{{reservation.id}}1" size="large" type="star" readonly="true" data-ng-model="reservation.commentByUser.rate"></rating>{{reservation.commentByUser.rate}}</p>
+                                                <p><i class="write icon"></i><strong>Treść komentarza</strong></p>
                                                 <p>{{reservation.commentByUser.content}}</p>
+                                                <div data-ng-if="reservation.commentByUser.response === null">
+                                                    <form class="ui form" name="replyToCommentForm" data-ng-submit="replyToComment(reservation.commentByUser.id, commentReply.content)" novalidate>
+                                                        <div class="field" data-ng-class="{'error' : replyToCommentForm.content.$invalid && replyToCommentForm.content.$touched }">
+                                                            <label><i class="write icon"></i>Treść odpowiedzi</label>
+                                                            <textarea data-ng-model="commentReply.content" type="description" maxlength="250" name="commentReply" placeholder="Odpowiedź..." required></textarea>
+                                                        </div>
+                                                        <button class="ui accent-color button" type="submit">Odpowiedz</button>
+                                                    </form>
+                                                </div>
+                                                <div data-ng-if="reservation.commentByUser.response !== null">
+                                                    <p><i class="write icon"></i><strong>Treść odpowiedzi</strong></p>
+                                                    <p>{{reservation.commentByUser.response.content}}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +299,12 @@
                                             </div>
                                             <div data-ng-if="angular.isDefined(reservation.commentByDriver) || reservation.commentByDriver !== null">
                                                 <p><rating id="my-rating{{reservation.id}}3" size="large" type="star" readonly="true" data-ng-model="reservation.commentByDriver.rate"></rating>{{reservation.commentByDriver.rate}}</p>
+                                                <p><i class="write icon"></i><strong>Treść komentarza</strong></p>
                                                 <p>{{reservation.commentByDriver.content}}</p>
+                                                <div data-ng-if="reservation.commentByDriver.response !== null">
+                                                    <p><i class="write icon"></i><strong>Treść odpowiedzi</strong></p>
+                                                    <p>{{reservation.commentByDriver.response.content}}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
