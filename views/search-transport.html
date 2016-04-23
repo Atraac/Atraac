@@ -53,7 +53,15 @@
                                                 data-ng-checked="selection.indexOf(preference) > -1"
                                                 data-ng-click="toggleSelection(preference)"
                                         >
-                                        <label>{{preference.name}}</label>
+                                        <label>
+                                            {{preference.name}}
+                                            <i class="help-popup Large Help Circle Grey icon" data-content="{{preference.description}}"></i>
+                                            <script>
+                                                $('.help-popup').popup({
+                                                    on: 'hover'
+                                                });
+                                            </script>
+                                        </label>
                                     </div>
                                 </div>
                             </div>

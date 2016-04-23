@@ -23,9 +23,6 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
             }
         });
 
-        // NIE DZIALA
-        
-
         // datetime picker
         $('#departureDate').on('apply.daterangepicker', function(ev, picker) {
         }).daterangepicker(
