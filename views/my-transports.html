@@ -1,6 +1,9 @@
 <div data-ng-controller="MyTransportsController">
     <div class="ui grid centered">
-        <table class="ui very basic collapsing celled table">
+        <div class="ui Orange segment" data-ng-if="transports.transports.length === 0">
+            Nie posiadasz jeszcze swoich transportów.
+        </div>
+        <table data-ng-if="transports.transports.length > 0" class="ui very basic collapsing celled table">
             <thead>
                 <tr>
                     <th>
