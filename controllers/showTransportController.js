@@ -20,6 +20,18 @@ showTransportController.controller('ShowTransportController',
         $scope.commentByUser = {};
         $scope.userReservation = null;
         $scope.rate = 3;
+        $scope.commentReply = {};
+        
+        $scope.replyToComment = function(commentId, commentContent){
+            $scope.commentReply.commentId = commentId;
+            $scope.commentReply.content = commentContent;
+            Comment.replyToComment($scope.commentReply).then(function (response) {
+                console.log(response.data);
+                getCurrentTransport();
+            }, function (error) {
+                console.log(error.toString);
+            });
+        }
 
         $scope.addComment = function (reservationId) {
             $scope.comment.reservationId = reservationId;

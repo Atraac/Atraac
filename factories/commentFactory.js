@@ -5,7 +5,11 @@ commentFactory.factory('Comment', ['$http', 'Urls',
 
         Comment.addComment = function (comment) {
             return $http.post(Urls.Base+'comments', comment);
-        }
+        };
+
+        Comment.replyToComment = function (replyComment) {
+            return $http.post(Urls.Base+'comments/response', replyComment);
+        };
 
         return Comment;
     }]);

@@ -157,6 +157,19 @@
                                 <div data-ng-if="angular.isDefined(userReservation.commentByDriver) || userReservation.commentByDriver !== null">
                                     <p><rating id="my-rating{{userReservation.id}}1" size="large" type="star" readonly="true" data-ng-model="userReservation.commentByDriver.rate"></rating>{{userReservation.commentByDriver.rate}}</p>
                                     <p>{{userReservation.commentByDriver.content}}</p>
+                                    <div data-ng-if="userReservation.commentByDriver.response === null">
+                                        <form class="ui form" name="replyToCommentForm" data-ng-submit="replyToComment(userReservation.commentByDriver.id, commentReply.content)" novalidate>
+                                            <div class="field" data-ng-class="{'error' : replyToCommentForm.content.$invalid && replyToCommentForm.content.$touched }">
+                                                <label><i class="write icon"></i>Treść odpowiedzi</label>
+                                                <textarea data-ng-model="commentReply.content" type="description" maxlength="250" name="commentReply" placeholder="Odpowiedź..." required></textarea>
+                                            </div>
+                                            <button class="ui accent-color button" type="submit">Odpowiedz</button>
+                                        </form>
+                                    </div>
+                                    <div data-ng-if="userReservation.commentByDriver.response !== null">
+                                        <p><i class="write icon"></i>Treść odpowiedzi</p>
+                                        <p>{{userReservation.commentByDriver.response.content}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
