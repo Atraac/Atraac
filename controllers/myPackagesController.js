@@ -2,7 +2,6 @@ var myPackagesController = angular.module('myPackagesController', ['reservationF
 
 myPackagesController.controller('MyPackagesController', ['$scope', '$rootScope', 'Reservation',
     function ($scope, $rootScope, Reservation) {
-
         Reservation.getUserReservations().then(function (response) {
             $scope.reservations = response.data;
         }, function(error){

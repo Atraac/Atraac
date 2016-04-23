@@ -1,3 +1,124 @@
 <div data-ng-controller="MyMessagesController">
-    {{something}}
+    <div data-ng-show="logged" class="ui grid centered">
+        <div class="row">
+            <div class="ten wide column">
+                <h4 class="ui horizontal divider header">
+                    <i class="Mail icon"></i>
+                    {{currentViewText}}
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ten wide column">
+                <button class="ui medium teal button" ng-click="setView('send')" type="button"><i class="Edit icon"></i>Napisz</button>
+                <button data-ng-disabled="currentView=='received'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
+                <button data-ng-disabled="currentView=='sent'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ten wide column">
+                <div data-ng-show="currentView=='received'">
+                    <table data-ng-if="receivedMessages.length > 0" class="ui padded collapsing celled teal table" style="margin-top: 20px">
+                        <tbody>
+                        <tr data-ng-repeat="receivedMessage in receivedMessages">
+                            <td>
+                                <h4><a class="accent-color-link" type="button" ng-click="showMsg(receivedMessage.id, 'received')">{{receivedMessage.title}}</a></h4>
+                            </td>
+                            <td>
+                                {{receivedMessage.date | date: 'short'}}
+                            </td>
+                            <td>
+                                <a class="accent-color-link" href="#/profile/{{receivedMessage.author.id}}" type="button">
+                                    Od: {{receivedMessage.author.name}} {{receivedMessage.author.surname}}
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="ui Orange segment" data-ng-if="receivedMessages.length === 0">
+                        Nie odebrano jeszcze żadnych wiadomości.
+                    </div>
+                </div>
+                <div data-ng-show="currentView=='sent'">
+                    <table data-ng-if="sentMessages.length > 0" class="ui padded collapsing celled teal table" style="margin-top: 20px">
+                        <tbody>
+                        <tr data-ng-repeat="sentMessage in sentMessages">
+                            <td>
+                                <h4><a class="accent-color-link" type="button" ng-click="showMsg(sentMessage.id, 'sent')">{{sentMessage.title}}</a></h4>
+                            </td>
+                            <td>
+                                {{sentMessage.date | date: 'short'}}
+                            </td>
+                            <td>
+                                <a class="accent-color-link" href="#/profile/{{sentMessage.receiver.id}}" type="button">
+                                    Do: {{sentMessage.receiver.name}} {{sentMessage.receiver.surname}}
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="ui Orange segment" data-ng-if="sentMessages.length === 0">
+                        Nie wysłano jeszcze żadnych wiadomości.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="ui small modal" id="sendMsgModal">
+        <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
+            <div class="eight wide column centered">
+                <form class="ui form" name="sendMsgModalForm" data-ng-submit="sendMsg()" novalidate>
+                    <ul>
+                        <li class="has-error" data-ng-show="sendMsgModalForm.receiverEmail.$invalid && sendMsgModalForm.receiverEmail.$touched" class="help-block">Odbiorca jest wymagany</li>
+                        <li class="has-error" data-ng-show="sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched" class="help-block">Pole Tytuł wiadomości jest puste!</li>
+                        <li class="has-error" data-ng-show="receiverDoesntExist" class="help-block">Podany odbiorca nie istnieje!</li>
+                        <li class="has-error" data-ng-show="receiverAndAuthorAreTheSame" class="help-block">Nie możesz wysyłać wiadomości do samego siebie!</li>
+                    </ul>
+                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.receiverEmail.$invalid && sendMsgModalForm.receiverEmail.$touched }">
+                        <label><i class="User icon"></i>Odbiorca</label>
+                        <input data-ng-model="sendMessage.receiverEmail" type="email" name="receiverEmail" placeholder="odbiorca@gmail.com" maxlength="100" required>
+                    </div>
+                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
+                        <label><i class="Edit icon"></i>Tytuł wiadomości</label>
+                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100" required>
+                    </div>
+                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
+                        <label><i class="Newspaper icon"></i>Treść wiadomości</label>
+                        <textarea data-ng-model="sendMessage.content" type="text" name="content" placeholder="Treść wiadomości" maxlength="500"></textarea>
+                    </div>
+                    <button class="ui left floated medium blue button" type="submit">Wyslij</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="ui small modal" id="viewMsgModal">
+        <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
+            <div class="eight wide column centered">
+                <div class="inline field">
+                    <h4><i class="User icon"></i>Nadawca</h4>
+                    <p>{{viewMessage.author.name}} {{viewMessage.author.surname}} <{{viewMessage.author.email}}></p>
+                </div>
+                <div class="inline field">
+                    <h4><i class="User icon"></i>Odbiorca</h4>
+                    <p>{{viewMessage.receiver.name}} {{viewMessage.receiver.surname}} <{{viewMessage.receiver.email}}></p>
+                </div>
+                <div class="field">
+                    <h4><i class="Calendar icon"></i>Data wysłania</h4>
+                    <p>{{viewMessage.date}}</p>
+                </div>
+                <div class="field">
+                    <h4><i class="Edit icon"></i>Tytuł wiadomości</h4>
+                    <p>{{viewMessage.title}}</p>
+                </div>
+                <div class="field">
+                    <h4><i class="Newspaper icon"></i>Treść wiadomości</h4>
+                    <p>{{viewMessage.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

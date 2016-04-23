@@ -1,43 +1,45 @@
 <div data-ng-controller="MyPackagesController">
     <div class="ui grid centered">
-        <div class="ui Orange segment" data-ng-if="reservations.length === 0">
-            Nie posiadasz jeszcze swoich paczek.
+        <div data-ng-show="logged" class="ten wide column">
+            <div class="ui Orange segment" data-ng-if="reservations.length === 0">
+                Nie posiadasz jeszcze swoich paczek.
+            </div>
+            <table data-ng-if="reservations.length > 0" class="ui very basic collapsing celled table">
+                <thead>
+                <tr>
+                    <th>
+                        ID rezerwacji paczki
+                    </th>
+                    <th>
+                        Tytuł ogłoszenia
+                    </th>
+                    <th>
+                        Data rezerwacji paczki
+                    </th>
+                    <th>
+                        Status rezerwacji
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="reservation in reservations">
+                    <td>
+                        {{reservation.reservationId}}
+                    </td>
+                    <td>
+                        <h4><a class="accent-color-link" href="#/transports/{{reservation.transportId}}" type="button">{{reservation.transportTitle}}</a></h4>
+                    </td>
+                    <td>
+                        {{reservation.creationDate | date: 'short'}}
+                    </td>
+                    <td>
+                        <span data-ng-if="reservation.state === 'ACCEPTED'" style="color: green">Zaakceptowano</span>
+                        <span data-ng-if="reservation.state === 'REJECTED'" style="color: red">Odrzucono</span>
+                        <span data-ng-if="reservation.state === 'NOTACCEPTED'" style="color: orange">Czeka na weryfikację</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <table data-ng-if="reservations.length > 0" class="ui very basic collapsing celled table">
-            <thead>
-            <tr>
-                <th>
-                    ID rezerwacji paczki
-                </th>
-                <th>
-                    Tytuł ogłoszenia
-                </th>
-                <th>
-                    Data rezerwacji paczki
-                </th>
-                <th>
-                    Status rezerwacji
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="reservation in reservations">
-                <td>
-                    {{reservation.reservationId}}
-                </td>
-                <td>
-                    <h4><a class="accent-color-link" href="#/transports/{{reservation.transportId}}" type="button">{{reservation.transportTitle}}</a></h4>
-                </td>
-                <td>
-                    {{reservation.creationDate | date: 'short'}}
-                </td>
-                <td>
-                    <span data-ng-if="reservation.state === 'ACCEPTED'" style="color: green">Zaakceptowano</span>
-                    <span data-ng-if="reservation.state === 'REJECTED'" style="color: red">Odrzucono</span>
-                    <span data-ng-if="reservation.state === 'NOTACCEPTED'" style="color: orange">Czeka na weryfikację</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </div>
