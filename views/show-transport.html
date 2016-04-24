@@ -240,13 +240,15 @@
                             </div>
                             <div class="content">
                                 <div class="accordion-contact-data left-aligned-text">
-                                    <div class="accordion-user-icon" style="display: inline-block; float: left">
-                                        <a href="#/profile/{{reservation.sender.id}}" type="button"><i class="user black huge icon"></i></a>
-                                    </div>
-                                    <div>
-                                        <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
-                                        <p>Email: <strong>{{transport.driver.email}}</strong></p>
-                                    </div>
+                                    <a class="grow" style="display: inline-block" href="#/profile/{{reservation.sender.id}}" type="button">
+                                        <h5 class="ui image header">
+                                            <img src="./content/pictures/brak.jpg" class="ui mini image">
+                                        <div class="content">
+                                            <p class="margin-bottom-5px">Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
+                                            <p class="margin-bottom-5px">Email: <strong>{{transport.driver.email}}</strong></p>
+                                        </div>
+                                        </h5>
+                                    </a>
                                 </div>
 
                                 <div data-ng-if="reservation.state==='ACCEPTED' && (transport.state === 'INPROGRESS' || transport.state === 'OVER')">

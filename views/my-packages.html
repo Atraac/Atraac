@@ -1,6 +1,6 @@
 <div data-ng-controller="MyPackagesController">
     <div class="ui grid centered">
-        <div data-ng-show="logged" class="ten wide column">
+        <div data-ng-show="logged">
             <div class="ui Orange segment" data-ng-if="reservations.length === 0">
                 Nie posiadasz jeszcze swoich paczek.
             </div>
@@ -8,7 +8,7 @@
                 <thead>
                 <tr>
                     <th>
-                        ID rezerwacji paczki
+                        ID rezerwacji
                     </th>
                     <th>
                         Tytuł ogłoszenia
