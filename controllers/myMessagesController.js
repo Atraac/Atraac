@@ -2,12 +2,13 @@ var myMessagesController = angular.module('myMessagesController', ['messageFacto
 
 myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
     function ($scope, Message) {
+
         $scope.getReceivedMessages = function() {
             Message.getUserReceivedMessages().then(function (response) {
-                $scope.receivedMessages = response.data.receivedMessages;
-                angular.forEach($scope.receivedMessages, function(eachObj) {
-                    eachObj.title ='aaaaaa';
-                });
+                $scope.messages = response.data.receivedMessages;
+                angular.forEach($scope.messages, function(eachObj) {
+                    eachObj.title ='Tytuł odebranej wiadomości';
+                })
             }, function (error) {
                 console.log("getUserReceivedMessages: " + error);
             });
@@ -15,10 +16,10 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
 
         $scope.getSentMessages = function() {
             Message.getUserSentMessages().then(function (response) {
-                $scope.sentMessages = response.data.sendedMessages; // literowka od nich do zmiany
-                angular.forEach($scope.sentMessages, function(eachObj) {
-                    eachObj.title ='aaaaaa';
-                });
+                $scope.messages = response.data.sentMessages;
+                angular.forEach($scope.messages, function(eachObj) {
+                    eachObj.title ='Tytuł wysłanej wiadomości';
+                })
             }, function(error){
                 console.log("getUserSentMessages: "+error);
             });
@@ -28,12 +29,10 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
             if(newView == "received") {
                 $scope.getReceivedMessages();
                 $scope.currentViewText = "Odebrane wiadomości";
-                $scope.currentView = "received";
             }
-            else if(newView == "sent"){
+            else if(newView == "sent") {
                 $scope.getSentMessages();
                 $scope.currentViewText = "Wysłane wiadomości";
-                $scope.currentView = "sent";
             }
             else if(newView == "send") {
                 $('#sendMsgModal')
@@ -47,38 +46,40 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.sendMsg = function() {
             delete $scope.sendMessage.title;    // TEMP
             Message.sendMessageByEmail($scope.sendMessage).then(function(response){
-                if(response.data.result != true && response.data.status == 200) {
-                    if(response.data.message=="Receiver doesn't exist") {
+                if(response.data.result != true && response.status == 200) {
+                    if(response.data.message ==="Receiver doesn't exist") {
                         $scope.receiverDoesntExist = true;
-                    } else if(response.data.message=="Receiver and author are the same") {
-                        $scope.receiverAndAuthorAreTheSame = true;
+                    } else if(response.data.message ==="Receiver and author are the same") {
+                        $scope.receiverAndAuthorAreTheSame = true;  // w api (/jeszcze) nie dziala mimo, ze tak napisali
                     }
                 }
-                else if(response.data.status == 200) {
+                else if(response.data.result == true && response.status == 200) {
+                    if($scope.currentViewText === "Odebrane wiadomości") {
+                        $scope.setView('received');
+                    }
+                    else {
+                        $scope.setView('sent');
+                    }
+
                     $('#sendMsgModal')
-                        .modal('hide');     // cos nie dziala, nie wiem jeszcze czemu
+                        .modal('hide');
+
                     $scope.sendMessage = {};
+                    $scope.sendMsgModalForm.$setPristine();
+                    $scope.sendMsgModalForm.$setUntouched();
                 }
             });
         };
-        
-        $scope.showMsg = function(msgId, type) {
-            if(type == 'received') {
-                for (var i = 0; i < $scope.receivedMessages.length; i++) {
-                    if ($scope.receivedMessages[i].id === msgId) {
-                        $scope.viewMessage = $scope.receivedMessages[i];
-                        break;
-                    }
+
+        $scope.showMsg = function(msgId) {
+            for (var i = 0; i < $scope.messages.length; i++) {
+                if ($scope.messages[i].id === msgId) {
+                    $scope.viewMessage = $scope.messages[i];
+                    break;
                 }
             }
-            else {
-                for (i = 0; i < $scope.sentMessages.length; i++) {
-                    if ($scope.sentMessages[i].id === msgId) {
-                        $scope.viewMessage = $scope.sentMessages[i];
-                        break;
-                    }
-                }
-            }
+            console.log($scope.viewMessage.content);
+
             $('#viewMsgModal')
                 .modal('show');
         };
@@ -86,7 +87,6 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.sendMessage = {};
         $scope.viewMessage = {};
         $scope.getReceivedMessages();
-        $scope.currentView = "received";
         $scope.currentViewText = "Odebrane wiadomości";
 
     }]);

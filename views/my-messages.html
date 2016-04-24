@@ -11,60 +11,39 @@
         <div class="row">
             <div class="ten wide column">
                 <button class="ui medium teal button" ng-click="setView('send')" type="button"><i class="Edit icon"></i>Napisz</button>
-                <button data-ng-disabled="currentView=='received'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
-                <button data-ng-disabled="currentView=='sent'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
+                <button data-ng-disabled="currentViewText=='Odebrane wiadomości'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
+                <button data-ng-disabled="currentViewText=='Wysłane wiadomości'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
             </div>
         </div>
         <div class="row">
             <div class="ten wide column">
-                <div data-ng-show="currentView=='received'">
-                    <table data-ng-if="receivedMessages.length > 0" class="ui padded collapsing celled teal table" style="margin-top: 20px">
-                        <tbody>
-                        <tr data-ng-repeat="receivedMessage in receivedMessages">
-                            <td>
-                                <h4><a class="accent-color-link" type="button" ng-click="showMsg(receivedMessage.id, 'received')">{{receivedMessage.title}}</a></h4>
-                            </td>
-                            <td>
-                                {{receivedMessage.date | date: 'short'}}
-                            </td>
-                            <td>
-                                <a class="accent-color-link" href="#/profile/{{receivedMessage.author.id}}" type="button">
-                                    Od: {{receivedMessage.author.name}} {{receivedMessage.author.surname}}
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="ui Orange segment" data-ng-if="receivedMessages.length === 0">
-                        Nie odebrano jeszcze żadnych wiadomości.
-                    </div>
-                </div>
-                <div data-ng-show="currentView=='sent'">
-                    <table data-ng-if="sentMessages.length > 0" class="ui padded collapsing celled teal table" style="margin-top: 20px">
-                        <tbody>
-                        <tr data-ng-repeat="sentMessage in sentMessages">
-                            <td>
-                                <h4><a class="accent-color-link" type="button" ng-click="showMsg(sentMessage.id, 'sent')">{{sentMessage.title}}</a></h4>
-                            </td>
-                            <td>
-                                {{sentMessage.date | date: 'short'}}
-                            </td>
-                            <td>
-                                <a class="accent-color-link" href="#/profile/{{sentMessage.receiver.id}}" type="button">
-                                    Do: {{sentMessage.receiver.name}} {{sentMessage.receiver.surname}}
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="ui Orange segment" data-ng-if="sentMessages.length === 0">
-                        Nie wysłano jeszcze żadnych wiadomości.
-                    </div>
+                <table data-ng-if="messages.length > 0" class="ui padded celled teal table" style="margin-top: 20px">
+                    <tbody>
+                    <tr data-ng-repeat="message in messages">
+                        <td>
+                            <h4><a class="accent-color-link" type="button" ng-click="showMsg(message.id)">{{message.title}}</a></h4>
+                        </td>
+                        <td>
+                            {{message.date | date: 'short'}}
+                        </td>
+                        <td>
+                            <a class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
+                                <span ng-if="currentViewText=='Odebrane wiadomości'">Od: </span>
+                                <span ng-if="currentViewText=='Wysłane wiadomości'">Do: </span>
+                                {{message.author.name}} {{message.author.surname}}
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="ui Orange segment" data-ng-if="messages.length === 0">
+                    Nie ma tu jeszcze żadnych wiadomości.
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="ui small modal" id="sendMsgModal">
         <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
@@ -82,13 +61,13 @@
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
                         <label><i class="Edit icon"></i>Tytuł wiadomości</label>
-                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100" required>
+                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100">
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
                         <label><i class="Newspaper icon"></i>Treść wiadomości</label>
                         <textarea data-ng-model="sendMessage.content" type="text" name="content" placeholder="Treść wiadomości" maxlength="500"></textarea>
                     </div>
-                    <button class="ui left floated medium blue button" type="submit">Wyslij</button>
+                    <button data-ng-disabled="sendMsgModalForm.$invalid" class="ui left floated medium teal button" type="submit">Wyslij</button>
                 </form>
             </div>
         </div>
@@ -100,23 +79,23 @@
             <div class="eight wide column centered">
                 <div class="inline field">
                     <h4><i class="User icon"></i>Nadawca</h4>
-                    <p>{{viewMessage.author.name}} {{viewMessage.author.surname}} <{{viewMessage.author.email}}></p>
+                    <p></p>
                 </div>
                 <div class="inline field">
                     <h4><i class="User icon"></i>Odbiorca</h4>
-                    <p>{{viewMessage.receiver.name}} {{viewMessage.receiver.surname}} <{{viewMessage.receiver.email}}></p>
+                    <p></p>
                 </div>
                 <div class="field">
                     <h4><i class="Calendar icon"></i>Data wysłania</h4>
-                    <p>{{viewMessage.date}}</p>
+                    <span ng-bind="viewMessage.date"></span>
                 </div>
                 <div class="field">
                     <h4><i class="Edit icon"></i>Tytuł wiadomości</h4>
-                    <p>{{viewMessage.title}}</p>
+                    <p ng-bind="viewMessage.title"></p>
                 </div>
                 <div class="field">
                     <h4><i class="Newspaper icon"></i>Treść wiadomości</h4>
-                    <p>{{viewMessage.content}}</p>
+                    <p ng-bind="viewMessage.content"></p>
                 </div>
             </div>
         </div>
