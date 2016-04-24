@@ -8,13 +8,34 @@
 .primary-dark-color{                                                            color: #0097A7; }
 .accent-color, .ui.steps .active.step .icon, .ui.steps .step.active .title{     color: #FF6F00; }
 
-.primary-color.button{          box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:transparent;}
-.accent-color.button{        box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:transparent;}
-.primary-light-color.button{    box-shadow: 0 0 0 1px #B2EBF2 inset!important; color: #B2EBF2 !important; background-color:transparent;}
-.primary-dark-color.button{     box-shadow: 0 0 0 1px #0097A7 inset!important; color: #0097A7 !important; background-color:transparent;}
+.primary-color.button{
+    box-shadow: 0 0 0 2px #00ACC1 inset!important;
+    color: #00ACC1 !important;
+    background-color:transparent;
+}
+
+.accent-color.button{
+    box-shadow: 0 0 0 2px #FF6F00 inset!important;
+    color: #FF6F00 !important;
+    background-color:transparent;
+}
+
+.primary-light-color.button{
+    box-shadow: 0 0 0 2px #B2EBF2 inset!important;
+    color: #B2EBF2 !important;
+    background-color:transparent;
+}
+
+.primary-dark-color.button{
+    box-shadow: 0 0 0 2px #0097A7 inset!important;
+    color: #0097A7 !important;
+    background-color:transparent;
+}
 
 .accent-color.button:hover{
-     box-shadow: 0 0 0 1px #00ACC1 inset!important; color: #00ACC1 !important; background-color:transparent;
+    box-shadow: 0 0 0 2px #00ACC1 inset!important;
+    color: #00ACC1 !important;
+    background-color:transparent;
  }
 
 .accent-color.button:focus{
@@ -22,7 +43,9 @@
 }
 
 .primary-color.button:hover{
-    box-shadow: 0 0 0 1px #FF6F00 inset!important; color: #FF6F00 !important; background-color:transparent;
+    box-shadow: 0 0 0 2px #FF6F00 inset!important;
+    color: #FF6F00 !important;
+    background-color:transparent;
 }
 
 .primary-color.button:focus{

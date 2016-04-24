@@ -1,7 +1,7 @@
 <div data-ng-controller="MyPackagesController">
     <div class="ui grid centered">
         <div data-ng-show="logged">
-            <div class="margin-top-30px" data-ng-if="!contentLoaded">
+            <div margin-top-loader data-ng-if="!contentLoaded">
                 <div class="ui active large centered inline loader"></div>
             </div>
             <div class="ui Orange segment" data-ng-if="reservations.length === 0 && contentLoaded">

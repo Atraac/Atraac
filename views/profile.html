@@ -6,7 +6,10 @@
                 <i class="user icon"></i>
                 Dane użytkownika
             </h4>
-            <div class="ui two column grid stackable">
+            <div class="margin-top-loader" data-ng-if="!userLoaded">
+                <div class="ui active large centered inline loader"></div>
+            </div>
+            <div data-ng-if="userLoaded" class="ui two column grid stackable">
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
