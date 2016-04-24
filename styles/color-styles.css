@@ -91,3 +91,7 @@ a.accent-color-link:hover, span.orderBy:hover{
 .grey-text{
     color: gray; !important;
 }
+
+a.author:hover{
+    color: #FF6F00;
+}

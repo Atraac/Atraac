@@ -5,12 +5,13 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
         $scope.commentLoaded = false;
         $scope.user = null;
         $scope.comments = null;
-        $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
+        $scope.isCurrentUserProfile = null;
 
         User.getUser($routeParams.userId).then(function (response) {
             if(response.status == 200) {
                 $scope.user = response.data;
                 $scope.user.birthDate = new Date(response.data.birthDate);
+                $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
                 $scope.userLoaded = true;
             }
         }, function(error){
@@ -25,4 +26,8 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
             $scope.commentLoaded = true;
             console.log(error);
         });
+
+        $scope.openReplyCommentModal = function (commentId) {
+            
+        }
     }]);

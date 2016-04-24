@@ -35,9 +35,9 @@
                         <p>Telefon: <strong>{{user.phoneNumber}}</strong></p>
                         <p>Email: <strong>{{user.email}}</strong></p>
                         <p>Auto: <strong>{{user.car}}</strong></p>
-                        <p data-ng-show="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
-                        <p data-ng-show="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
-                        <a data-ng-show="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
+                        <p data-ng-if="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
+                        <p data-ng-if="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
+                        <a data-ng-if="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
                     </div>
                 </div>
             </div>
@@ -62,12 +62,16 @@
                         <img src="./content/pictures/brak.jpg">
                     </a>
                     <div class="content">
-                        <a class="author">{{comment.author.name}} {{comment.author.surname}}</a>
+                        <a class="author" href="#/profile/{{comment.author.id}}" type="button">{{comment.author.name}} {{comment.author.surname}}</a>
                         <div class="metadata">
+                            <rating id="my-rating{{comment.id}}" readonly="true" size="small" type="star" data-ng-model="comment.rate"></rating>
                             <span class="date">{{comment.date}}</span>
                         </div>
                         <div class="text">
                             {{comment.content}}
+                        </div>
+                        <div class="actions">
+                            <a data-ng-click="openReplyCommentModal(commentId)" data-ng-if="comment.response === null && isCurrentUserProfile" class="reply">Odpowiedz</a>
                         </div>
                     </div>
                     <div data-ng-if="comment.response !== null" class="comments">
