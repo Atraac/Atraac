@@ -11,5 +11,9 @@ commentFactory.factory('Comment', ['$http', 'Urls',
             return $http.post(Urls.Base+'comments/response', replyComment);
         };
 
+        Comment.getUserComments = function (userId) {
+            return $http.get(Urls.Base+'users/'+userId+'/comments');
+        }
+
         return Comment;
     }]);
