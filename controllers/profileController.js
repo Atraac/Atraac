@@ -2,8 +2,9 @@ var profileController = angular.module('profileController', ['userFactory', 'com
 profileController.controller('ProfileController', ['$scope', 'User', '$location', '$rootScope', '$routeParams', 'Comment',
     function ($scope, User, $location, $rootScope, $routeParams, Comment) {
         $scope.userLoaded = false;
-        $scope.user = {};
-        $scope.comments = {};
+        $scope.commentLoaded = false;
+        $scope.user = null;
+        $scope.comments = null;
         $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
 
         User.getUser($routeParams.userId).then(function (response) {
@@ -14,11 +15,14 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
             }
         }, function(error){
             console.log("getUser: "+ error);
+            $scope.userLoaded = true;
         });
 
         Comment.getUserComments($routeParams.userId).then(function (response) {
-            $scope.comments = response.data;
+            $scope.comments = response.data.comments;
+            $scope.commentLoaded = true;
         }, function (error) {
+            $scope.commentLoaded = true;
             console.log(error);
         });
     }]);

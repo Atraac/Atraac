@@ -9,7 +9,10 @@
             <div class="margin-top-loader" data-ng-if="!userLoaded">
                 <div class="ui active large centered inline loader"></div>
             </div>
-            <div data-ng-if="userLoaded" class="ui two column grid stackable">
+            <div class="ui red segment center aligned" data-ng-if="user === null && userLoaded">
+                Błąd serwera. Nie można wczytać użytkownika.
+            </div>
+            <div data-ng-if="userLoaded && user !== null" class="ui two column grid stackable">
                 <div class="column center aligned">
                     <div class="ui center aligned">
                         <div class="ui header">
@@ -44,62 +47,41 @@
                 <i class="Write icon"></i>
                 Komentarze
             </h4>
-            <div class="ui comments">
-                <div class="comment">
+            <div class="margin-top-loader" data-ng-if="!commentLoaded">
+                <div class="ui active large centered inline loader"></div>
+            </div>
+            <div class="ui red segment center aligned" data-ng-if="comments === null && commentLoaded">
+                Błąd serwera. Nie można wczytać komentarzy.
+            </div>
+            <div class="ui Orange segment center aligned" data-ng-if="comments.length === 0 && commentLoaded">
+                Użytkownik nie posiada jeszcze żadnych komentarzy.
+            </div>
+            <div data-ng-if="comments.length > 0 && commentLoaded" class="ui comments">
+                <div class="comment" data-ng-repeat="comment in comments">
                     <a class="avatar">
-                        <img src="./content/pictures/lolek.jpg">
+                        <img src="./content/pictures/brak.jpg">
                     </a>
                     <div class="content">
-                        <a class="author">Matt</a>
+                        <a class="author">{{comment.author.name}} {{comment.author.surname}}</a>
                         <div class="metadata">
-                            <span class="date">Today at 5:42PM</span>
+                            <span class="date">{{comment.date}}</span>
                         </div>
                         <div class="text">
-                            How artistic!
+                            {{comment.content}}
                         </div>
                     </div>
-                    <div class="comments">
+                    <div data-ng-if="comment.response !== null" class="comments">
                         <div class="comment">
                             <a class="avatar">
-                                <img src="./content/pictures/daniel.jpg">
+                                <img src="./content/pictures/brak.jpg">
                             </a>
                             <div class="content">
-                                <a class="author">Jenny Hess</a>
+                                <a class="author">{{user.name}} {{user.surname}}</a>
                                 <div class="metadata">
-                                    <span class="date">Just now</span>
+                                    <span class="date">{{comment.response.date}}</span>
                                 </div>
                                 <div class="text">
-                                    Elliot you are always so right :)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <a class="avatar">
-                        <img src="./content/pictures/maciek.jpg">
-                    </a>
-                    <div class="content">
-                        <a class="author">Elliot Fu</a>
-                        <div class="metadata">
-                            <span class="date">Yesterday at 12:30AM</span>
-                        </div>
-                        <div class="text">
-                            <p>This has been very useful for my research. Thanks as well!</p>
-                        </div>
-                    </div>
-                    <div class="comments">
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="./content/pictures/daniel.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">Jenny Hess</a>
-                                <div class="metadata">
-                                    <span class="date">Just now</span>
-                                </div>
-                                <div class="text">
-                                    Elliot you are always so right :)
+                                    {{comment.response.content}}
                                 </div>
                             </div>
                         </div>
