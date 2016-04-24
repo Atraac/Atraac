@@ -1,16 +1,24 @@
 <div data-ng-controller="GreetingController">
     <div class="container ui">
-        <h2 class="center aligned ui icon huge header">
+        <h2 id="greeting-title" class="center aligned ui icon huge header">
             <i class="car icon primary-color"></i>
             <div class="content">
                 DeliverIT
-                <div class="sub header">Portal społecznościowy do obsługi przesyłek</div>
+                <div class="sub header">
+                    <div id ="title-shape" class="ui text shape">
+                        <div class="sides">
+                            <div class="active ui sub-header side">Portal społecznościowy do obsługi przesyłek</div>
+                            <div class="ui sub-header side">Bez kłopotliwych formalności</div>
+                            <div class="ui sub-header side">Bezpośredni kontakt z kierowcą</div>
+                            <div class="ui sub-header side">Możliwość śledzenia paczki w czasie rzeczywistym</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </h2>
         <h4 class="ui horizontal divider header">
             <i class="accent-color Star icon"></i>
         </h4>
-
         <div data-ng-show="logged && yanek" class="ui grid centered">
             <div class="row ui">
                 <h2>Proponowane przejazdy</h2>
@@ -185,7 +193,10 @@
     $(document).ready(function(){
         $('.ui.rating')
                 .rating();
-        $('.shape').shape('flip up');
+        $('#greeting-title').mouseenter(function () {
+            $('#title-shape').shape('flip up');
+        });
+        $('#title-shape').shape();
     });
 
 </script>
