@@ -1,18 +1,18 @@
 <div data-ng-controller="MyMessagesController">
     <div data-ng-show="logged" class="ui grid centered">
         <div class="row">
+            <div class="ten wide column center aligned">
+                <button style="display: inline-block" class="ui medium teal button" ng-click="setView('send')" type="button"><i class="Edit icon"></i>Napisz</button>
+                <button style="display: inline-block" data-ng-disabled="currentViewText=='Odebrane wiadomości'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
+                <button style="display: inline-block" data-ng-disabled="currentViewText=='Wysłane wiadomości'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
+            </div>
+        </div>
+        <div class="row">
             <div class="ten wide column">
                 <h4 class="ui horizontal divider header">
                     <i class="Mail icon"></i>
                     {{currentViewText}}
                 </h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="ten wide column">
-                <button class="ui medium teal button" ng-click="setView('send')" type="button"><i class="Edit icon"></i>Napisz</button>
-                <button data-ng-disabled="currentViewText=='Odebrane wiadomości'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
-                <button data-ng-disabled="currentViewText=='Wysłane wiadomości'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
             </div>
         </div>
         <div class="row">
@@ -42,9 +42,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
     <div class="ui small modal" id="sendMsgModal">
         <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
             <div class="eight wide column centered">
@@ -72,8 +69,6 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="ui small modal" id="viewMsgModal">
         <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
             <div class="eight wide column centered">
@@ -87,15 +82,15 @@
                 </div>
                 <div class="field">
                     <h4><i class="Calendar icon"></i>Data wysłania</h4>
-                    <span ng-bind="viewMessage.date"></span>
+                    {{viewMessage.date}}
                 </div>
                 <div class="field">
                     <h4><i class="Edit icon"></i>Tytuł wiadomości</h4>
-                    <p ng-bind="viewMessage.title"></p>
+                    {{viewMessage.title}}
                 </div>
                 <div class="field">
                     <h4><i class="Newspaper icon"></i>Treść wiadomości</h4>
-                    <p ng-bind="viewMessage.content"></p>
+                    {{viewMessage.content}}
                 </div>
             </div>
         </div>
