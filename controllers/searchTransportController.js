@@ -2,7 +2,7 @@ var searchTransportController = angular.module('searchTransportController', ['tr
 
 searchTransportController.controller('SearchTransportController', ['$scope', 'Urls', 'Transport', 'Cities', 'Preferences', '$http', '$rootScope',
     function ($scope, Urls, Transport, Cities, Preferences) {
-
+        $scope.preferencesLoaded = false;
         Cities.getCities().then(function (response) {
             if(response.status == 200) {
                 $scope.cities = response.data.cities;
@@ -10,15 +10,20 @@ searchTransportController.controller('SearchTransportController', ['$scope', 'Ur
             else {
                 alert("Wystąpił problem połączenia z serwerem")
             }
+        }, function (error) {
+            console.log(error);
         });
 
         Preferences.getPreferences().then(function (response) {
             if (response.status == 200) {
                 $scope.preferences = response.data.preferences;
+                $scope.preferencesLoaded = true;
             }
             else {
                 alert("Wystąpił problem połączenia z serwerem")
             }
+        }, function (error) {
+            console.log(error);
         });
 
         $scope.selection = [];

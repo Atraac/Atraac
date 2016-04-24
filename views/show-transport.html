@@ -1,5 +1,8 @@
 <div class="ui container" data-ng-controller="ShowTransportController">
-    <div data-ng-if="error" class="ui centered card red">
+    <div class="margin-top-30px" data-ng-if="!contentLoaded">
+        <div class="ui active large centered inline loader"></div>
+    </div>
+    <div data-ng-if="error && contentLoaded" class="ui centered card red">
             <div class="content center aligned">
                 <div class="header">
                     Przykro mi! :(
@@ -9,7 +12,7 @@
                 </div>
             </div>
     </div>
-    <div data-ng-if="!error" class="ui grid stackable">
+    <div data-ng-if="!error && contentLoaded" class="ui grid stackable">
         <div class="four wide column center aligned">
             <div class="row">
                 <h4 class="ui horizontal divider header">

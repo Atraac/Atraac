@@ -5,7 +5,7 @@ showTransportController.controller('ShowTransportController',
     ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation', 'Comment',
     function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation, Comment) {
         'use strict'
-        $scope.something = 'ShowTransportController';
+        $scope.contentLoaded = false;
         $scope.transport = {};
         $scope.reservation = {};
         $scope.comment = {};
@@ -183,6 +183,7 @@ showTransportController.controller('ShowTransportController',
                             }
                         }
                     }
+                    $scope.contentLoaded = true;
                 }
 
                 if($scope.transport.state === 'OVER' || $scope.transport.state === 'INPROGRESS' || $scope.transport.state === 'CANCELED'

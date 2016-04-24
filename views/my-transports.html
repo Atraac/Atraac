@@ -1,9 +1,12 @@
     <div data-ng-controller="MyTransportsController">
     <div class="ui grid centered">
-        <div class="ui Orange segment" data-ng-if="transports.transports.length === 0">
+        <div class="margin-top-30px" data-ng-if="!contentLoaded">
+            <div class="ui active large centered inline loader"></div>
+        </div>
+        <div class="ui Orange segment" data-ng-if="transports.transports.length === 0 && contentLoaded">
             Nie posiadasz jeszcze swoich transportów.
         </div>
-        <table data-ng-if="transports.transports.length > 0" class="ui very basic collapsing celled table">
+        <table data-ng-if="transports.transports.length > 0 && contentLoaded" class="ui very basic collapsing celled table">
             <thead>
                 <tr>
                     <th>

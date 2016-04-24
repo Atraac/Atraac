@@ -44,7 +44,10 @@
                         <div class="three wide column">
                             <div class="grouped fields">
                                 <label><i class="Suitcase icon"></i>Akceptowane paczki</label>
-                                <div class="field">
+                                <div style="margin-top: 20px" data-ng-if="!preferencesLoaded">
+                                    <div class="ui active centered inline loader"></div>
+                                </div>
+                                <div class="field" data-ng-if="preferencesLoaded">
                                     <div style="display: block; margin-bottom: 5px" class="ui slider checkbox" data-ng-repeat="preference in preferences">
                                         <input
                                                 type="checkbox"
