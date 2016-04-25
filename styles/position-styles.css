@@ -111,3 +111,26 @@ img.profile-image.image.center.ui.tiny {
 .margin-top-loader{
     margin-top: 50px;
 }
+
+a.author{
+    transition: all 0.7s ease-in-out;
+}
+
+a.author:hover{
+    color: #FF6F00 !important;
+    font-size: 1.1em !important;
+}
+
+a.author.modal-content{
+    font-weight: 900 !important;
+    margin-bottom: 10px !important;
+}
+
+.modal-bottom-margin{
+    margin-bottom: 5px !important;
+}
+
+.modal-metadata{
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+}

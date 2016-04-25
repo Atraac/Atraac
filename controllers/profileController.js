@@ -6,6 +6,16 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
         $scope.user = null;
         $scope.comments = null;
         $scope.isCurrentUserProfile = null;
+        $scope.commentInModal = null;
+
+        $scope.openReplyCommentModal = function(comment){
+            $scope.commentInModal = comment;
+            $('#replyCommentModal').modal('show');
+        };
+
+        $scope.closeReplyCommentModal = function(){
+            $('#replyCommentModal').modal('hide');
+        };
 
         User.getUser($routeParams.userId).then(function (response) {
             if(response.status == 200) {
@@ -19,16 +29,28 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
             $scope.userLoaded = true;
         });
 
-        Comment.getUserComments($routeParams.userId).then(function (response) {
-            $scope.comments = response.data.comments;
-            $scope.commentLoaded = true;
-        }, function (error) {
-            $scope.commentLoaded = true;
-            console.log(error);
-        });
+        $scope.getUserComments = function()
+        {
+            Comment.getUserComments($routeParams.userId).then(function (response) {
+                $scope.comments = response.data.comments;
+                $scope.commentLoaded = true;
+            }, function (error) {
+                $scope.commentLoaded = true;
+                console.log(error);
+            });
+        }
 
-        $scope.openReplyCommentModal = function (commentId) {
-            
+        $scope.getUserComments();
+
+        $scope.replyToComment = function(){
+            $scope.commentReply.commentId = $scope.commentInModal.id;
+            Comment.replyToComment($scope.commentReply).then(function (response) {
+                console.log(response.data);
+                $scope.closeReplyCommentModal();
+                $scope.getUserComments();
+            }, function (error) {
+                console.log(error.toString);
+            });
         };
 
         $scope.sendMessage = {};

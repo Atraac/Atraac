@@ -1,5 +1,4 @@
 <div class="ui container" data-ng-controller="ProfileController">
-
     <div class="ui grid stackable">
         <div class="eight wide column">
             <h4 class="ui horizontal divider header">
@@ -72,7 +71,7 @@
                             {{comment.content}}
                         </div>
                         <div class="actions">
-                            <a data-ng-click="openReplyCommentModal(commentId)" data-ng-if="comment.response === null && isCurrentUserProfile" class="reply">Odpowiedz</a>
+                            <a data-ng-click="openReplyCommentModal(comment)" data-ng-if="comment.response === null && isCurrentUserProfile" class="reply">Odpowiedz</a>
                         </div>
                     </div>
                     <div data-ng-if="comment.response !== null" class="comments">
@@ -92,6 +91,46 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="replyCommentModal" class="ui small modal">
+        <i data-ng-click="closeReplyCommentModal()" class="close icon"></i>
+        <div class="header">
+            Odpowidz na komentarz!
+        </div>
+        <div class="content">
+            <div class="ui grid center stackable">
+                <div class="two wide column"></div>
+                <div class="six wide column">
+                    <div class="row">
+                        <div class="ui comments">
+                            <div class="content">
+                                <a class="author modal-content" href="#/profile/{{commentInModal.author.id}}" type="button">{{commentInModal.author.name}} {{commentInModal.author.surname}}</a>
+                                <div class="metadata modal-metadata">
+                                    <rating class="modal-bottom-margin" style="display: block;" id="my-rating{{commentInModal.id}}modal" readonly="true" size="small" type="star" data-ng-model="commentInModal.rate"></rating>
+                                    <span class="date modal-bottom-margin">{{commentInModal.date}}</span>
+                                </div>
+                                <div class="text">
+                                    {{commentInModal.content}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <div class="row">
+                        <form class="ui form" name="replyToCommentForm" data-ng-submit="replyToComment()" novalidate>
+                            <div class="field" data-ng-class="{'error' : replyToCommentForm.content.$invalid && replyToCommentForm.content.$touched }">
+                                <label><i class="write icon"></i>Treść odpowiedzi</label>
+                                <textarea data-ng-model="commentReply.content" type="description" maxlength="250" name="commentReply" placeholder="Odpowiedź..." required></textarea>
+                            </div>
+                            <button class="ui right floated accent-color button" type="submit">Odpowiedz</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="two wide column"></div>
             </div>
         </div>
     </div>
