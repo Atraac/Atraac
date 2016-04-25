@@ -6,9 +6,9 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.getReceivedMessages = function() {
             Message.getUserReceivedMessages().then(function (response) {
                 $scope.messages = response.data.receivedMessages;
-                angular.forEach($scope.messages, function(eachObj) {
+                /*angular.forEach($scope.messages, function(eachObj) {
                     eachObj.title ='Tytuł odebranej wiadomości';
-                })
+                })*/
             }, function (error) {
                 console.log("getUserReceivedMessages: " + error);
             });
@@ -17,9 +17,9 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.getSentMessages = function() {
             Message.getUserSentMessages().then(function (response) {
                 $scope.messages = response.data.sentMessages;
-                angular.forEach($scope.messages, function(eachObj) {
+                /*angular.forEach($scope.messages, function(eachObj) {
                     eachObj.title ='Tytuł wysłanej wiadomości';
-                })
+                })*/
             }, function(error){
                 console.log("getUserSentMessages: "+error);
             });
@@ -44,7 +44,7 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.receiverAndAuthorAreTheSame = false;
 
         $scope.sendMsg = function() {
-            delete $scope.sendMessage.title;    // TEMP
+            //delete $scope.sendMessage.title;    // TEMP
             Message.sendMessageByEmail($scope.sendMessage).then(function(response){
                 if(response.data.result != true && response.status == 200) {
                     if(response.data.message ==="Receiver doesn't exist") {
@@ -61,12 +61,12 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
                         $scope.setView('sent');
                     }
 
-                    $('#sendMsgModal')
-                        .modal('hide');
-
                     $scope.sendMessage = {};
                     $scope.sendMsgModalForm.$setPristine();
                     $scope.sendMsgModalForm.$setUntouched();
+
+                    $('#sendMsgModal')
+                        .modal('hide');
                 }
             });
         };
@@ -78,8 +78,6 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
                     break;
                 }
             }
-            console.log($scope.viewMessage.content);
-
             $('#viewMsgModal')
                 .modal('show');
         };

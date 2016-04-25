@@ -28,9 +28,8 @@
                         </td>
                         <td>
                             <a class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
-                                <span ng-if="currentViewText=='Odebrane wiadomości'">Od: </span>
-                                <span ng-if="currentViewText=='Wysłane wiadomości'">Do: </span>
-                                {{message.author.name}} {{message.author.surname}}
+                                <span ng-if="currentViewText=='Odebrane wiadomości'">Od: {{message.author.name}} {{message.author.surname}}</span>
+                                <span ng-if="currentViewText=='Wysłane wiadomości'">Do: {{message.receiver.name}} {{message.receiver.surname}}</span>
                             </a>
                         </td>
                     </tr>
@@ -58,7 +57,7 @@
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
                         <label><i class="Edit icon"></i>Tytuł wiadomości</label>
-                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100">
+                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100" required>
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
                         <label><i class="Newspaper icon"></i>Treść wiadomości</label>
@@ -74,23 +73,29 @@
             <div class="eight wide column centered">
                 <div class="inline field">
                     <h4><i class="User icon"></i>Nadawca</h4>
-                    <p></p>
+                    <p>
+                        {{viewMessage.author.name}} {{viewMessage.author.surname}} <br />
+                        <{{viewMessage.author.email}}>
+                    </p>
                 </div>
                 <div class="inline field">
                     <h4><i class="User icon"></i>Odbiorca</h4>
-                    <p></p>
+                    <p>
+                        {{viewMessage.receiver.name}} {{viewMessage.receiver.surname}} <br />
+                        <{{viewMessage.receiver.email}}>
+                    </p>
                 </div>
                 <div class="field">
                     <h4><i class="Calendar icon"></i>Data wysłania</h4>
-                    {{viewMessage.date}}
+                    <p>{{viewMessage.date}}</p>
                 </div>
                 <div class="field">
                     <h4><i class="Edit icon"></i>Tytuł wiadomości</h4>
-                    {{viewMessage.title}}
+                    <p>{{viewMessage.title}}</p>
                 </div>
                 <div class="field">
                     <h4><i class="Newspaper icon"></i>Treść wiadomości</h4>
-                    {{viewMessage.content}}
+                    <p>{{viewMessage.content}}</p>
                 </div>
             </div>
         </div>
