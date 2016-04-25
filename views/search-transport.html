@@ -39,7 +39,23 @@
                                 <label><i class="Calendar icon"></i>Data nadania paczki</label>
                                 <input data-ng-model="departureDate" id="departureDate" type="text" name="departureDate" readonly="readonly" required>
                             </div>
-
+                            <div class="field">
+                                <label><i class="Dollar icon"></i>Cena przewozu</label>
+                            </div>
+                            <div class="inline fields center aligned">
+                                <div class="eight wide field">
+                                    <input data-ng-model="searchTransport.minPrice" type="number" name="minPrice" placeholder="0.00">
+                                </div>
+                                <div class="one wide field center aligned">
+                                    <i class="Minus icon"></i>
+                                </div>
+                                <div class="eight wide field">
+                                    <input data-ng-model="searchTransport.maxPrice" type="number" name="maxPrice" placeholder="0.00">
+                                </div>
+                                <div class="two wide field">
+                                    <h5>Zł</h5>
+                                </div>
+                            </div>
                         </div>
                         <div class="three wide column">
                             <div class="grouped fields">
@@ -74,6 +90,7 @@
                         </div>
                         <div class="four wide column">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="five wide column">
@@ -137,6 +154,9 @@
                         Czas wyjazdu
                     </th>
                     <th>
+                        Cena
+                    </th>
+                    <th>
                         Rodzaje paczek
                     </th>
                 </tr>
@@ -150,8 +170,8 @@
                                 <a class="accent-color-link" type="button" href="#/profile/{{transport.driver.id}}">{{transport.driver.name}} {{transport.driver.surname}}</a>
                                 <p></p><rating id="my-rating{{transport.id}}" size="small" readonly="true" type="star" data-ng-model="transport.driver.rating | round"></rating></p>
                                 <p>
-                                    <div data-ng-show="(transport.driver.rating <= 0)" class="sub header">Ocena: Brak ocen</div>
-                                    <div data-ng-show="(transport.driver.rating > 0)" class="sub header">Ocena: {{transport.driver.rating}}</div>
+                                <div data-ng-show="(transport.driver.rating <= 0)" class="sub header">Ocena: Brak ocen</div>
+                                <div data-ng-show="(transport.driver.rating > 0)" class="sub header">Ocena: {{transport.driver.rating}}</div>
                                 </p>
                             </div>
 
@@ -165,6 +185,9 @@
                     </td>
                     <td>
                         {{transport.departureDate | date:'yyyy-MM-dd HH:mm'}}
+                    </td>
+                    <td>
+                        {{transport.minPrice}}zł - {{transport.maxPrice}}zł
                     </td>
                     <td>
                     <span data-ng-repeat="preference in transport.preferences">

@@ -1,14 +1,12 @@
 var myMessagesController = angular.module('myMessagesController', ['messageFactory']);
 
-myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
-    function ($scope, Message) {
+myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope', 'Message',
+    function ($scope, $rootScope, Message) {
 
         $scope.getReceivedMessages = function() {
             Message.getUserReceivedMessages().then(function (response) {
                 $scope.messages = response.data.receivedMessages;
-                /*angular.forEach($scope.messages, function(eachObj) {
-                    eachObj.title ='Tytuł odebranej wiadomości';
-                })*/
+                $scope.messages.reverse();
             }, function (error) {
                 console.log("getUserReceivedMessages: " + error);
             });
@@ -17,9 +15,7 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
         $scope.getSentMessages = function() {
             Message.getUserSentMessages().then(function (response) {
                 $scope.messages = response.data.sentMessages;
-                /*angular.forEach($scope.messages, function(eachObj) {
-                    eachObj.title ='Tytuł wysłanej wiadomości';
-                })*/
+                $scope.messages.reverse();
             }, function(error){
                 console.log("getUserSentMessages: "+error);
             });
@@ -34,23 +30,15 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
                 $scope.getSentMessages();
                 $scope.currentViewText = "Wysłane wiadomości";
             }
-            else if(newView == "send") {
-                $('#sendMsgModal')
-                    .modal('show');
-            }
         };
 
         $scope.receiverDoesntExist = false;
-        $scope.receiverAndAuthorAreTheSame = false;
 
         $scope.sendMsg = function() {
-            //delete $scope.sendMessage.title;    // TEMP
-            Message.sendMessageByEmail($scope.sendMessage).then(function(response){
+            Message.sendMessageById($scope.sendMessage).then(function(response){
                 if(response.data.result != true && response.status == 200) {
                     if(response.data.message ==="Receiver doesn't exist") {
                         $scope.receiverDoesntExist = true;
-                    } else if(response.data.message ==="Receiver and author are the same") {
-                        $scope.receiverAndAuthorAreTheSame = true;  // w api (/jeszcze) nie dziala mimo, ze tak napisali
                     }
                 }
                 else if(response.data.result == true && response.status == 200) {
@@ -79,6 +67,18 @@ myMessagesController.controller('MyMessagesController', ['$scope', 'Message',
                 }
             }
             $('#viewMsgModal')
+                .modal('show');
+        };
+
+        $scope.reply = function() {
+            if($scope.viewMessage.author.id == $rootScope.loggedUser.id) {
+                $scope.sendMessage.receiverId = $scope.viewMessage.receiver.id;
+            }
+            else {
+                $scope.sendMessage.receiverId = $scope.viewMessage.author.id;
+            }
+            $scope.sendMessage.title = "Re: " + $scope.viewMessage.title;
+            $('#sendMsgModal')
                 .modal('show');
         };
 

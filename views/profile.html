@@ -38,6 +38,7 @@
                         <p data-ng-if="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
                         <p data-ng-if="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
                         <a data-ng-if="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
+                        <button data-ng-if="!isCurrentUserProfile" style="display: inline-block; margin-top: 15px" class="ui right floated medium teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
                     </div>
                 </div>
             </div>
@@ -91,6 +92,35 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui small modal" id="sendMsgModal">
+        <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
+            <div class="eight wide column centered">
+                <form class="ui form" name="sendMsgModalForm" data-ng-submit="sendMsg()" novalidate>
+                    <div class="header">
+                        <h2 class="ui horizontal divider header"><i class="Mail icon"></i></h2>
+                        <ul>
+                            <li class="has-error" data-ng-show="sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched" class="help-block">Pole Tytuł wiadomości jest puste!</li>
+                            <li class="has-error" data-ng-show="receiverDoesntExist" class="help-block">Podany odbiorca nie istnieje!</li>
+                        </ul>
+                        <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
+                            <label><i class="Edit icon"></i>Tytuł wiadomości</label>
+                            <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="" maxlength="50" required>
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top:20px; margin-bottom : 15px;">
+                        <label><i class="User icon"></i>Odbiorca</label>
+                        {{user.name}} {{user.surname}}
+                    </div>
+                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
+                        <label><i class="Newspaper icon"></i>Treść wiadomości</label>
+                        <textarea data-ng-model="sendMessage.content" type="text" name="content" placeholder="Treść wiadomości" maxlength="500"></textarea>
+                    </div>
+                    <button data-ng-disabled="sendMsgModalForm.$invalid" class="ui left floated medium teal button" type="submit">Wyslij</button>
+                </form>
             </div>
         </div>
     </div>

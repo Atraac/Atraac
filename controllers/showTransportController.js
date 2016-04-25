@@ -4,7 +4,7 @@ var showTransportController = angular.module('showTransportController',
 showTransportController.controller('ShowTransportController', 
     ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation', 'Comment',
     function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation, Comment) {
-        'use strict'
+        'use strict';
         $scope.contentLoaded = false;
         $scope.transport = {};
         $scope.reservation = {};
@@ -31,7 +31,7 @@ showTransportController.controller('ShowTransportController',
             }, function (error) {
                 console.log(error.toString);
             });
-        }
+        };
 
         $scope.addComment = function (reservationId) {
             $scope.comment.reservationId = reservationId;
@@ -43,7 +43,7 @@ showTransportController.controller('ShowTransportController',
             }, function (error) {
                 console.log(error.toString);
             });
-        }
+        };
 
         $scope.changeTransportState = function (state) {
             Transport.changeTransportState($scope.transport.id, {newTransportState: state}).then(function (response) {
@@ -113,7 +113,7 @@ showTransportController.controller('ShowTransportController',
             $scope.noPreference = false;
             $scope.hideModalReservation = true;
             $('#addReservationModal').modal('hide');
-        }
+        };
 
         $scope.onReservation = function(){
             if(!$scope.hideModalReservation){
@@ -198,7 +198,31 @@ showTransportController.controller('ShowTransportController',
                 console.log(error);
                 $scope.error = true;
             });
-        }
+        };
 
         getCurrentTransport();
+
+        $scope.sendMessage = {};
+
+        $scope.contact = function() {
+            $scope.sendMessage.receiverId = $scope.transport.driver.userId;
+            $('#sendMsgModal')
+                .modal('show');
+        };
+
+        $scope.sendMsg = function() {
+            Message.sendMessageById($scope.sendMessage).then(function(response){
+                if(response.data.result != true && response.status == 200) {
+                    if(response.data.message ==="Receiver doesn't exist") {
+                        $scope.receiverDoesntExist = true;
+                    }
+                }
+                $scope.sendMessage = {};
+                $scope.sendMsgModalForm.$setPristine();
+                $scope.sendMsgModalForm.$setUntouched();
+
+                $('#sendMsgModal')
+                    .modal('hide');
+            });
+        };
     }]);

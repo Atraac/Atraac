@@ -2,7 +2,6 @@
     <div data-ng-show="logged" class="ui grid centered">
         <div class="row">
             <div class="ten wide column center aligned">
-                <button style="display: inline-block" class="ui medium teal button" ng-click="setView('send')" type="button"><i class="Edit icon"></i>Napisz</button>
                 <button style="display: inline-block" data-ng-disabled="currentViewText=='Odebrane wiadomości'" class="ui medium teal button" ng-click="setView('received')" type="button">Odebrane</button>
                 <button style="display: inline-block" data-ng-disabled="currentViewText=='Wysłane wiadomości'" class="ui medium teal button" ng-click="setView('sent')" type="button">Wysłane</button>
             </div>
@@ -21,7 +20,7 @@
                     <tbody>
                     <tr data-ng-repeat="message in messages">
                         <td>
-                            <h4><a class="accent-color-link" type="button" ng-click="showMsg(message.id)">{{message.title}}</a></h4>
+                            <h4><a class="accent-color-link" type="button" ng-click="showMsg(message.id)">{{message.title | limitTo : 20}}</a></h4>
                         </td>
                         <td>
                             {{message.date | date: 'short'}}
@@ -41,23 +40,25 @@
             </div>
         </div>
     </div>
+
     <div class="ui small modal" id="sendMsgModal">
         <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
             <div class="eight wide column centered">
                 <form class="ui form" name="sendMsgModalForm" data-ng-submit="sendMsg()" novalidate>
-                    <ul>
-                        <li class="has-error" data-ng-show="sendMsgModalForm.receiverEmail.$invalid && sendMsgModalForm.receiverEmail.$touched" class="help-block">Odbiorca jest wymagany</li>
-                        <li class="has-error" data-ng-show="sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched" class="help-block">Pole Tytuł wiadomości jest puste!</li>
-                        <li class="has-error" data-ng-show="receiverDoesntExist" class="help-block">Podany odbiorca nie istnieje!</li>
-                        <li class="has-error" data-ng-show="receiverAndAuthorAreTheSame" class="help-block">Nie możesz wysyłać wiadomości do samego siebie!</li>
-                    </ul>
-                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.receiverEmail.$invalid && sendMsgModalForm.receiverEmail.$touched }">
-                        <label><i class="User icon"></i>Odbiorca</label>
-                        <input data-ng-model="sendMessage.receiverEmail" type="email" name="receiverEmail" placeholder="odbiorca@gmail.com" maxlength="100" required>
+                    <div class="header">
+                        <h2 class="ui horizontal divider header"><i class="Mail icon"></i></h2>
+                        <ul>
+                            <li class="has-error" data-ng-show="sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched" class="help-block">Pole Tytuł wiadomości jest puste!</li>
+                            <li class="has-error" data-ng-show="receiverDoesntExist" class="help-block">Podany odbiorca nie istnieje!</li>
+                        </ul>
+                        <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
+                            <label><i class="Edit icon"></i>Tytuł wiadomości</label>
+                            <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="" maxlength="50" required>
+                        </div>
                     </div>
-                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
-                        <label><i class="Edit icon"></i>Tytuł wiadomości</label>
-                        <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="Tytuł wiadomości" maxlength="100" required>
+                    <div class="field" style="margin-top:20px; margin-bottom : 15px;">
+                        <label><i class="User icon"></i>Odbiorca</label>
+                        {{viewMessage.author.name}} {{viewMessage.author.surname}}
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
                         <label><i class="Newspaper icon"></i>Treść wiadomości</label>
@@ -68,36 +69,44 @@
             </div>
         </div>
     </div>
+
     <div class="ui small modal" id="viewMsgModal">
         <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
-            <div class="eight wide column centered">
-                <div class="inline field">
-                    <h4><i class="User icon"></i>Nadawca</h4>
-                    <p>
-                        {{viewMessage.author.name}} {{viewMessage.author.surname}} <br />
-                        <{{viewMessage.author.email}}>
-                    </p>
+            <form class="ui form" novalidate>
+                <div class="eight wide column">
+                    <div class="header">
+                        <h2 class="ui horizontal divider header"><i class="Mail icon"></i></h2>
+                        <p style="color : dimgrey; text-align: center">{{viewMessage.date}}</p>
+                        <div class="field">
+                            <h4 style="text-align: center">{{viewMessage.title}}</h4>
+                        </div>
+                    </div>
+                    <div class="ui grid stackable center aligned">
+                        <div class="eight wide column">
+                            <div class="field" style="margin-top:20px; margin-bottom : 15px;">
+                                <h4><i class="User icon"></i>Nadawca</h4>
+                                <p>
+                                    {{viewMessage.author.name}} {{viewMessage.author.surname}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="eight wide column">
+                            <div class="field" style="margin-top:20px; margin-bottom : 15px;">
+                                <h4><i class="User icon"></i>Odbiorca</h4>
+                                <p>
+                                    {{viewMessage.receiver.name}} {{viewMessage.receiver.surname}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <textarea readonly type="text" maxlength="500">{{viewMessage.content}}</textarea>
+                    </div>
+                    <div class="footer">
+                        <button style="display: inline-block; margin-top: 15px" class="ui right floated medium teal button" ng-click="reply()" type="button">Odpowiedz</button>
+                    </div>
                 </div>
-                <div class="inline field">
-                    <h4><i class="User icon"></i>Odbiorca</h4>
-                    <p>
-                        {{viewMessage.receiver.name}} {{viewMessage.receiver.surname}} <br />
-                        <{{viewMessage.receiver.email}}>
-                    </p>
-                </div>
-                <div class="field">
-                    <h4><i class="Calendar icon"></i>Data wysłania</h4>
-                    <p>{{viewMessage.date}}</p>
-                </div>
-                <div class="field">
-                    <h4><i class="Edit icon"></i>Tytuł wiadomości</h4>
-                    <p>{{viewMessage.title}}</p>
-                </div>
-                <div class="field">
-                    <h4><i class="Newspaper icon"></i>Treść wiadomości</h4>
-                    <p>{{viewMessage.content}}</p>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

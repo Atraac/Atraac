@@ -1,6 +1,6 @@
-var profileController = angular.module('profileController', ['userFactory', 'commentFactory']);
-profileController.controller('ProfileController', ['$scope', 'User', '$location', '$rootScope', '$routeParams', 'Comment',
-    function ($scope, User, $location, $rootScope, $routeParams, Comment) {
+var profileController = angular.module('profileController', ['userFactory', 'commentFactory', 'messageFactory']);
+profileController.controller('ProfileController', ['$scope', 'User', '$location', '$rootScope', '$routeParams', 'Comment', 'Message',
+    function ($scope, User, $location, $rootScope, $routeParams, Comment, Message) {
         $scope.userLoaded = false;
         $scope.commentLoaded = false;
         $scope.user = null;
@@ -29,5 +29,29 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
 
         $scope.openReplyCommentModal = function (commentId) {
             
-        }
+        };
+
+        $scope.sendMessage = {};
+
+        $scope.contact = function() {
+            $scope.sendMessage.receiverId = $routeParams.userId;
+            $('#sendMsgModal')
+                .modal('show');
+        };
+        
+        $scope.sendMsg = function() {
+            Message.sendMessageById($scope.sendMessage).then(function(response){
+                if(response.data.result != true && response.status == 200) {
+                    if(response.data.message ==="Receiver doesn't exist") {
+                        $scope.receiverDoesntExist = true;
+                    }
+                }
+                    $scope.sendMessage = {};
+                    $scope.sendMsgModalForm.$setPristine();
+                    $scope.sendMsgModalForm.$setUntouched();
+
+                    $('#sendMsgModal')
+                        .modal('hide');
+            });
+        };
     }]);

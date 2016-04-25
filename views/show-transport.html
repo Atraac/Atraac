@@ -3,14 +3,14 @@
         <div class="ui active large centered inline loader"></div>
     </div>
     <div data-ng-if="error && contentLoaded" class="ui centered card red">
-            <div class="content center aligned">
-                <div class="header">
-                    Przykro mi! :(
-                </div>
-                <div class="description">
-                    Nie ma takiego transportu.
-                </div>
+        <div class="content center aligned">
+            <div class="header">
+                Przykro mi! :(
             </div>
+            <div class="description">
+                Nie ma takiego transportu.
+            </div>
+        </div>
     </div>
     <div data-ng-if="!error && contentLoaded" class="ui grid stackable">
         <div class="four wide column center aligned">
@@ -31,9 +31,10 @@
                             <p>Nazwisko: <strong>{{transport.driver.surname}}</strong></p>
                             <p>Auto: <strong>{{transport.driver.car}}</strong></p>
                             <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
-                            <p>Email: <strong>{{transport.driver.email}}</strong></p>
+                            <p data-ng-show="yanek">Email: <strong>{{transport.driver.email}}</strong></p>
                         </div>
                     </a>
+                    <button ng-show="!userIsDriver" style="display: inline-block; margin-top: 15px; margin-bottom: 15px" class="ui medium teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
                 </div>
             </div>
             <div class="row ">
@@ -246,10 +247,10 @@
                                     <a class="grow" style="display: inline-block" href="#/profile/{{reservation.sender.id}}" type="button">
                                         <h5 class="ui image header">
                                             <img src="./content/pictures/brak.jpg" class="ui mini image">
-                                        <div class="content">
-                                            <p class="margin-bottom-5px">Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
-                                            <p class="margin-bottom-5px">Email: <strong>{{transport.driver.email}}</strong></p>
-                                        </div>
+                                            <div class="content">
+                                                <p class="margin-bottom-5px">Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
+                                                <p class="margin-bottom-5px">Email: <strong>{{transport.driver.email}}</strong></p>
+                                            </div>
                                         </h5>
                                     </a>
                                 </div>
@@ -460,5 +461,32 @@
             </form>
         </div>
     </div>
-
+    <div class="ui small modal" id="sendMsgModal">
+        <div class="ui grid stackable" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px">
+            <div class="eight wide column centered">
+                <form class="ui form" name="sendMsgModalForm" data-ng-submit="sendMsg()" novalidate>
+                    <div class="header">
+                        <h2 class="ui horizontal divider header"><i class="Mail icon"></i></h2>
+                        <ul>
+                            <li class="has-error" data-ng-show="sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched" class="help-block">Pole Tytuł wiadomości jest puste!</li>
+                            <li class="has-error" data-ng-show="receiverDoesntExist" class="help-block">Podany odbiorca nie istnieje!</li>
+                        </ul>
+                        <div class="field" data-ng-class="{'error' : sendMsgModalForm.title.$invalid && sendMsgModalForm.title.$touched }">
+                            <label><i class="Edit icon"></i>Tytuł wiadomości</label>
+                            <input data-ng-model="sendMessage.title" type="text" name="title" placeholder="" maxlength="50" required>
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top:20px; margin-bottom : 15px;">
+                        <label><i class="User icon"></i>Odbiorca</label>
+                        {{transport.driver.name}} {{transport.driver.surname}}
+                    </div>
+                    <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
+                        <label><i class="Newspaper icon"></i>Treść wiadomości</label>
+                        <textarea data-ng-model="sendMessage.content" type="text" name="content" placeholder="Treść wiadomości" maxlength="500"></textarea>
+                    </div>
+                    <button data-ng-disabled="sendMsgModalForm.$invalid" class="ui left floated medium teal button" type="submit">Wyslij</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
