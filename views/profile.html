@@ -38,7 +38,7 @@
                         <p data-ng-if="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
                         <p data-ng-if="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
                         <a data-ng-if="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
-                        <button data-ng-if="!isCurrentUserProfile" style="display: inline-block; margin-top: 15px" class="ui right floated medium teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
+                        <button data-ng-if="!isCurrentUserProfile" style="display: inline-block; margin-top: 15px" class="ui large teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
                     </div>
                 </div>
             </div>

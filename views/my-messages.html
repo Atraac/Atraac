@@ -26,9 +26,11 @@
                             {{message.date | date: 'short'}}
                         </td>
                         <td>
-                            <a class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
-                                <span ng-if="currentViewText=='Odebrane wiadomości'">Od: {{message.author.name}} {{message.author.surname}}</span>
-                                <span ng-if="currentViewText=='Wysłane wiadomości'">Do: {{message.receiver.name}} {{message.receiver.surname}}</span>
+                            <a ng-if="currentViewText=='Odebrane wiadomości'" class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
+                                Od: {{message.author.name}} {{message.author.surname}}
+                            </a>
+                            <a ng-if="currentViewText=='Wysłane wiadomości'" class="accent-color-link" href="#/profile/{{message.receiver.id}}" type="button">
+                                Do: {{message.receiver.name}} {{message.receiver.surname}}
                             </a>
                         </td>
                     </tr>

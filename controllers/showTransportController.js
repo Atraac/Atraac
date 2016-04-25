@@ -1,9 +1,9 @@
 var showTransportController = angular.module('showTransportController', 
-    ['transportFactory', 'preferencesFactory', 'reservationFactory', 'commentFactory']);
+    ['transportFactory', 'preferencesFactory', 'reservationFactory', 'commentFactory', 'messageFactory']);
 
 showTransportController.controller('ShowTransportController', 
-    ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation', 'Comment',
-    function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation, Comment) {
+    ['$rootScope', '$scope', '$http', 'Transport', '$routeParams', 'Preferences', 'Reservation', 'Comment', 'Message',
+    function ($rootScope, $scope, $http, Transport, $routeParams, Preferences, Reservation, Comment, Message) {
         'use strict';
         $scope.contentLoaded = false;
         $scope.transport = {};
@@ -21,6 +21,7 @@ showTransportController.controller('ShowTransportController',
         $scope.userReservation = null;
         $scope.rate = 3;
         $scope.commentReply = {};
+        $scope.sendMessage = {};
         
         $scope.replyToComment = function(commentId, commentContent){
             $scope.commentReply.commentId = commentId;
@@ -201,8 +202,6 @@ showTransportController.controller('ShowTransportController',
         };
 
         getCurrentTransport();
-
-        $scope.sendMessage = {};
 
         $scope.contact = function() {
             $scope.sendMessage.receiverId = $scope.transport.driver.userId;
