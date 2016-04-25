@@ -2,23 +2,32 @@ var profileController = angular.module('profileController', ['userFactory', 'com
 profileController.controller('ProfileController', ['$scope', 'User', '$location', '$rootScope', '$routeParams', 'Comment',
     function ($scope, User, $location, $rootScope, $routeParams, Comment) {
         $scope.userLoaded = false;
-        $scope.user = {};
-        $scope.comments = {};
-        $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
+        $scope.commentLoaded = false;
+        $scope.user = null;
+        $scope.comments = null;
+        $scope.isCurrentUserProfile = null;
 
         User.getUser($routeParams.userId).then(function (response) {
             if(response.status == 200) {
                 $scope.user = response.data;
                 $scope.user.birthDate = new Date(response.data.birthDate);
+                $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
                 $scope.userLoaded = true;
             }
         }, function(error){
             console.log("getUser: "+ error);
+            $scope.userLoaded = true;
         });
 
         Comment.getUserComments($routeParams.userId).then(function (response) {
-            $scope.comments = response.data;
+            $scope.comments = response.data.comments;
+            $scope.commentLoaded = true;
         }, function (error) {
+            $scope.commentLoaded = true;
             console.log(error);
         });
+
+        $scope.openReplyCommentModal = function (commentId) {
+            
+        }
     }]);
