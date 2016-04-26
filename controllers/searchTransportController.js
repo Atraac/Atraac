@@ -3,9 +3,12 @@ var searchTransportController = angular.module('searchTransportController', ['tr
 searchTransportController.controller('SearchTransportController', ['$scope', 'Urls', 'Transport', 'Cities', 'Preferences', '$http', '$rootScope',
     function ($scope, Urls, Transport, Cities, Preferences) {
         $scope.preferencesLoaded = false;
+        $scope.citiesLoaded = false;
+
         Cities.getCities().then(function (response) {
             if(response.status == 200) {
                 $scope.cities = response.data.cities;
+                $scope.citiesLoaded = true;
             }
             else {
                 alert("Wystąpił problem połączenia z serwerem")

@@ -3,10 +3,22 @@ var myMessagesController = angular.module('myMessagesController', ['messageFacto
 myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope', 'Message',
     function ($scope, $rootScope, Message) {
 
+        $scope.messagesLoaded = false;
+        $scope.currentMessages = [];
+        $scope.pageNumber = 1;
+        $scope.totalPages = 1;
+        $scope.resultsPerPage = 6;
+
+        $scope.messageSent = true;
+
         $scope.getReceivedMessages = function() {
             Message.getUserReceivedMessages().then(function (response) {
                 $scope.messages = response.data.receivedMessages;
                 $scope.messages.reverse();
+                $scope.currentMessages = $scope.messages.slice(0, $scope.resultsPerPage);
+                $scope.pageNumber = 1;
+                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage) - 1;
+                $scope.messagesLoaded = true;
             }, function (error) {
                 console.log("getUserReceivedMessages: " + error);
             });
@@ -16,17 +28,38 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
             Message.getUserSentMessages().then(function (response) {
                 $scope.messages = response.data.sentMessages;
                 $scope.messages.reverse();
+                $scope.currentMessages = $scope.messages.slice(0, $scope.resultsPerPage);
+                $scope.pageNumber = 1;
+                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage) - 1;
+                $scope.messagesLoaded = true;
             }, function(error){
                 console.log("getUserSentMessages: "+error);
             });
         };
 
+        $scope.getPreviousMessages = function() {
+            if($scope.pageNumber > 1) {
+                $scope.pageNumber--;
+                $scope.currentMessages = $scope.messages.slice(($scope.pageNumber - 1) * $scope.resultsPerPage, $scope.pageNumber * $scope.resultsPerPage);
+
+            }
+        };
+
+        $scope.getNextMessages = function() {
+            if($scope.pageNumber < $scope.totalPages) {
+                $scope.pageNumber++;
+                $scope.currentMessages = $scope.messages.slice($scope.pageNumber * $scope.resultsPerPage, ($scope.pageNumber + 1) * $scope.resultsPerPage);
+            }
+        };
+
         $scope.setView = function(newView) {
             if(newView == "received") {
+                $scope.messagesLoaded = false;
                 $scope.getReceivedMessages();
                 $scope.currentViewText = "Odebrane wiadomości";
             }
             else if(newView == "sent") {
+                $scope.messagesLoaded = false;
                 $scope.getSentMessages();
                 $scope.currentViewText = "Wysłane wiadomości";
             }
@@ -35,13 +68,17 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
         $scope.receiverDoesntExist = false;
 
         $scope.sendMsg = function() {
+            $scope.messageSent = false;
             Message.sendMessageById($scope.sendMessage).then(function(response){
                 if(response.data.result != true && response.status == 200) {
                     if(response.data.message ==="Receiver doesn't exist") {
                         $scope.receiverDoesntExist = true;
+                        $scope.messageSent = true;
                     }
                 }
                 else if(response.data.result == true && response.status == 200) {
+                    $scope.messageSent = true;
+                    
                     if($scope.currentViewText === "Odebrane wiadomości") {
                         $scope.setView('received');
                     }

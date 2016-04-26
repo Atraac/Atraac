@@ -27,12 +27,18 @@
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point0.$invalid && addTransportForm.point0.$touched }">
                     <label><i class="Flag Outline icon"></i>Wyruszam z</label>
-                    <select class="dropdown-bottom-margin" id="point0Dropdown" name="point0" data-ng-model="routes.point0" data-ng-options="point0City.name for point0City in cities" required>
+                    <div data-ng-if="!citiesLoaded">
+                        <div class="ui active centered inline loader"></div>
+                    </div>
+                    <select data-ng-if="citiesLoaded" class="dropdown-bottom-margin" id="point0Dropdown" name="point0" data-ng-model="routes.point0" data-ng-options="point0City.name for point0City in cities" required>
                     </select>
                 </div>
                 <div class="field">
                     <label><i class="Ellipsis Vertical icon"></i>Jadę przez</label>
-                    <select class="dropdown-bottom-margin" id="point1Dropdown" data-ng-model="routes.point1" data-ng-options="point1City.name for point1City in cities" data-ng-change="addPoint(2)">
+                    <div data-ng-if="!citiesLoaded">
+                        <div class="ui active centered inline loader"></div>
+                    </div>
+                    <select data-ng-if="citiesLoaded" class="dropdown-bottom-margin" id="point1Dropdown" data-ng-model="routes.point1" data-ng-options="point1City.name for point1City in cities" data-ng-change="addPoint(2)">
                         <option value=""></option>
                     </select>
                     <select class="dropdown-bottom-margin" id="point2Dropdown" data-ng-model="routes.point2" data-ng-options="point2City.name for point2City in cities" data-ng-change="addPoint(3)" data-ng-show=" points >= 2">
@@ -53,7 +59,10 @@
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.point7.$invalid && addTransportForm.point7.$touched }">
                     <label><i class="Flag icon"></i>Wyruszam do</label>
-                    <select id="point7Dropdown" name="point7" data-ng-model="routes.point7" data-ng-options="point7City.name for point7City in cities" required>
+                    <div data-ng-if="!citiesLoaded">
+                        <div class="ui active centered inline loader"></div>
+                    </div>
+                    <select data-ng-if="citiesLoaded" id="point7Dropdown" name="point7" data-ng-model="routes.point7" data-ng-options="point7City.name for point7City in cities" required>
                     </select>
                 </div>
                 <div class="field" data-ng-class="{'error' : addTransportForm.description.$invalid && addTransportForm.description.$touched }">
@@ -77,7 +86,10 @@
                 </div>
                 <div class="grouped fields">
                     <label><i class="Suitcase icon"></i>Paczki jakie mogę zabrać</label>
-                    <div class="field">
+                    <div style="margin-top: 20px" data-ng-if="!preferencesLoaded">
+                        <div class="ui active centered inline loader"></div>
+                    </div>
+                    <div class="field" data-ng-if="preferencesLoaded">
                         <div style="display: block; margin-bottom: 5px " class="ui slider checkbox" data-ng-repeat="preference in preferences">
                             <input
                                     type="checkbox"

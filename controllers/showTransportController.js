@@ -204,7 +204,7 @@ showTransportController.controller('ShowTransportController',
         getCurrentTransport();
 
         $scope.contact = function() {
-            $scope.sendMessage.receiverId = $scope.transport.driver.userId;
+            $scope.sendMessage.receiverId = $scope.transport.driver.id;
             $('#sendMsgModal')
                 .modal('show');
         };
@@ -216,12 +216,14 @@ showTransportController.controller('ShowTransportController',
                         $scope.receiverDoesntExist = true;
                     }
                 }
+
+                $('#sendMsgModal')
+                    .modal('hide');
+
                 $scope.sendMessage = {};
                 $scope.sendMsgModalForm.$setPristine();
                 $scope.sendMsgModalForm.$setUntouched();
 
-                $('#sendMsgModal')
-                    .modal('hide');
             });
         };
     }]);

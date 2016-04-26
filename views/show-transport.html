@@ -31,11 +31,10 @@
                             <p>Nazwisko: <strong>{{transport.driver.surname}}</strong></p>
                             <p>Auto: <strong>{{transport.driver.car}}</strong></p>
                             <p>Telefon: <strong>{{transport.driver.phoneNumber}}</strong></p>
-                            <p data-ng-show="yanek">Email: <strong>{{transport.driver.email}}</strong></p>
                         </div>
                     </a>
-                    <button ng-show="!userIsDriver" style="display: inline-block; margin-top: 15px; margin-bottom: 15px" class="ui medium teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
                 </div>
+                <button ng-show="!userIsDriver" style="display: inline-block; margin-top: 15px; margin-bottom: 15px" class="ui medium teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
             </div>
             <div class="row ">
                 <h4 class="ui horizontal divider header">

@@ -1,9 +1,13 @@
 var addTransportController = angular.module('addTransportController', ['citiesFactory', 'preferencesFactory', 'transportFactory']);
 addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 'Cities', 'Preferences', '$http', 'Transport', '$rootScope', '$location',
     function ($scope, Urls, Cities, Preferences, $http, Transport, $rootScope, $location) {
+        $scope.preferencesLoaded = false;
+        $scope.citiesLoaded = false;
+
         Cities.getCities().then(function (response) {
             if (response.status == 200) {
                 $scope.cities = response.data.cities;
+                $scope.citiesLoaded = true;
             }
             else {
                 alert("Wystąpił problem połączenia z serwerem.\n Spróbuj ponownie za chwilę.")
@@ -13,6 +17,7 @@ addTransportController.controller('AddTransportController', [ '$scope', 'Urls', 
         Preferences.getPreferences().then(function (response) {
             if (response.status == 200) {
                 $scope.preferences = response.data.preferences;
+                $scope.preferencesLoaded = true;
             }
             else {
                 alert("Wystąpił problem połączenia z serwerem.\n Spróbuj ponownie za chwilę.")
