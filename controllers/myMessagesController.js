@@ -9,15 +9,13 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
         $scope.totalPages = 1;
         $scope.resultsPerPage = 6;
 
-        $scope.messageSent = true;
-
         $scope.getReceivedMessages = function() {
             Message.getUserReceivedMessages().then(function (response) {
                 $scope.messages = response.data.receivedMessages;
                 $scope.messages.reverse();
                 $scope.currentMessages = $scope.messages.slice(0, $scope.resultsPerPage);
                 $scope.pageNumber = 1;
-                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage) - 1;
+                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage);
                 $scope.messagesLoaded = true;
             }, function (error) {
                 console.log("getUserReceivedMessages: " + error);
@@ -30,7 +28,7 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
                 $scope.messages.reverse();
                 $scope.currentMessages = $scope.messages.slice(0, $scope.resultsPerPage);
                 $scope.pageNumber = 1;
-                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage) - 1;
+                $scope.totalPages = Math.ceil($scope.messages.length / $scope.resultsPerPage);
                 $scope.messagesLoaded = true;
             }, function(error){
                 console.log("getUserSentMessages: "+error);
@@ -39,16 +37,15 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
 
         $scope.getPreviousMessages = function() {
             if($scope.pageNumber > 1) {
+                $scope.currentMessages = $scope.messages.slice(($scope.pageNumber - 2) * $scope.resultsPerPage, ($scope.pageNumber - 1) * $scope.resultsPerPage);
                 $scope.pageNumber--;
-                $scope.currentMessages = $scope.messages.slice(($scope.pageNumber - 1) * $scope.resultsPerPage, $scope.pageNumber * $scope.resultsPerPage);
-
             }
         };
 
         $scope.getNextMessages = function() {
             if($scope.pageNumber < $scope.totalPages) {
-                $scope.pageNumber++;
                 $scope.currentMessages = $scope.messages.slice($scope.pageNumber * $scope.resultsPerPage, ($scope.pageNumber + 1) * $scope.resultsPerPage);
+                $scope.pageNumber++;
             }
         };
 
@@ -78,7 +75,7 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
                 }
                 else if(response.data.result == true && response.status == 200) {
                     $scope.messageSent = true;
-                    
+
                     if($scope.currentViewText === "Odebrane wiadomości") {
                         $scope.setView('received');
                     }
@@ -114,7 +111,7 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
             else {
                 $scope.sendMessage.receiverId = $scope.viewMessage.author.id;
             }
-            $scope.sendMessage.title = "Re: " + $scope.viewMessage.title;
+            $scope.sendMessage.title = "Re: " + $scope.viewMessage.title.substring(0,44);
             $('#sendMsgModal')
                 .modal('show');
         };

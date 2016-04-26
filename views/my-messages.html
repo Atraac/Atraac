@@ -26,7 +26,7 @@
                             <a class="accent-color-link" type="button" ng-click="showMsg(message.id)" href="">{{message.title | limitTo : 20}}</a>
                         </td>
                         <td>
-                            {{message.date | date: 'short'}}
+                            {{message.date | date:'MM-dd-yyyy HH:mm'}}
                         </td>
                         <td>
                             <a ng-if="currentViewText=='Odebrane wiadomości'" class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
@@ -77,16 +77,18 @@
                     </div>
                     <div class="field" style="margin-top:20px; margin-bottom : 15px;">
                         <label><i class="User icon"></i>Odbiorca</label>
-                        {{viewMessage.author.name}} {{viewMessage.author.surname}}
+                        <p ng-if="currentViewText=='Odebrane wiadomości'">
+                            {{viewMessage.author.name}} {{viewMessage.author.surname}}
+                        </p>
+                        <p ng-if="currentViewText=='Wysłane wiadomości'">
+                            {{viewMessage.receiver.name}} {{viewMessage.receiver.surname}}
+                        </p>
                     </div>
                     <div class="field" data-ng-class="{'error' : sendMsgModalForm.content.$invalid && sendMsgModalForm.content.$touched }">
                         <label><i class="Newspaper icon"></i>Treść wiadomości</label>
                         <textarea data-ng-model="sendMessage.content" type="text" name="content" placeholder="Treść wiadomości" maxlength="500"></textarea>
                     </div>
-                    <div data-ng-if="!messageSent">
-                        <div class="ui active centered inline loader"></div>
-                    </div>
-                    <button data-ng-if="messageSent" data-ng-disabled="sendMsgModalForm.$invalid" class="ui left floated medium teal button" type="submit">Wyslij</button>
+                    <button data-ng-disabled="sendMsgModalForm.$invalid" class="ui left floated medium teal button" type="submit">Wyslij</button>
                 </form>
             </div>
         </div>
@@ -98,7 +100,7 @@
                 <div class="eight wide column">
                     <div class="header">
                         <h2 class="ui horizontal divider header"><i class="Mail icon"></i></h2>
-                        <p style="color : dimgrey; text-align: center">{{viewMessage.date}}</p>
+                        <p style="color : dimgrey; text-align: center">{{viewMessage.date | date:'MM-dd-yyyy HH:mm'}}</p>
                         <div class="field">
                             <h4 style="text-align: center">{{viewMessage.title}}</h4>
                         </div>
