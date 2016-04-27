@@ -43,6 +43,9 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
 
         $scope.deleteNotification = function (notificationId) {
             User.deleteNotification(notificationId).then(function (response) {
+                if(response.data.result === true){
+                    $rootScope.loggedUser.notificationQuantity--;
+                }
                 $scope.getNotifications();
             }, function (error) {
                 console.log(error);

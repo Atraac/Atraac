@@ -1,3 +1,13 @@
 th span:first-child:hover{
     cursor: pointer;
 }
+
+div div i.close-icon{
+    transition: all 0.7s ease-in-out;
+}
+
+div div i.close-icon:hover{
+    color: black !important;
+    font-size: 2em !important;
+    cursor: pointer;
+}
