@@ -72,12 +72,12 @@
                     <i class="List icon"></i> Twoje przejazdy
                 </a>
                 <a ng-show="logged"  ng-class="{ active: isActive('/my-messages') }" href="#my-messages" class="item">
-                    <i class="Mail icon"></i> Wiadomości
+                    <i class="Mail icon"><div style="display: inline;" class="ui orange small label">{{loggedUser.notReadMessagesQuantity}}</div></i> Wiadomości
                 </a>
 
                 <div class="right menu">
                     <a ng-show="logged"  ng-class="{ active: isActive('/profile/{{loggedUser.id}}') }" href="#profile/{{loggedUser.id}}" class="item">
-                        <i class="user icon "></i> {{loggedUser.name}} {{loggedUser.surname}}
+                        <i style="display: inline;" class="user icon "><div style="display: inline;" class="ui orange small label">{{loggedUser.notificationQuantity}}</div></i> {{loggedUser.name}} {{loggedUser.surname}}
                     </a>
                     <a ng-show="!logged" ng-class="{ active: isActive('/login') }" href="#login" class="item">
                         <i class="Sign in icon"></i>Logowanie
