@@ -4,6 +4,7 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
         $scope.userLoaded = false;
         $scope.commentLoaded = false;
         $scope.user = null;
+        $scope.notifications = null;
         $scope.comments = null;
         $scope.isCurrentUserProfile = null;
         $scope.commentInModal = null;
@@ -22,12 +23,34 @@ profileController.controller('ProfileController', ['$scope', 'User', '$location'
                 $scope.user = response.data;
                 $scope.user.birthDate = new Date(response.data.birthDate);
                 $scope.isCurrentUserProfile = $routeParams.userId==$rootScope.loggedUser.id;
+                if($scope.isCurrentUserProfile){
+                    $scope.getNotifications();
+                }
                 $scope.userLoaded = true;
             }
         }, function(error){
             console.log("getUser: "+ error);
             $scope.userLoaded = true;
         });
+
+        $scope.getNotifications = function () {
+            User.getNotifications().then(function (response) {
+                $scope.notifications = response.data;
+            }, function(error){
+                console.log(error);
+            });
+        }
+
+        $scope.deleteNotification = function (notificationId) {
+            User.deleteNotification(notificationId).then(function (response) {
+                if(response.data.result === true){
+                    $rootScope.loggedUser.notificationQuantity--;
+                }
+                $scope.getNotifications();
+            }, function (error) {
+                console.log(error);
+            });
+        };
 
         $scope.getUserComments = function()
         {

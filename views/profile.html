@@ -1,42 +1,65 @@
 <div class="ui container" data-ng-controller="ProfileController">
     <div class="ui grid stackable">
         <div class="eight wide column">
-            <h4 class="ui horizontal divider header">
-                <i class="user icon"></i>
-                Dane użytkownika
-            </h4>
-            <div class="margin-top-loader" data-ng-if="!userLoaded">
-                <div class="ui active large centered inline loader"></div>
-            </div>
-            <div class="ui red segment center aligned" data-ng-if="user === null && userLoaded">
-                Błąd serwera. Nie można wczytać użytkownika.
-            </div>
-            <div data-ng-if="userLoaded && user !== null" class="ui two column grid stackable">
-                <div class="column center aligned">
-                    <div class="ui center aligned">
-                        <div class="ui header">
-                            <rating id="my-rating" readonly="true" size="large" type="star" data-ng-model="user.rating | round"></rating>
-                            <span data-ng-show="user.rating!=0">{{user.rating}}</span>
-                            <span data-ng-show="user.rating==0">Brak ocen</span>
+            <div class="row">
+                <h4 class="ui horizontal divider header">
+                    <i class="user icon"></i>
+                    Dane użytkownika
+                </h4>
+                <div class="margin-top-loader" data-ng-if="!userLoaded">
+                    <div class="ui active large centered inline loader"></div>
+                </div>
+                <div class="ui red segment center aligned" data-ng-if="user === null && userLoaded">
+                    Błąd serwera. Nie można wczytać użytkownika.
+                </div>
+                <div data-ng-if="userLoaded && user !== null" class="ui two column grid stackable">
+                    <div class="column center aligned">
+                        <div class="ui center aligned">
+                            <div class="ui header">
+                                <rating id="my-rating" readonly="true" size="large" type="star" data-ng-model="user.rating | round"></rating>
+                                <span data-ng-show="user.rating!=0">{{user.rating}}</span>
+                                <span data-ng-show="user.rating==0">Brak ocen</span>
+                            </div>
+                            <div class="image right">
+                                <img src="./content/pictures/brak.jpg">
+                            </div>
                         </div>
-                        <div class="image right">
-                            <img src="./content/pictures/brak.jpg">
+                    </div>
+                    <div class="column center aligned">
+                        <div class="ui  center aligned">
+                            <p>Imię: <strong>{{user.name}}</strong></p>
+                            <p>Nazwisko: <strong>{{user.surname}}</strong></p>
+                            <p ng-show="yanek">Data urodzenia: <strong>{{user.birthDate | date:'dd-MM-yyyy'}}</strong></p>
+                            <p ng-show="yanek">Płeć: <strong>{{user.sex}}</strong></p>
+                            <p>Telefon: <strong>{{user.phoneNumber}}</strong></p>
+                            <p>Auto: <strong>{{user.car}}</strong></p>
+                            <p data-ng-if="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
+                            <p data-ng-if="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
+                            <a data-ng-if="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
+                            <button data-ng-if="!isCurrentUserProfile" style="display: inline-block; margin-top: 15px" class="ui large teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
                         </div>
                     </div>
                 </div>
-                <div class="column center aligned">
-                    <div class="ui  center aligned">
-
-                        <p>Imię: <strong>{{user.name}}</strong></p>
-                        <p>Nazwisko: <strong>{{user.surname}}</strong></p>
-                        <p ng-show="yanek">Data urodzenia: <strong>{{user.birthDate | date:'dd-MM-yyyy'}}</strong></p>
-                        <p ng-show="yanek">Płeć: <strong>{{user.sex}}</strong></p>
-                        <p>Telefon: <strong>{{user.phoneNumber}}</strong></p>
-                        <p>Auto: <strong>{{user.car}}</strong></p>
-                        <p data-ng-if="user.rating!=0">Ocena: <strong>{{user.rating}}</strong></p>
-                        <p data-ng-if="user.rating==0">Ocena: <strong>Brak ocen</strong></p>
-                        <a data-ng-if="isCurrentUserProfile" type="button" href="#edit-my-profile" class="ui large accent-color button">Edytuj profil</a>
-                        <button data-ng-if="!isCurrentUserProfile" style="display: inline-block; margin-top: 15px" class="ui large teal button" ng-click="contact()" type="button"><i class="Mail icon"></i>Napisz</button>
+            </div>
+            <div class="row" data-ng-if="notifications !== null && isCurrentUserProfile">
+                <h4 class="ui horizontal divider header">
+                    <i class="Alarm icon"></i>
+                    Powiadomienia
+                </h4>
+                <div class="ui orange segment center aligned" data-ng-if="notifications.length === 0">
+                    Nie masz żadnych nowych powiadomień.
+                </div>
+                <div class="ui Grey segment center aligned" data-ng-if="notifications.length > 0" data-ng-repeat="notification in notifications">
+                    <div style="display: inline-block; float: right" class="right aligned">
+                        <i data-ng-click="deleteNotification(notification.transportId)" class="Grey large close icon close-icon"></i>
+                    </div>
+                    <div style="display: inline-block">
+                        <div class="header">
+                            <h4><a class="accent-color-link" href="#/transports/{{notification.transportId}}" type="button">{{notification.transportTitle}}</a></h4>
+                        </div>
+                        <div class="content">
+                            <p>{{notification.content}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
