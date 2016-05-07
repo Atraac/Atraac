@@ -8,8 +8,8 @@ deliverIT.run(function ($rootScope, $http, $window, $localStorage, Account) {
     $rootScope.loggedUser = {};
     $rootScope.logged = false;
 
-    // ukrycie paru elementow dla prowadzacego
-    $rootScope.yanek = true;
+    // false by ukryc pare elementow UI dla prowadzacego
+    $rootScope.yanek = false;
     $rootScope.rateRoot = 0;
     if($window.localStorage.getItem('X-CustomToken')!=null){
         $rootScope.logged = true;
