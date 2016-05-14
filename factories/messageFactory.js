@@ -19,5 +19,9 @@ messageFactory.factory('Message', ['$http', 'Urls',
             return $http.post(Urls.Base+"users/messagebyid", message);
         };
 
+        Messages.markAsRead = function(id) {
+            return $http.put(Urls.Base+"/users/"+id+"/read");
+        };
+
         return Messages;
     }]);

@@ -94,7 +94,8 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
         };
 
         $scope.showMsg = function(msgId) {
-            for (var i = 0; i < $scope.messages.length; i++) {
+            var i;
+            for (i = 0; i < $scope.messages.length; i++) {
                 if ($scope.messages[i].id === msgId) {
                     $scope.viewMessage = $scope.messages[i];
                     break;
@@ -102,6 +103,11 @@ myMessagesController.controller('MyMessagesController', ['$scope', '$rootScope',
             }
             $('#viewMsgModal')
                 .modal('show');
+
+            if($scope.currentViewText = "Odebrane wiadomości" && $scope.messages[i].read === false) {
+                Message.markAsRead(msgId);
+                $scope.messages[i].read = true;
+            }
         };
 
         $scope.reply = function() {
