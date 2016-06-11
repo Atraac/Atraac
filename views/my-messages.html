@@ -23,11 +23,11 @@
                     <tbody>
                     <tr data-ng-repeat="message in currentMessages">
                         <td>
-                            <b data-ng-if="!message.read"><a class="accent-color-link" type="button" ng-click="showMsg(message.id)" href="">{{message.title | limitTo : 20}}</a></b>
-                            <a data-ng-if="message.read" class="accent-color-link" type="button" ng-click="showMsg(message.id)" href="">{{message.title | limitTo : 20}}</a>
+                            <b data-ng-if="!message.read"><a class="accent-color-link" type="button" ng-click="showMsg(message.id)" href="">{{message.title | limitTo : 30}}</a></b>
+                            <a data-ng-if="message.read" class="accent-color-link" type="button" ng-click="showMsg(message.id)" href="">{{message.title | limitTo : 30}}</a>
                         </td>
                         <td>
-                            {{message.date | date:'MM-dd-yyyy HH:mm'}}
+                            {{message.date | date:'MM-dd-yyyy'}}
                         </td>
                         <td>
                             <a ng-if="currentViewText=='Odebrane wiadomości'" class="accent-color-link" href="#/profile/{{message.author.id}}" type="button">
