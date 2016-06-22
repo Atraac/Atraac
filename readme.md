@@ -23,33 +23,53 @@ Demo aplikacji Android można znaleźć w sklepie Google Play pod nazwą "Delive
 
 ### Główne założenia projektu
 Celem projektu jest dostarczenie aplikacji na platformę Android lub iOS, która umożliwia użytkownikom umawianie się z innymi osobami w celu wysłania i dostarczenia przesyłki/paczki.
+
 Zarejestrowani użytkownicy portalu publikują informacje na temat podróży, jaką będą odbywać oraz o rodzajach paczek (np. list, mała paczka, duża paczka o danych wymiarach), jakie mogą dostarczyć do adresatów. Ponadto kierowca/kurier zaznacza, do jakich miejscowości znajdujących się na trasie może dostarczyć przesyłkę. Zainteresowana osoba zgłasza się do potencjalnego kuriera, aby umówić się na dostarczenie przesyłki.
+
 Transport każdej z paczek kosztuje określoną kwotę. Kurier może dostarczyć paczkę bezpośrednio do adresata (za dodatkową opłatą), bądź umówić się z odbiorcą w danym miejscu, aby nie zbaczać z trasy.
+
 Dodatkowo kurier może udostępniać swoje położenie przy pomocy GPS tak, aby nadawca oraz odbiorca paczki mogli na bieżąco monitorować status paczki oraz potencjalny czas oczekiwania. Ponadto aplikacja kuriera może automatycznie wysyłać powiadomienia/alerty (działające w obrębie aplikacji) lub/i smsy, aby poinformować zainteresowanych o postępie podróży. Użytkownicy mogą się wzajemnie oceniać oraz dodawać komentarze na temat współpracy.
+
 Aplikacja mobilna ma być dedykowana na system Android lub iOS(Windows Phone pomijamy z powodu znikomego(2,6%) udziału w rynku), natomiast strona backendowa może zostać zaimplementowana przy użyciu frameworków języka Java (np. Spring).
 
 ### Zrealizowane przypadki użycia
 
 -Logowanie
+
 -Założenie konta
+
 -Edycja danych
+
 -Usunięcie konta
+
 -Dodawanie komentarzy i oceny
+
 -Ustosunkowywanie się do komentarzy
 
 -Umieszczenie ogłoszenia:
+
   -Wyznaczenie trasy
+  
   -Podanie szczegółów oferty
+  
 -Zezwolenie na lokalizację GPS
+
 -Odwołanie przewozu
+
 -Odmowa rezerwacji
+
 -Akceptacja rezerwacji
 
 -Wyszukiwanie posortowanych ogłoszeń
--Rezerwacja przewozu
--Rezygnacja z rezerwacji
--Sprawdzanie pozycji paczki
--Przeglądanie profilu
--Wysłanie wiadomości
--Przeglądanie wiadomości
 
+-Rezerwacja przewozu
+
+-Rezygnacja z rezerwacji
+
+-Sprawdzanie pozycji paczki
+
+-Przeglądanie profilu
+
+-Wysłanie wiadomości
+
+-Przeglądanie wiadomości

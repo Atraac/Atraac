@@ -28,8 +28,8 @@ Transport każdej z paczek kosztuje określoną kwotę. Kurier może dostarczyć
 Dodatkowo kurier może udostępniać swoje położenie przy pomocy GPS tak, aby nadawca oraz odbiorca paczki mogli na bieżąco monitorować status paczki oraz potencjalny czas oczekiwania. Ponadto aplikacja kuriera może automatycznie wysyłać powiadomienia/alerty (działające w obrębie aplikacji) lub/i smsy, aby poinformować zainteresowanych o postępie podróży. Użytkownicy mogą się wzajemnie oceniać oraz dodawać komentarze na temat współpracy.
 Aplikacja mobilna ma być dedykowana na system Android lub iOS(Windows Phone pomijamy z powodu znikomego(2,6%) udziału w rynku), natomiast strona backendowa może zostać zaimplementowana przy użyciu frameworków języka Java (np. Spring).
 
-### Przypadki użycia
-Użytkownik:
+### Zrealizowane przypadki użycia
+
 -Logowanie
 -Założenie konta
 -Edycja danych
@@ -39,7 +39,7 @@ Użytkownik:
 
 -Umieszczenie ogłoszenia:
   -Wyznaczenie trasy
-  -Podanie szczegółów	oferty
+  -Podanie szczegółów oferty
 -Zezwolenie na lokalizację GPS
 -Odwołanie przewozu
 -Odmowa rezerwacji
@@ -50,7 +50,6 @@ Użytkownik:
 -Rezygnacja z rezerwacji
 -Sprawdzanie pozycji paczki
 -Przeglądanie profilu
--Ustawienie powiadomienia o dodawanych ofertach (do wyjebania)
 -Wysłanie wiadomości
 -Przeglądanie wiadomości
 
